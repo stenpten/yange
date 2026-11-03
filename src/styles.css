@@ -90,9 +90,37 @@ a { color: inherit; }
 .event button { background: transparent; border: 0; padding: 0; text-align: left; }
 .muted { color: #b4b4b4; }
 .faint { color: #949494; font-size: 12px; }
-.swatch { width: 36px; height: 36px; }
-.cardhead { display: flex; gap: 12px; align-items: center; }
-.cardhead h2 { font-size: 20px; font-weight: 600; }
+.polity { border-top: 2px solid #c44536; padding-top: 16px; }
+.polity-rule { width: 36px; height: 8px; margin-bottom: 14px; }
+.polity h2 { margin: 0 0 4px; font-size: 22px; font-weight: 500; line-height: 1.25; }
+.eyebrow, .alias, .note { margin: 0 0 10px; }
+.eyebrow { color: #b4b4b4; font-size: 13px; }
+.alias { color: #b4b4b4; }
+.note { max-width: 36ch; }
+.polity-actions { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
+.chapter {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0e0d0c;
+  text-decoration: none;
+  font-weight: 600;
+}
+.event-hit {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+.event-hit b, .event-hit .muted { display: block; }
+.credit a { color: inherit; }
 .yearbar { background: #0e0d0c; border-top: 1px solid #1a1a1a; padding: 10px 16px 12px; }
 .chronicle { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
 .year-num { font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; }

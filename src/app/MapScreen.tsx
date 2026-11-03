@@ -100,7 +100,7 @@ export function MapScreen() {
     if (!mapNode.current || mapRef.current) return
     const map = new Map({
       container: mapNode.current,
-      style: { version: 8, sources: {}, layers: [{ id: "bg", type: "background", paint: { "background-color": "#0e0d0c" } }] },
+      style: { version: 8, sources: {}, layers: [{ id: "bg", type: "background", paint: { "background-color": "#071828" } }] },
       center: [lng, lat],
       zoom,
       attributionControl: false,
@@ -110,14 +110,53 @@ export function MapScreen() {
     mapRef.current = map
     map.on("load", () => {
       ready.current = true
-      map.addSource("land", { type: "geojson", data: asset("history/land.geojson") })
-      map.addLayer({ id: "land", type: "fill", source: "land", paint: { "fill-color": "#181716" } })
+      map.addSource("dem", {
+        type: "raster-dem",
+        tiles: ["https://tiles.mapterhorn.com/{z}/{x}/{y}.webp"],
+        encoding: "terrarium",
+        tileSize: 512,
+        maxzoom: 3,
+        attribution: "Mapterhorn",
+      })
+      map.addLayer({
+        id: "relief",
+        type: "color-relief",
+        source: "dem",
+        paint: {
+          "color-relief-color": [
+            "interpolate", ["linear"], ["elevation"],
+            -8000, "#071828",
+            -1500, "#14344e",
+            -80, "#2a6d86",
+            20, "#4f7344",
+            650, "#b89a62",
+            1800, "#8d6848",
+            4200, "#e4e0d6",
+          ],
+        },
+      })
+      map.addLayer({
+        id: "shade",
+        type: "hillshade",
+        source: "dem",
+        paint: {
+          "hillshade-method": "multidirectional",
+          "hillshade-exaggeration": ["interpolate", ["linear"], ["zoom"], 0.5, 0.42, 4, 0.28],
+          "hillshade-illumination-anchor": "map",
+          "hillshade-illumination-direction": 335,
+          "hillshade-shadow-color": "#24180f",
+          "hillshade-highlight-color": "#fff6e8",
+          "hillshade-accent-color": "#5c4a38",
+        },
+      })
       map.addSource("world", { type: "geojson", data: empty })
-      map.addLayer({ id: "world", type: "fill", source: "world", paint: { "fill-color": ["get", "color"], "fill-opacity": 0.92 } })
+      map.addLayer({ id: "world", type: "fill", source: "world", paint: { "fill-color": ["get", "color"], "fill-opacity": ["interpolate", ["linear"], ["zoom"], 0.5, 0.64, 3, 0.5, 5, 0.46] } })
       map.addSource("china", { type: "geojson", data: empty })
-      map.addLayer({ id: "china", type: "fill", source: "china", paint: { "fill-color": ["get", "color"], "fill-opacity": 0.94 } })
+      map.addLayer({ id: "china", type: "fill", source: "china", paint: { "fill-color": ["get", "color"], "fill-opacity": ["interpolate", ["linear"], ["zoom"], 0.5, 0.7, 3, 0.58, 5, 0.52] } })
+      map.addLayer({ id: "world-line", type: "line", source: "world", paint: { "line-color": ["get", "color"], "line-width": ["interpolate", ["linear"], ["zoom"], 0.5, 0.35, 3, 0.8, 5, 1.15], "line-opacity": 0.9 } })
+      map.addLayer({ id: "china-line", type: "line", source: "china", paint: { "line-color": ["get", "color"], "line-width": ["interpolate", ["linear"], ["zoom"], 0.5, 0.45, 3, 1, 5, 1.35], "line-opacity": 0.95 } })
       map.addSource("select", { type: "geojson", data: empty })
-      map.addLayer({ id: "select", type: "line", source: "select", paint: { "line-color": "#c44536", "line-width": 2 } })
+      map.addLayer({ id: "select", type: "line", source: "select", paint: { "line-color": "#c44536", "line-width": 2.5 } })
       map.resize()
     })
     map.on("click", (event) => {
@@ -272,28 +311,29 @@ export function MapScreen() {
           <button className="expand textbtn" type="button" onClick={() => setRailOpen((value) => !value)}>{railOpen ? t.close : t.thisYear}</button>
           {status ? <p>{status}</p> : null}
           {selected ? (
-            <>
-              <div className="cardhead">
-                <div className="swatch" style={{ background: String(selected.properties.color) }} />
-                <div>
-                  <h2>{labelOf(selected, lang)}</h2>
-                  <p className="muted">{selected.properties.name_zh ? (lang === "zh" ? selected.properties.name_en : selected.properties.name_zh) : selected.properties.name}</p>
-                </div>
+            <article className="polity">
+              <div className="polity-rule" style={{ background: String(selected.properties.color) }} />
+              <p className="eyebrow">{era ? `${era} · ${sourceText}` : sourceText}</p>
+              <h2>{labelOf(selected, lang)}</h2>
+              <p className="alias">{selected.properties.name_zh ? (lang === "zh" ? selected.properties.name_en : selected.properties.name_zh) : selected.properties.name}</p>
+              {selected.properties.note_zh ? <p className="note">{lang === "zh" ? selected.properties.note_zh : selected.properties.note_en}</p> : null}
+              <div className="polity-actions">
+                {chapter ? <Link className="chapter" to={`/${lang}/chapters/${chapter.slug}`}>{t.openChapter}</Link> : null}
+                <button className="textbtn" type="button" onClick={() => write({ polity: undefined })}>{t.close}</button>
               </div>
-              {selected.properties.note_zh ? <p>{lang === "zh" ? selected.properties.note_zh : selected.properties.note_en}</p> : null}
-              {chapter ? <p><Link to={`/${lang}/chapters/${chapter.slug}`}>{t.openChapter}</Link></p> : null}
-              <button className="textbtn" type="button" onClick={() => write({ polity: undefined })}>{t.close}</button>
-            </>
+            </article>
           ) : (
             <>
               <h2>{t.thisYear}</h2>
               {shownEvents.length === 0 ? <p className="muted">{t.noEvents}</p> : shownEvents.map((event) => (
                 <div className="event" key={event.id}>
-                  <button type="button" onClick={() => write({ year: String(event.year), lng: String(event.lng), lat: String(event.lat), z: "4", polity: event.polityId })}>
-                    <b>{event.title[lang]}</b>
-                    <span className="num"> {event.year}</span>
+                  <button className="event-hit" type="button" onClick={() => write({ year: String(event.year), lng: String(event.lng), lat: String(event.lat), z: "4", polity: event.polityId })}>
+                    <span className="num">{event.year}</span>
+                    <span>
+                      <b>{event.title[lang]}</b>
+                      <span className="muted">{event.summary[lang]}</span>
+                    </span>
                   </button>
-                  <p className="muted">{event.summary[lang]}</p>
                 </div>
               ))}
               <p><Link to={`/${lang}/chapters?filter=events`}>{t.allEvents}</Link></p>
@@ -318,7 +358,7 @@ export function MapScreen() {
             <button type="button" aria-pressed={view === "map"} onClick={() => write({ view: undefined })}>{t.flat}</button>
             <button type="button" aria-pressed={view === "globe"} onClick={() => write({ view: "globe" })}>{t.globe}</button>
           </div>
-          <p className="faint credit">{t.credit}</p>
+          <p className="faint credit">{t.credit} <a href="https://mapterhorn.com/attribution">{t.terrain}</a></p>
         </div>
       </div>
     </div>
