@@ -1064,4 +1064,759 @@ On 1 July 1997 Hong Kong returned to China as a special administrative region. I
       { year: 1997, zh: "香港回归。", en: "Hong Kong returns." },
     ],
   ),
+"roman republic": book(
+    "前509–前27",
+    "509–27 BCE",
+    "罗马",
+    "Rome",
+    `罗马共和国从王政结束以后，由执政官、元老院和公民大会共同执政。它先统一意大利，再在前264年到前146年的布匿战争里灭掉迦太基，把地中海西部变成自己的行省。东部则接过马其顿和塞琉古留下的地盘。
+
+共和国的结束不是一次外敌入侵。前1世纪，马略、苏拉、庞培和恺撒用私人军队打内战。前44年恺撒被刺。前31年屋大维在亚克兴打败安东尼。前27年元老院授给他奥古斯都的称号，共和国的外壳还在，权力已经归一个人。`,
+    `The Republic was governed by consuls, the Senate, and the assemblies after the kings were expelled. It unified Italy, destroyed Carthage in the Punic wars of 264 to 146 BCE, and then took over the lands left by Macedon and the Seleucids.
+
+It did not fall to a foreign invader. In the last century BCE Marius, Sulla, Pompey, and Caesar fought with private armies. Caesar was killed in 44 BCE. In 31 BCE Octavian defeated Antony at Actium. In 27 BCE the Senate gave him the name Augustus. The republican offices remained. Power belonged to one man.`,
+    [
+      { year: -264, zh: "第一次布匿战争开始。", en: "The First Punic War begins." },
+      { year: -146, zh: "迦太基被毁，科林斯也被攻破。", en: "Carthage is destroyed and Corinth falls." },
+      { year: -49, zh: "恺撒渡过卢比孔。", en: "Caesar crosses the Rubicon." },
+      { year: -27, zh: "屋大维称奥古斯都，帝制开始。", en: "Octavian becomes Augustus and the principate begins." },
+    ],
+  ),
+  "roman empire": book(
+    "前27–476为统一帝国与西罗马；东罗马另计",
+    "27 BCE–476 in the west; the east continued",
+    "罗马，后亦为君士坦丁堡",
+    "Rome, later also Constantinople",
+    `前27年以后的罗马帝国用皇帝、行省和军团维持地中海周围的土地。公元117年图拉真死时，版图从不列颠伸到两河流域，这是面积最大的时候，不是每一年都守得住的边界。三世纪军队拥立皇帝，边境同时受到日耳曼人和萨珊的压力。
+
+285年戴克里先把统治分成东西，330年君士坦丁把东都定在君士坦丁堡。395年狄奥多西死后，东西两个朝廷正式分开。西罗马在476年结束：日耳曼将领奥多亚克废掉罗慕路斯·奥古斯都。东罗马还在，后来称为拜占庭。西边的行省变成了日耳曼人的王国。`,
+    `From 27 BCE the empire was held by an emperor, provinces, and legions around the Mediterranean. At Trajan's death in 117 it reached from Britain to Mesopotamia. That was its greatest extent, not a border it kept every year. In the third century armies made emperors, while Germanic groups and the Sasanians pressed the frontier.
+
+In 285 Diocletian split the rule. In 330 Constantine fixed an eastern capital at Constantinople. After Theodosius died in 395 the eastern and western courts were separate. The west ended in 476, when the Germanic commander Odoacer deposed Romulus Augustulus. The east continued. It is later called Byzantium. The western provinces became Germanic kingdoms.`,
+    [
+      { year: -27, zh: "奥古斯都建立元首制。", en: "Augustus establishes the principate." },
+      { year: 117, zh: "图拉真死时帝国面积最大。", en: "The empire is at its greatest extent when Trajan dies." },
+      { year: 330, zh: "君士坦丁堡成为东都。", en: "Constantinople becomes the eastern capital." },
+      { year: 395, zh: "帝国分成东西两个朝廷。", en: "The empire divides into eastern and western courts." },
+      { year: 476, zh: "西罗马末帝被废。", en: "The last western emperor is deposed." },
+    ],
+  ),
+  "byzantine empire": book(
+    "330–1453",
+    "330–1453",
+    "君士坦丁堡",
+    "Constantinople",
+    `拜占庭就是东罗马帝国，国号仍是罗马，语言后来以希腊语为主。查士丁尼在527年到565年编成《民法大全》，又一度收回意大利和北非，但瘟疫和与萨珊的战争把这些成果耗掉了。七世纪阿拉伯军队夺走叙利亚、埃及和北非，帝国收缩到安纳托利亚、希腊和部分意大利。
+
+1204年第四次十字军攻陷君士坦丁堡，拉丁人在城里建了一个朝廷，拜占庭残余退到尼西亚，1261年才收回首都。这时它已经是一个小国。1453年奥斯曼苏丹穆罕默德二世攻破君士坦丁堡，末代皇帝君士坦丁十一世死于城破。东罗马的朝廷到此结束。`,
+    `Byzantium was the eastern Roman empire. It still called itself Roman. Greek later became its main language. From 527 to 565 Justinian issued the law code and briefly recovered Italy and North Africa. Plague and the Persian wars spent those gains. In the seventh century Arab armies took Syria, Egypt, and North Africa. The empire contracted to Anatolia, Greece, and part of Italy.
+
+In 1204 the Fourth Crusade took Constantinople and Latin rulers held the city. The Byzantine remnant withdrew to Nicaea and recovered the capital only in 1261. By then it was a small state. In 1453 the Ottoman sultan Mehmed II took Constantinople. The last emperor, Constantine XI, died in the fall. The eastern Roman court ended.`,
+    [
+      { year: 532, zh: "查士丁尼开始编订罗马法。", en: "Justinian begins the codification of Roman law." },
+      { year: 636, zh: "雅穆克战役后，叙利亚不再属于帝国。", en: "After Yarmouk, Syria is no longer imperial." },
+      { year: 1071, zh: "曼齐刻尔特战败，安纳托利亚大门打开。", en: "Manzikert opens Anatolia." },
+      { year: 1204, zh: "十字军攻占君士坦丁堡。", en: "The Crusaders take Constantinople." },
+      { year: 1453, zh: "奥斯曼攻破君士坦丁堡，拜占庭灭亡。", en: "The Ottomans take Constantinople and Byzantium ends." },
+    ],
+  ),
+  franks: book(
+    "约5世纪–843",
+    "about the 5th century–843",
+    "巴黎、亚琛",
+    "Paris, later Aachen",
+    `法兰克人在五世纪进入罗马的高卢。克洛维在481年以后消灭其他法兰克首领，改宗基督教，建立起墨洛温王朝。王权后来落到宫相手里。751年矮子丕平废掉墨洛温末王，建立加洛林王朝。
+
+768年查理即位，800年在罗马由教皇加冕为皇帝。他的帝国从比利牛斯伸到易北河和意大利中部，用伯爵和巡按把地方连到宫廷。843年凡尔登条约把帝国分成西法兰克、中法兰克和东法兰克。西法兰克后来变成法国，东法兰克变成德意志的核心。一个法兰克王国到此结束。`,
+    `The Franks entered Roman Gaul in the fifth century. After 481 Clovis removed the other Frankish leaders, converted to Christianity, and founded the Merovingian dynasty. Power later passed to the mayors of the palace. In 751 Pepin the Short deposed the last Merovingian and founded the Carolingian dynasty.
+
+Charles became king in 768 and in 800 the pope crowned him emperor in Rome. His empire ran from the Pyrenees to the Elbe and central Italy, tied together by counts and inspectors. In 843 the Treaty of Verdun split it into West, Middle, and East Francia. West Francia became France. East Francia became the core of Germany. One Frankish kingdom ended there.`,
+    [
+      { year: 481, zh: "克洛维统一法兰克。", en: "Clovis unifies the Franks." },
+      { year: 751, zh: "丕平建立加洛林王朝。", en: "Pepin founds the Carolingian dynasty." },
+      { year: 800, zh: "查理在罗马加冕。", en: "Charles is crowned in Rome." },
+      { year: 843, zh: "凡尔登条约把帝国一分为三。", en: "Verdun divides the empire into three." },
+    ],
+  ),
+  france: book(
+    "843年以后的西法兰克与法国",
+    "West Francia and France after 843",
+    "巴黎",
+    "Paris",
+    `843年西法兰克归秃头查理。987年于格·卡佩被诸侯拥立，卡佩王朝开始，王室领地起初只有巴黎周围。腓力二世、路易九世和腓力四世把王权扩展到诺曼底、朗格多克和教会税上。1337年到1453年的百年战争最后把英格兰王室赶出大陆，只留下加来。
+
+1589年波旁王朝开始。路易十四把宫廷定在凡尔赛，对外长期战争。1789年革命推翻旧制度，1792年成立共和国，1793年路易十六被处死。1804年拿破仑称帝，1815年战败。此后法国在君主制和共和制之间来回，1870年第二帝国在普法战争中垮台，第三共和国建立。法国的边界在每一次战争后都改过，不是一张固定的六边形。`,
+    `In 843 West Francia went to Charles the Bald. In 987 the magnates raised Hugh Capet. The royal domain at first was only the country around Paris. Philip II, Louis IX, and Philip IV extended royal power into Normandy, Languedoc, and church taxation. The Hundred Years' War, from 1337 to 1453, ended with the English kings driven off the continent except for Calais.
+
+The Bourbons began in 1589. Louis XIV settled the court at Versailles and fought long wars. The revolution of 1789 brought down the old order. A republic was declared in 1792, and Louis XVI was executed in 1793. Napoleon became emperor in 1804 and was defeated in 1815. France then moved between monarchy and republic. In 1870 the Second Empire fell in the war with Prussia and the Third Republic began. The border changed after each war. It was not a fixed hexagon.`,
+    [
+      { year: 987, zh: "于格·卡佩即位。", en: "Hugh Capet becomes king." },
+      { year: 1453, zh: "百年战争结束。", en: "The Hundred Years' War ends." },
+      { year: 1789, zh: "法国革命开始。", en: "The French Revolution begins." },
+      { year: 1804, zh: "拿破仑称帝。", en: "Napoleon becomes emperor." },
+      { year: 1870, zh: "第二帝国在色当战败后垮台。", en: "The Second Empire collapses after Sedan." },
+    ],
+  ),
+  "holy roman empire": book(
+    "962–1806",
+    "962–1806",
+    "无固定首都，后期常在维也纳",
+    "No fixed capital; later often Vienna",
+    `962年奥托一世在罗马加冕，东法兰克的国王同时成为皇帝。这个帝国后来被称作神圣罗马帝国。它不是一个中央集权的国家，而是皇帝、诸侯、主教和城市组成的复合体。1356年黄金诏书规定七个选帝侯选举皇帝。皇帝的实权取决于他自己的家族领地，长期是哈布斯堡。
+
+宗教改革以后，帝国在1555年奥格斯堡和约里承认诸侯可以选择路德宗或天主教。1618年到1648年的三十年战争把德意志打空，威斯特伐利亚和约确认诸侯的对外权利。1806年拿破仑逼弗朗茨二世放下皇帝称号。神圣罗马帝国结束，没有一个继承它全部领地的单一国家。`,
+    `In 962 Otto I was crowned in Rome. The king of East Francia was also emperor. The realm later called itself the Holy Roman Empire. It was not a centralized state. It was a composite of emperor, princes, bishops, and cities. The Golden Bull of 1356 gave seven electors the right to choose the emperor. The emperor's real power depended on his own family lands, for a long time those of the Habsburgs.
+
+After the Reformation, the Peace of Augsburg in 1555 let princes choose Lutheranism or Catholicism. The Thirty Years' War, from 1618 to 1648, emptied Germany. The Peace of Westphalia confirmed the princes' right to conduct foreign affairs. In 1806 Napoleon forced Francis II to lay down the imperial title. The Holy Roman Empire ended. No single state inherited all of its lands.`,
+    [
+      { year: 962, zh: "奥托一世加冕皇帝。", en: "Otto I is crowned emperor." },
+      { year: 1356, zh: "黄金诏书规定选帝侯。", en: "The Golden Bull fixes the electors." },
+      { year: 1648, zh: "威斯特伐利亚和约。", en: "The Peace of Westphalia." },
+      { year: 1806, zh: "帝国在拿破仑的压力下解散。", en: "The empire is dissolved under Napoleon's pressure." },
+    ],
+  ),
+  "ottoman empire": book(
+    "约1299–1922",
+    "about 1299–1922",
+    "布尔萨，后为埃迪尔内、伊斯坦布尔",
+    "Bursa, then Edirne and Istanbul",
+    `奥斯曼人在十三世纪末从安纳托利亚西北的一个小侯国扩张。1453年穆罕默德二世攻下君士坦丁堡，把它变成首都。塞利姆一世在1516年到1517年夺取叙利亚和埃及，麦加和麦地那的宗主权也转了过来。苏莱曼时期，帝国同时在匈牙利、地中海和波斯边境作战。
+
+1683年维也纳围城失败以后，欧洲边界开始后退。十九世纪巴尔干的民族国家一个个分出去。1908年青年土耳其党人政变。第一次世界大战里帝国站在德国一边，战败后被占领和分割。1922年苏丹制废除，1923年土耳其共和国成立，首都后来迁到安卡拉。奥斯曼作为帝国结束，土耳其是它在安纳托利亚的继承国家，不是同一张边界。`,
+    `The Ottomans expanded from a small principality in northwestern Anatolia at the end of the thirteenth century. In 1453 Mehmed II took Constantinople and made it the capital. From 1516 to 1517 Selim I seized Syria and Egypt, and the claim over Mecca and Medina passed with them. Under Suleiman the empire fought at once in Hungary, the Mediterranean, and on the Persian frontier.
+
+After the failed siege of Vienna in 1683 the European border receded. In the nineteenth century Balkan nation-states broke away one after another. The Young Turks seized power in 1908. In the First World War the empire sided with Germany, and after defeat it was occupied and partitioned. The sultanate was abolished in 1922. The Republic of Turkey was founded in 1923, later with its capital at Ankara. The Ottoman empire ended. Turkey is its successor in Anatolia, not the same map.`,
+    [
+      { year: 1453, zh: "攻下君士坦丁堡。", en: "Constantinople is taken." },
+      { year: 1517, zh: "夺取埃及，马穆鲁克灭亡。", en: "Egypt is taken and the Mamluks end." },
+      { year: 1683, zh: "维也纳围城失败。", en: "The siege of Vienna fails." },
+      { year: 1922, zh: "苏丹制废除。", en: "The sultanate is abolished." },
+      { year: 1923, zh: "土耳其共和国成立。", en: "The Republic of Turkey is founded." },
+    ],
+  ),
+  persia: book(
+    "波斯诸王朝",
+    "The Persian dynasties",
+    "波斯波利斯、泰西封、伊斯法罕、德黑兰",
+    "Persepolis, Ctesiphon, Isfahan, Tehran",
+    `波斯不是一个连续不断的同一王朝。阿契美尼德在前550年由居鲁士建立，前330年亡于亚历山大。塞琉古和帕提亚之后，224年萨珊重新用波斯的王号统治，651年亡于阿拉伯军队。此后波斯语和地方王朝还在，最高权力长期属于哈里发、塞尔柱、蒙古伊利汗和帖木儿。
+
+1501年萨法维王朝把什叶派定为国教，都伊斯法罕。1736年纳迪尔沙推翻萨法维末流。1794年以后恺加王朝以德黑兰为都。1925年巴列维王朝取代恺加，1935年国号在对外文件里改称伊朗。1979年巴列维王朝被推翻。地图上写着波斯的那一块，要按年份判断是萨珊、恺加还是更早的帝国。`,
+    `Persia was not one uninterrupted dynasty. Cyrus founded the Achaemenid empire in 550 BCE, and Alexander ended it in 330 BCE. After the Seleucids and the Parthians, the Sasanians restored a Persian royal title in 224 and fell to the Arab armies in 651. Persian remained, and local dynasties remained, but supreme power long belonged to caliphs, Seljuks, the Mongol Ilkhans, and Timur.
+
+In 1501 the Safavids made Shi'ism the state religion and ruled from Isfahan. Nader Shah pushed aside the last Safavid line in 1736. After 1794 the Qajars ruled from Tehran. The Pahlavi dynasty replaced them in 1925, and in 1935 the foreign name became Iran. The Pahlavi dynasty was overthrown in 1979. A shape labeled Persia has to be read by the year: Sasanian, Qajar, or an earlier empire.`,
+    [
+      { year: -550, zh: "居鲁士建立阿契美尼德帝国。", en: "Cyrus founds the Achaemenid empire." },
+      { year: -330, zh: "亚历山大攻入波斯。", en: "Alexander enters Persia." },
+      { year: 224, zh: "萨珊王朝建立。", en: "The Sasanian dynasty is founded." },
+      { year: 1501, zh: "萨法维王朝建立。", en: "The Safavid dynasty is founded." },
+      { year: 1925, zh: "巴列维王朝取代恺加。", en: "The Pahlavis replace the Qajars." },
+    ],
+  ),
+  "parthian empire": book(
+    "前247–224",
+    "247 BCE–224 CE",
+    "尼萨、泰西封",
+    "Nisa, later Ctesiphon",
+    `帕提亚由伊朗东北的安息人建立。前247年阿尔撒息斯称王，后来把泰西封建成与罗马对峙的都城。帕提亚不是整齐的行省帝国，国王依靠大贵族和边境王国。它与罗马反复争夺亚美尼亚和两河流域，前53年克拉苏死于卡雷。
+
+224年，波斯人阿尔达希尔在霍尔木兹德甘打败帕提亚末王阿尔达班四世。帕提亚灭亡，萨珊取而代之。如果一张300年的底图还写着帕提亚，国号应按萨珊来读。`,
+    `Parthia was founded by the Arsacid Iranians of the northeast. Arsaces took the royal title in 247 BCE. Ctesiphon later became the capital facing Rome. Parthia was not a neat provincial empire. The king depended on great nobles and border kingdoms. It fought Rome repeatedly over Armenia and Mesopotamia. Crassus died at Carrhae in 53 BCE.
+
+In 224 the Persian Ardashir defeated the last Parthian king, Artabanus IV, at Hormozdgan. Parthia ended and the Sasanians replaced it. If a sheet for the year 300 still says Parthia, the name should be read as Sasanian.`,
+    [
+      { year: -247, zh: "阿尔撒息斯建国。", en: "Arsaces founds the kingdom." },
+      { year: -53, zh: "卡雷战役，克拉苏战死。", en: "Crassus is killed at Carrhae." },
+      { year: 224, zh: "阿尔达希尔灭帕提亚，建立萨珊。", en: "Ardashir destroys Parthia and founds the Sasanians." },
+    ],
+  ),
+  "achaemenid empire": book(
+    "前550–前330",
+    "550–330 BCE",
+    "波斯波利斯、苏萨、巴比伦",
+    "Persepolis, Susa, and Babylon",
+    `前550年居鲁士推翻米底，建立阿契美尼德帝国。他随后夺取吕底亚和巴比伦。冈比西斯征服埃及。大流士一世把帝国分成行省，修御道，铸统一的金币，并在前490年兵败于马拉松。薛西斯前480年的希腊远征也没有把希腊城邦并进来。
+
+帝国的核心在伊朗和两河流域，行省从埃及伸到印度河。前330年亚历山大追击大流士三世，大流士被自己的部下杀死，波斯波利斯被焚。阿契美尼德王朝结束。`,
+    `In 550 BCE Cyrus overthrew the Medes and founded the Achaemenid empire. He then took Lydia and Babylon. Cambyses conquered Egypt. Darius I divided the empire into satrapies, built the royal road, coined a standard gold piece, and lost at Marathon in 490 BCE. Xerxes' invasion of Greece in 480 BCE did not annex the Greek cities.
+
+The core was Iran and Mesopotamia. The satrapies ran from Egypt to the Indus. In 330 BCE Alexander pursued Darius III. Darius was killed by his own officers, and Persepolis was burned. The Achaemenid dynasty ended.`,
+    [
+      { year: -550, zh: "居鲁士建国。", en: "Cyrus founds the empire." },
+      { year: -490, zh: "马拉松战役。", en: "The battle of Marathon." },
+      { year: -330, zh: "亚历山大灭亡阿契美尼德。", en: "Alexander ends the Achaemenids." },
+    ],
+  ),
+  "mauryan empire": book(
+    "前322–前185",
+    "322–185 BCE",
+    "华氏城",
+    "Pataliputra",
+    `前322年旃陀罗笈多夺取难陀王朝的华氏城，建立孔雀王朝。他挡住了塞琉古东进的势头，换得印度河以西的一部分土地。阿育王在前273年即位，前261年血洗羯陵伽之后转向护法，把诏令刻在石柱上，派使者到希腊化王国和斯里兰卡。
+
+阿育王后继者控制不住各省。前185年将军普士亚密多罗杀掉末帝，建立巽伽王朝。孔雀帝国结束。它是印度次大陆上第一个把恒河与印度河连在一个朝廷之下的大帝国。`,
+    `In 322 BCE Chandragupta took Pataliputra from the Nanda dynasty and founded the Maurya. He stopped the Seleucid advance and received land west of the Indus. Ashoka came to the throne in 273 BCE. After the slaughter in Kalinga in 261 BCE he turned to protecting dharma, cut edicts on pillars, and sent missions to the Hellenistic kingdoms and Sri Lanka.
+
+Ashoka's successors could not hold the provinces. In 185 BCE the general Pushyamitra killed the last emperor and founded the Shunga dynasty. The Mauryan empire ended. It was the first empire on the subcontinent to join the Ganges and the Indus under one court.`,
+    [
+      { year: -322, zh: "旃陀罗笈多建立孔雀王朝。", en: "Chandragupta founds the Maurya." },
+      { year: -261, zh: "羯陵伽战争后阿育王转向护法。", en: "After Kalinga, Ashoka turns to dharma." },
+      { year: -185, zh: "孔雀王朝被巽伽取代。", en: "The Shungas replace the Maurya." },
+    ],
+  ),
+  "gupta empire": book(
+    "约320–550",
+    "about 320–550",
+    "华氏城",
+    "Pataliputra",
+    `笈多王朝约在320年由旃陀罗笈多一世建立，都城仍在华氏城。沙摩陀罗笈多和旃陀罗笈多二世把统治从恒河扩展到马尔瓦和印度西部的港口。朝廷用梵语、土地赠予和藩属国王来维持一个比孔雀松散的帝国。
+
+五世纪中叶嚈哒人从西北反复攻入。佛陀笈多以后中央已经守不住西部。一般把六世纪中叶当作笈多帝国的结束。北印度重新分成小国，直到后来的戒日王短暂再统一。`,
+    `The Gupta dynasty was founded around 320 by Chandragupta I, again at Pataliputra. Samudragupta and Chandragupta II extended rule from the Ganges to Malwa and the western ports. The court held a looser empire than the Maurya, through Sanskrit, land grants, and subordinate kings.
+
+From the mid-fifth century the Hephthalites raided from the northwest. After Budhagupta the center could not hold the west. The middle of the sixth century is the usual end of the Gupta empire. North India split into smaller kingdoms until Harsha briefly pulled it together again.`,
+    [
+      { year: 320, zh: "旃陀罗笈多一世称王。", en: "Chandragupta I takes the royal title." },
+      { year: 380, zh: "旃陀罗笈多二世在位，帝国达到盛期。", en: "Under Chandragupta II the empire is at its height." },
+      { year: 550, zh: "笈多的中央统治解体。", en: "Gupta central rule breaks up." },
+    ],
+  ),
+"ghana empire": book(
+    "约300–1200",
+    "about 300–1200",
+    "昆比萨利赫",
+    "Koumbi Saleh",
+    `加纳王国在尼日尔河和塞内加尔河上游之间，控制跨撒哈拉的黄金和盐。阿拉伯地理书写到它的国王向穆斯林商人收税，自己的都城分成两个居住区。它的盛期大约在九到十一世纪。名字加纳是国王的称号，不是今天西非沿海的加纳共和国。两国不在同一块土地上。
+
+十一世纪以后，王国受到穆拉比特势力和内部属国的压力。约1200年前后索索人占领都城，加纳王国结束。马里帝国随后在更南边兴起。二十世纪地图上的黄金海岸，是英国在几内亚湾的殖民地，1957年独立时才借用加纳这个古名。`,
+    `The Ghana kingdom lay between the upper Niger and the Senegal. It taxed the gold and salt of the trans-Saharan trade. Arabic geographers described a king whose capital had two towns. Its height was about the ninth to eleventh centuries. Ghana was the king's title. It is not the modern Republic of Ghana on the coast. The two are not the same land.
+
+After the eleventh century the kingdom was pressed by the Almoravids and by its own vassals. Around 1200 the Sosso took the capital and the kingdom ended. The Mali empire then rose farther south. The Gold Coast on a twentieth-century map was a British colony on the Gulf of Guinea. It borrowed the old name Ghana only when it became independent in 1957.`,
+    [
+      { year: 800, zh: "加纳王国处于跨撒哈拉贸易的盛期。", en: "Ghana is at the height of the Saharan trade." },
+      { year: 1076, zh: "穆拉比特军队攻入加纳的核心地带。", en: "An Almoravid army enters the Ghanaian heartland." },
+      { year: 1200, zh: "索索人占领都城，王国结束。", en: "The Sosso take the capital and the kingdom ends." },
+      { year: 1957, zh: "黄金海岸独立，国名定为加纳。", en: "The Gold Coast becomes independent as Ghana." },
+    ],
+  ),
+  mali: book(
+    "约1235–1670为帝国",
+    "an empire about 1235–1670",
+    "尼亚尼",
+    "Niani",
+    `马里帝国由凯塔家族的松迪亚塔在约1235年建立。他打败索索人，把尼日尔河上游的产金地连成一个国家。曼萨穆萨在1324年去麦加朝觐，带去大量黄金，开罗的金价因此下跌。廷巴克图和杰内成为伊斯兰学术和商路的城市。
+
+十五世纪桑海在东部崛起，马里退回西边。十七世纪帝国解体。今天的马里共和国在1960年脱离法属苏丹独立，领土以尼日尔河中游为主，并不等于曼萨穆萨的帝国。`,
+    `The Mali empire was founded about 1235 by Sundiata of the Keita. He defeated the Sosso and joined the gold country of the upper Niger into one state. Mansa Musa went to Mecca in 1324 with so much gold that prices in Cairo fell. Timbuktu and Jenne became cities of Islamic learning and of the trade road.
+
+In the fifteenth century Songhai rose in the east and Mali fell back to the west. The empire broke up in the seventeenth century. The Republic of Mali left French Sudan in 1960. Its territory is mainly the middle Niger. It is not Mansa Musa's empire.`,
+    [
+      { year: 1235, zh: "松迪亚塔建立马里帝国。", en: "Sundiata founds the Mali empire." },
+      { year: 1324, zh: "曼萨穆萨朝觐麦加。", en: "Mansa Musa travels to Mecca." },
+      { year: 1468, zh: "桑海占领廷巴克图，马里失去东部。", en: "Songhai takes Timbuktu and Mali loses the east." },
+      { year: 1960, zh: "马里共和国独立。", en: "The Republic of Mali becomes independent." },
+    ],
+  ),
+  songhai: book(
+    "约1464–1591",
+    "about 1464–1591",
+    "加奥",
+    "Gao",
+    `桑海原来是尼日尔河弯的一个王国，都加奥。1464年索尼·阿里上台以后连年出征，占领廷巴克图和杰内，把马里的东部变成桑海的核心。1493年穆罕默德·图雷推翻索尼王朝，称阿斯基亚，用伊斯兰法和行省重整国家。阿斯基亚穆罕默德也曾去麦加。
+
+1591年摩洛哥苏丹艾哈迈德·曼苏尔派朱达尔帕夏率火枪兵穿越撒哈拉。汤迪比一战，桑海的军队溃败，帝国崩溃。王室退到南方的登迪，不再统治廷巴克图。此后西苏丹的霸权转到摩洛哥驻军和地方帕夏手里，很快也分裂了。`,
+    `Songhai began as a kingdom on the bend of the Niger, with its capital at Gao. After Sonni Ali took power in 1464 he campaigned every year, took Timbuktu and Jenne, and made the east of Mali the Songhai core. In 1493 Muhammad Ture overthrew the Sonni and took the title Askia. He reorganized the state with Islamic law and provinces. Askia Muhammad also went to Mecca.
+
+In 1591 the Moroccan sultan Ahmad al-Mansur sent Judar Pasha across the Sahara with musketeers. At Tondibi the Songhai army broke and the empire collapsed. The royal house withdrew south to Dendi and no longer ruled Timbuktu. Power in the western Sudan passed to the Moroccan garrison and local pashas, and that too soon split.`,
+    [
+      { year: 1464, zh: "索尼·阿里开始大规模扩张。", en: "Sonni Ali begins the great expansion." },
+      { year: 1493, zh: "阿斯基亚王朝建立。", en: "The Askia dynasty is founded." },
+      { year: 1591, zh: "汤迪比战败，桑海帝国灭亡。", en: "Tondibi destroys the Songhai empire." },
+    ],
+  ),
+  egypt: book(
+    "法老时代至现代埃及",
+    "From the pharaohs to modern Egypt",
+    "孟菲斯、底比斯、亚历山大、开罗",
+    "Memphis, Thebes, Alexandria, Cairo",
+    `埃及在前3100年前后由上下埃及统一，法老以孟菲斯或底比斯为都。古王国修建金字塔，新王国把统治伸到努比亚和黎凡特。前525年波斯征服埃及，前332年亚历山大进入，前30年托勒密王朝的末代女王克娄巴特拉死后，埃及成为罗马的行省。
+
+641年阿拉伯军队进入。969年法蒂玛王朝建开罗。1171年萨拉丁结束法蒂玛，埃及成为阿尤布和后来马穆鲁克的中心。1517年奥斯曼夺取开罗。1805年穆罕默德·阿里建立实际上自主的王朝。1922年英国承认埃及独立，1952年自由军官推翻王室。尼罗河河谷一直是这块土地的核心，统治它的王朝换过许多次。`,
+    `Egypt was unified around 3100 BCE. Pharaohs ruled from Memphis or Thebes. The Old Kingdom built the pyramids. The New Kingdom reached into Nubia and the Levant. Persia conquered Egypt in 525 BCE. Alexander entered in 332 BCE. In 30 BCE, after Cleopatra, Egypt became a Roman province.
+
+An Arab army entered in 641. The Fatimids founded Cairo in 969. In 1171 Saladin ended the Fatimids, and Egypt became the center of the Ayyubids and then the Mamluks. The Ottomans took Cairo in 1517. In 1805 Muhammad Ali founded a dynasty that was effectively autonomous. Britain recognized Egyptian independence in 1922. The Free Officers overthrew the monarchy in 1952. The Nile valley remained the core. The dynasties that ruled it changed many times.`,
+    [
+      { year: -3100, zh: "上下埃及统一。", en: "Upper and Lower Egypt are unified." },
+      { year: -332, zh: "亚历山大进入埃及。", en: "Alexander enters Egypt." },
+      { year: -30, zh: "埃及成为罗马行省。", en: "Egypt becomes a Roman province." },
+      { year: 969, zh: "法蒂玛王朝建立开罗。", en: "The Fatimids found Cairo." },
+      { year: 1517, zh: "奥斯曼夺取埃及。", en: "The Ottomans take Egypt." },
+      { year: 1952, zh: "埃及王室被推翻。", en: "The Egyptian monarchy is overthrown." },
+    ],
+  ),
+  "khmer empire": book(
+    "802–1431",
+    "802–1431",
+    "吴哥",
+    "Angkor",
+    `802年阇耶跋摩二世在荔枝山宣布独立，真腊从此不再依附爪哇。后来的国王在洞里萨湖北边建造吴哥城和吴哥窟。十二世纪苏利耶跋摩二世和阇耶跋摩七世在位时，灌溉系统和道路把洞里萨湖与湄公河连在一起，势力北到今天的老挝，西与蒲甘、南与占城争城。
+
+十四世纪灌溉失修，泰人的阿瑜陀耶从西边兴起。1431年阿瑜陀耶攻破吴哥，宫廷南迁金边一带。吴哥作为帝国首都结束。柬埔寨王国还在，但已经不是那个从吴哥号令四方的真腊。`,
+    `In 802 Jayavarman II proclaimed independence at Mahendraparvata. Chenla was no longer subject to Java. Later kings built the city of Angkor and Angkor Wat north of the Tonle Sap. Under Suryavarman II and Jayavarman VII in the twelfth century, canals and roads tied the lake to the Mekong. The empire reached north into what is now Laos and fought Pagan to the west and Champa to the south.
+
+In the fourteenth century the water system failed, and the Thai kingdom of Ayutthaya rose in the west. In 1431 Ayutthaya took Angkor and the court moved south toward Phnom Penh. Angkor ended as an imperial capital. A Cambodian kingdom continued. It was no longer the Chenla that had given orders from Angkor.`,
+    [
+      { year: 802, zh: "阇耶跋摩二世建国。", en: "Jayavarman II founds the kingdom." },
+      { year: 1150, zh: "吴哥窟约在这一时期建成。", en: "Angkor Wat is completed around this time." },
+      { year: 1431, zh: "阿瑜陀耶攻破吴哥。", en: "Ayutthaya takes Angkor." },
+    ],
+  ),
+  champa: book(
+    "约192–1832",
+    "about 192–1832",
+    "因陀罗补罗、毗阇耶",
+    "Indrapura, later Vijaya",
+    `占城在今天越南中南部的沿海，由几个以印度教神庙为中心的小国合成。它与北方的大越、西边的真腊长期战争，也靠港口贸易。1145年真腊一度占领毗阇耶，占城后来复国。
+
+1471年后黎的军队攻破毗阇耶，占城失去北部。残余王公退到更南的宾童龙。1697年南方的占城王室降于阮氏，1832年明命帝废除最后的占城封国。占城作为政权结束，占语人群还在。`,
+    `Champa lay on the coast of what is now central and southern Vietnam. It was several small states centered on Hindu temples. It fought Dai Viet to the north and the Khmer to the west, and it lived by port trade. In 1145 the Khmer briefly took Vijaya. Champa later recovered.
+
+In 1471 the Later Le army took Vijaya and Champa lost the north. The remaining princes withdrew to Panduranga farther south. In 1697 the southern Cham court submitted to the Nguyen. In 1832 the Minh Mang emperor abolished the last Cham principality. Champa as a state ended. Cham-speaking people remained.`,
+    [
+      { year: 192, zh: "占城诸国开始见于汉文记载。", en: "Cham states begin to appear in Chinese records." },
+      { year: 1471, zh: "大越攻破毗阇耶。", en: "Dai Viet takes Vijaya." },
+      { year: 1832, zh: "末代占城封国被废。", en: "The last Cham principality is abolished." },
+    ],
+  ),
+  "srivijaya empire": book(
+    "约7世纪–14世纪",
+    "about the 7th–14th centuries",
+    "巨港",
+    "Palembang",
+    `三佛齐以苏门答腊的巨港为中心，控制马六甲海峡和巽他海峡的港口。中国僧人义净在七世纪曾在那里停留。它向唐朝和宋朝朝贡，同时向过往商船收税，势力伸到马来半岛和爪哇的一部分。
+
+1025年注辇的海军袭击三佛齐的港口，霸权开始动摇。十三世纪以后室利佛逝的名字在记录里变少。1377年满者伯夷传统上被认为攻占了巨港。三佛齐作为海峡上的帝国结束，马六甲在十五世纪接过了贸易中心的位置。`,
+    `Srivijaya was centered on Palembang in Sumatra and controlled the ports of the Malacca and Sunda straits. The Chinese monk Yijing stayed there in the seventh century. It sent tribute to Tang and Song and taxed passing ships. Its influence reached the Malay peninsula and part of Java.
+
+In 1025 a Chola fleet attacked its ports and the hegemony began to slip. After the thirteenth century the name appears less often. In 1377 Majapahit is traditionally said to have taken Palembang. Srivijaya ended as the empire of the straits. In the fifteenth century Melaka took its place as the trading center.`,
+    [
+      { year: 671, zh: "义净途经三佛齐。", en: "Yijing passes through Srivijaya." },
+      { year: 1025, zh: "注辇海军袭击巨港等港口。", en: "A Chola fleet attacks Palembang and the other ports." },
+      { year: 1377, zh: "巨港不再是三佛齐的都城。", en: "Palembang ceases to be the Srivijaya capital." },
+    ],
+  ),
+  delhi: book(
+    "1206–1526",
+    "1206–1526",
+    "德里",
+    "Delhi",
+    `1206年古尔王朝的总督库特布丁·艾巴克在德里自立，德里苏丹国开始。此后奴隶王朝、哈尔吉、图格鲁克、赛义德和洛迪五个王朝先后统治。阿拉丁·哈尔吉和穆罕默德·图格鲁克把兵力推向德干，但德干的巴赫曼尼王朝在1347年独立，北方的苏丹再也没有稳定地统治整个次大陆。
+
+1398年帖木儿洗劫德里。苏丹国恢复后只是北印度的一个强国。1526年帕尼帕特战役，巴布尔打败洛迪王朝的末代苏丹。德里苏丹国结束，莫卧儿帝国开始。`,
+    `In 1206 Qutb al-Din Aibak, a Ghurid governor, made himself ruler at Delhi. The Delhi sultanate began. Five dynasties followed: the Mamluks, the Khaljis, the Tughlaqs, the Sayyids, and the Lodis. Alauddin Khalji and Muhammad bin Tughlaq pushed armies into the Deccan, but the Bahmani sultanate became independent there in 1347. The northern sultans never again held the whole subcontinent for long.
+
+In 1398 Timur sacked Delhi. The restored sultanate was one power in north India, not more. At Panipat in 1526 Babur defeated the last Lodi sultan. The Delhi sultanate ended and the Mughal empire began.`,
+    [
+      { year: 1206, zh: "德里苏丹国建立。", en: "The Delhi sultanate is founded." },
+      { year: 1347, zh: "德干的巴赫曼尼王朝独立。", en: "The Bahmani sultanate becomes independent in the Deccan." },
+      { year: 1398, zh: "帖木儿洗劫德里。", en: "Timur sacks Delhi." },
+      { year: 1526, zh: "巴布尔在帕尼帕特取胜，苏丹国灭亡。", en: "Babur wins at Panipat and the sultanate ends." },
+    ],
+  ),
+  "mughal empire": book(
+    "1526–1857",
+    "1526–1857",
+    "阿格拉、德里",
+    "Agra and Delhi",
+    `1526年巴布尔在帕尼帕特打败洛迪苏丹，建立莫卧儿帝国。阿克巴把都城经营成一个同时容纳穆斯林和印度教贵族的朝廷，用曼萨卜制给官阶。沙贾汗修建泰姬陵。奥朗则布把帝国推到最大，也把德干的战争变成了长期消耗。
+
+1707年奥朗则布死后，地方总督和马拉塔人把帝国切成许多实际独立的政权。1857年印度兵变以后，英国废除末代皇帝巴哈杜尔沙二世，莫卧儿的名号结束。英国直接统治印度。`,
+    `In 1526 Babur defeated the Lodi sultan at Panipat and founded the Mughal empire. Akbar built a court that included both Muslim and Hindu nobles, and ranked officials in the mansab system. Shah Jahan built the Taj Mahal. Aurangzeb pushed the empire to its greatest extent and turned the Deccan wars into a permanent drain.
+
+After Aurangzeb died in 1707, provincial governors and the Marathas cut the empire into regimes that were independent in practice. After the Indian rebellion of 1857 the British deposed the last emperor, Bahadur Shah II. The Mughal title ended. Britain ruled India directly.`,
+    [
+      { year: 1526, zh: "巴布尔建立莫卧儿帝国。", en: "Babur founds the Mughal empire." },
+      { year: 1605, zh: "阿克巴死，帝国制度已经成形。", en: "Akbar dies with the imperial system in place." },
+      { year: 1707, zh: "奥朗则布死，地方开始各自为政。", en: "Aurangzeb dies and the provinces go their own way." },
+      { year: 1857, zh: "末代皇帝被废。", en: "The last emperor is deposed." },
+    ],
+  ),
+  "aztec empire": book(
+    "1428–1521",
+    "1428–1521",
+    "特诺奇蒂特兰",
+    "Tenochtitlan",
+    `阿兹特克通常指墨西哥谷地的墨西卡人及其同盟。1428年特诺奇蒂特兰、特斯科科和特拉科潘组成三方同盟，向周围城邦收取贡赋，并不把每一座城都变成直接治理的行省。首都建在湖中的岛上，有堤道和市场。
+
+1519年科尔特斯带领西班牙人从海岸进入内陆，利用对墨西卡纳贡的城邦。1521年同盟的首都在围城和疫病之后陷落，末代首领库奥赫特莫克被俘。阿兹特克帝国结束。西班牙在它的废墟上建墨西哥城。`,
+    `Aztec usually means the Mexica of the Valley of Mexico and their allies. In 1428 Tenochtitlan, Texcoco, and Tlacopan formed a triple alliance. They took tribute from surrounding cities. They did not turn every city into a directly governed province. The capital stood on an island in the lake, with causeways and a market.
+
+In 1519 Cortes led Spaniards inland from the coast and used the cities that had been paying tribute. In 1521 the allied capital fell after a siege and an epidemic. The last ruler, Cuauhtemoc, was captured. The Aztec empire ended. The Spanish built Mexico City on its ruins.`,
+    [
+      { year: 1428, zh: "三方同盟建立。", en: "The triple alliance is formed." },
+      { year: 1519, zh: "西班牙人进入墨西哥谷地。", en: "Spaniards enter the Valley of Mexico." },
+      { year: 1521, zh: "特诺奇蒂特兰陷落。", en: "Tenochtitlan falls." },
+    ],
+  ),
+  "inca empire": book(
+    "1438–1533",
+    "1438–1533",
+    "库斯科",
+    "Cusco",
+    `印加在库斯科兴起。1438年帕查库特克抵抗昌卡人之后，帝国迅速沿安第斯山扩张，用道路、仓库和克丘亚语把从今天的厄瓜多尔到智利中部的河谷连起来。地方精英被迁到新的地方，太阳神庙和王室木乃伊是权力的象征。
+
+1527年兄弟争位，瓦斯卡和阿塔瓦尔帕打内战。1532年皮萨罗在卡哈马卡捉住阿塔瓦尔帕。1533年他被处死，西班牙人进入库斯科。印加的残部在比尔卡班巴坚持到1572年。帝国作为从库斯科发号施令的国家，在1533年已经结束。`,
+    `The Inca rose at Cusco. After Pachacuti resisted the Chanka in 1438, the empire expanded quickly along the Andes. Roads, storehouses, and Quechua tied together valleys from what is now Ecuador to central Chile. Local elites were moved, and the sun temple and the royal mummies were the signs of power.
+
+In 1527 a succession war broke out between Huascar and Atahualpa. In 1532 Pizarro captured Atahualpa at Cajamarca. He was killed in 1533 and the Spanish entered Cusco. An Inca remnant held out at Vilcabamba until 1572. As a state giving orders from Cusco, the empire ended in 1533.`,
+    [
+      { year: 1438, zh: "帕查库特克开始扩张。", en: "Pachacuti begins the expansion." },
+      { year: 1532, zh: "阿塔瓦尔帕在卡哈马卡被俘。", en: "Atahualpa is captured at Cajamarca." },
+      { year: 1533, zh: "库斯科被西班牙人占领。", en: "The Spanish occupy Cusco." },
+      { year: 1572, zh: "比尔卡班巴的残部灭亡。", en: "The Vilcabamba remnant is destroyed." },
+    ],
+  ),
+  teotihuacan: book(
+    "约前100–550",
+    "about 100 BCE–550 CE",
+    "特奥蒂瓦坎",
+    "Teotihuacan",
+    `特奥蒂瓦坎在墨西哥谷地东北，公元一世纪已经是一座有网格街道的大城。太阳金字塔和月亮金字塔沿中轴线排列。它的影响通过黑曜石、陶器和图案到达玛雅城市，但没有证据表明它像后来的阿兹特克那样建立了一个收贡的帝国。
+
+六世纪中叶城市被焚毁，居民离开。特奥蒂瓦坎作为权力中心结束。阿兹特克人几百年后把这座空城当作神迹，那已经是另一段历史。`,
+    `Teotihuacan, northeast of the Valley of Mexico, was already a great city with a street grid in the first century CE. The Pyramids of the Sun and the Moon stood on its axis. Its influence reached Maya cities through obsidian, pottery, and motifs. There is no evidence that it ran a tribute empire of the later Aztec kind.
+
+In the middle of the sixth century the city was burned and the people left. Teotihuacan ended as a center of power. Centuries later the Aztecs treated the empty city as a place of the gods. That is a different history.`,
+    [
+      { year: 100, zh: "城市进入鼎盛。", en: "The city enters its height." },
+      { year: 550, zh: "城市被焚，居民离散。", en: "The city is burned and the people leave." },
+    ],
+  ),
+  axum: book(
+    "约100–960",
+    "about 100–960",
+    "阿克苏姆",
+    "Aksum",
+    `阿克苏姆在今天的厄立特里亚和埃塞俄比亚北部。它靠红海港口阿杜利斯把象牙、黄金和奴隶运往罗马和印度。四世纪埃扎纳国王改宗基督教，并出兵攻打尼罗河下游的麦罗埃。阿克苏姆的铸币同时有希腊文和盖埃兹文。
+
+七世纪阿拉伯人控制红海以后，阿杜利斯衰落，王国失去海路。十世纪王室传统中断，权力转到更南的扎格维王朝。阿克苏姆城不再是王国的首都。后来的埃塞俄比亚还使用它的基督教和盖埃兹传统，但那是新的王朝。`,
+    `Aksum lay in what is now Eritrea and northern Ethiopia. Through the Red Sea port of Adulis it sent ivory, gold, and slaves toward Rome and India. In the fourth century King Ezana converted to Christianity and campaigned against Meroe on the lower Nile. Aksumite coins carried both Greek and Ge'ez.
+
+After Arabs controlled the Red Sea in the seventh century, Adulis declined and the kingdom lost the sea road. In the tenth century the royal line broke off in tradition, and power moved south to the Zagwe. The city of Aksum was no longer a royal capital. Later Ethiopia kept its Christianity and Ge'ez. Those were new dynasties.`,
+    [
+      { year: 330, zh: "埃扎纳改宗基督教。", en: "Ezana converts to Christianity." },
+      { year: 350, zh: "阿克苏姆攻打麦罗埃。", en: "Aksum campaigns against Meroe." },
+      { year: 960, zh: "阿克苏姆王统中断。", en: "The Aksumite royal line breaks off." },
+    ],
+  ),
+england: book(
+    "927–1707的英格兰王国",
+    "the kingdom of England, 927–1707",
+    "温彻斯特，后为伦敦",
+    "Winchester, later London",
+    `927年埃塞尔斯坦成为全英格兰的国王。1066年诺曼底公爵威廉征服英格兰。1215年大宪章约束国王征税。1453年英格兰几乎失去在法国的领地。1534年亨利八世与罗马断绝，1588年英国舰队打散西班牙无敌舰队。1707年英格兰与苏格兰合成大不列颠王国。以后的帝国和议会政治属于联合王国，不再是单独的英格兰。`,
+    `In 927 Athelstan became king of all England. In 1066 William of Normandy conquered it. Magna Carta in 1215 constrained royal taxation. By 1453 England had lost almost all of its French lands. Henry VIII broke with Rome in 1534, and English ships scattered the Armada in 1588. In 1707 England and Scotland formed Great Britain. The later empire belongs to the United Kingdom, not to England alone.`,
+    [
+      { year: 1066, zh: "诺曼征服。", en: "The Norman conquest." },
+      { year: 1215, zh: "大宪章。", en: "Magna Carta." },
+      { year: 1588, zh: "无敌舰队战败。", en: "The Armada is defeated." },
+      { year: 1707, zh: "英格兰与苏格兰合并。", en: "England and Scotland unite." },
+    ],
+  ),
+  spain: book(
+    "1479年以后的西班牙",
+    "Spain after 1479",
+    "托莱多，后为马德里",
+    "Toledo, later Madrid",
+    `1479年卡斯蒂利亚和阿拉贡的王冠联在一起。1492年格拉纳达投降，哥伦布到达加勒比。西班牙在美洲设新西班牙和秘鲁两个总督辖区，白银经塞维利亚流入欧洲。1580年到1640年它还兼有葡萄牙。1588年无敌舰队失败，1648年尼德兰脱离。1898年失去古巴、波多黎各和菲律宾。海外帝国是港口、矿区和航线，不能涂成一整块大陆。`,
+    `In 1479 the crowns of Castile and Aragon were joined. Granada fell in 1492 and Columbus reached the Caribbean. Spain created the viceroyalties of New Spain and Peru, and silver flowed through Seville. From 1580 to 1640 it also held Portugal. The Armada failed in 1588 and the Netherlands left in 1648. In 1898 Spain lost Cuba, Puerto Rico, and the Philippines. The overseas empire was ports, mines, and routes, not one painted continent.`,
+    [
+      { year: 1492, zh: "格拉纳达投降，哥伦布西航。", en: "Granada falls and Columbus sails west." },
+      { year: 1588, zh: "无敌舰队失败。", en: "The Armada fails." },
+      { year: 1898, zh: "失去古巴、波多黎各和菲律宾。", en: "Cuba, Puerto Rico, and the Philippines are lost." },
+    ],
+  ),
+  portugal: book(
+    "1143年以后的葡萄牙",
+    "Portugal after 1143",
+    "里斯本",
+    "Lisbon",
+    `1143年葡萄牙从莱昂独立。1415年占领休达以后沿非洲海岸南下，1498年达伽马到达印度。帝国是一串商站：果阿、马六甲、澳门、巴西。1580年王位落入西班牙，1640年复国。1822年巴西独立。1975年非洲殖民地独立。葡萄牙的力量在海上，不在连成一片的陆地。`,
+    `Portugal separated from Leon in 1143. After Ceuta in 1415 it sailed down Africa, and Vasco da Gama reached India in 1498. The empire was a chain of posts: Goa, Melaka, Macau, and Brazil. The crown passed to Spain in 1580 and was restored in 1640. Brazil became independent in 1822. The African colonies followed in 1975. Portuguese power was at sea, not in a continuous land mass.`,
+    [
+      { year: 1143, zh: "葡萄牙王国成立。", en: "The kingdom of Portugal is founded." },
+      { year: 1498, zh: "达伽马到达印度。", en: "Vasco da Gama reaches India." },
+      { year: 1822, zh: "巴西独立。", en: "Brazil becomes independent." },
+    ],
+  ),
+  russia: book(
+    "莫斯科公国、沙皇俄国与俄罗斯",
+    "Muscovy, the tsardom, and Russia",
+    "莫斯科，1712年后为圣彼得堡",
+    "Moscow, Saint Petersburg after 1712",
+    `莫斯科在十四世纪成为金帐汗国下最强的公国，1480年停止纳贡。1547年伊凡四世称沙皇，1552年攻下喀山，随后向西伯利亚扩张。1721年彼得一世称皇帝，都城迁到圣彼得堡。帝国向西瓜分波兰，向南打奥斯曼。1917年沙皇制度结束，1922年苏联成立，1991年解体。俄罗斯联邦是苏联的主要继承国。西伯利亚是它扩大最快的方向。`,
+    `In the fourteenth century Moscow became the strongest principality under the Golden Horde and stopped paying tribute in 1480. Ivan IV took the title tsar in 1547, took Kazan in 1552, and then expanded into Siberia. Peter I became emperor in 1721 and moved the capital to Saint Petersburg. The empire partitioned Poland and fought the Ottomans. Tsardom ended in 1917. The Soviet Union lasted from 1922 to 1991. The Russian Federation is its main successor. Siberia was the fastest direction of growth.`,
+    [
+      { year: 1480, zh: "莫斯科结束对金帐汗国纳贡。", en: "Moscow ends tribute to the Golden Horde." },
+      { year: 1552, zh: "攻下喀山。", en: "Kazan is taken." },
+      { year: 1721, zh: "彼得一世称皇帝。", en: "Peter I becomes emperor." },
+      { year: 1917, zh: "沙皇制度结束。", en: "Tsardom ends." },
+      { year: 1991, zh: "苏联解体。", en: "The Soviet Union dissolves." },
+    ],
+  ),
+  "kanem-bornu": book(
+    "约700–1893",
+    "about 700–1893",
+    "恩吉米，后为恩加扎尔加穆",
+    "Njimi, later Ngazargamu",
+    `加涅姆在乍得湖东北兴起，约十一世纪国王改宗伊斯兰教，控制撒哈拉商路的东支。十四世纪末王室迁到湖西，国号转为博尔努。十六世纪末伊德里斯·阿劳马用火器巩固国家。1893年拉比赫推翻旧王朝。王国结束，土地后来被英、法、德的殖民边界切开。`,
+    `Kanem rose northeast of Lake Chad. Around the eleventh century its kings converted to Islam and held the eastern Saharan trade. At the end of the fourteenth century the court moved west of the lake and the state became Bornu. Idris Alooma strengthened it with firearms in the late sixteenth century. In 1893 Rabih overthrew the old dynasty. The kingdom ended, and colonial borders later cut the land among Britain, France, and Germany.`,
+    [
+      { year: 1100, zh: "加涅姆国王已经是穆斯林。", en: "The kings of Kanem are Muslim." },
+      { year: 1380, zh: "中心迁到乍得湖以西。", en: "The center moves west of Lake Chad." },
+      { year: 1893, zh: "旧王朝被推翻。", en: "The old dynasty is overthrown." },
+    ],
+  ),
+  ayutthaya: book(
+    "1351–1767",
+    "1351–1767",
+    "阿瑜陀耶",
+    "Ayutthaya",
+    `1351年乌通王在昭披耶河中游建立阿瑜陀耶，后来吞并素可泰。它靠稻米和王室贸易，与缅甸、真腊反复战争。1767年缅甸贡榜王朝攻毁都城，王朝结束。郑信在吞武里复国，1782年却克里王朝把都城迁到曼谷。阿瑜陀耶是泰人国家的主要一章，不是今天泰国的全部前身。`,
+    `In 1351 King Uthong founded Ayutthaya on the middle Chao Phraya. It later absorbed Sukhothai. It lived on rice and royal trade and fought Burma and the Khmer. In 1767 the Konbaung army destroyed the capital and the dynasty ended. Taksin restored a Thai kingdom at Thonburi, and in 1782 the Chakri dynasty moved to Bangkok. Ayutthaya is a main chapter of Thai history, not the whole ancestry of modern Thailand.`,
+    [
+      { year: 1351, zh: "阿瑜陀耶建国。", en: "Ayutthaya is founded." },
+      { year: 1438, zh: "素可泰并入。", en: "Sukhothai is absorbed." },
+      { year: 1767, zh: "都城被缅甸攻毁。", en: "Burma destroys the capital." },
+      { year: 1782, zh: "都城迁到曼谷。", en: "The capital moves to Bangkok." },
+    ],
+  ),
+  pagan: book(
+    "849–1287",
+    "849–1287",
+    "蒲甘",
+    "Pagan",
+    `849年缅人在伊洛瓦底江边建蒲甘。阿奴律陀在1044年以后征服孟人的直通，把上下缅甸连在一个朝廷之下。1287年元朝军队攻入，帝国解体，缅甸分成阿瓦、勃固等几个政权，直到十六世纪东吁王朝再次统一。`,
+    `In 849 the Burmans founded Pagan on the Irrawaddy. After 1044 Anawrahta conquered the Mon city of Thaton and joined upper and lower Burma. In 1287 a Yuan army entered and the empire broke up into Ava, Pegu, and other regimes until the Toungoo dynasty unified Burma again in the sixteenth century.`,
+    [
+      { year: 1044, zh: "阿奴律陀开始统一。", en: "Anawrahta begins the unification." },
+      { year: 1287, zh: "蒲甘解体。", en: "Pagan breaks up." },
+    ],
+  ),
+  venice: book(
+    "约697–1797",
+    "about 697–1797",
+    "威尼斯",
+    "Venice",
+    `威尼斯在泻湖里由总督统治，靠船和契约。1204年它参与攻占君士坦丁堡，分到克里特和爱琴海港口。1797年拿破仑把共和国交给奥地利，总督制度结束。它没有死于奥斯曼的围城，而死于法国的战争。`,
+    `Venice was ruled by a doge in the lagoon and lived by ships and contracts. In 1204 it joined the capture of Constantinople and took Crete and Aegean ports. In 1797 Napoleon handed the republic to Austria and the doges ended. It did not die in an Ottoman siege. It died in a French war.`,
+    [
+      { year: 1204, zh: "分得拜占庭的海港。", en: "Venice takes Byzantine ports." },
+      { year: 1797, zh: "共和国被取消。", en: "The republic is abolished." },
+    ],
+  ),
+ethiopia: book(
+    "阿克苏姆之后的埃塞俄比亚",
+    "Ethiopia after Aksum",
+    "拉利贝拉、贡德尔、亚的斯亚贝巴",
+    "Lalibela, Gondar, Addis Ababa",
+    `扎格维王朝之后，1270年所罗门王朝声称恢复阿克苏姆王统。十六世纪阿达尔的艾哈迈德·格拉尼几乎推翻基督教王国。1636年定都贡德尔。1896年孟尼利克二世在阿杜瓦打败意大利。1936年至1941年被意大利占领。埃塞俄比亚是非洲少数长期保持独立的王国，今天的边界仍是十九世纪末打出来的。`,
+    `After the Zagwe, the Solomonic dynasty of 1270 claimed the Aksumite line. In the sixteenth century Ahmad Gragn of Adal nearly overthrew the Christian kingdom. The capital settled at Gondar in 1636. Menelik II defeated Italy at Adwa in 1896. Italy occupied the country from 1936 to 1941. Ethiopia is one of the few African kingdoms that stayed independent for a long time. Its present borders were still made by war at the end of the nineteenth century.`,
+    [
+      { year: 1270, zh: "所罗门王朝建立。", en: "The Solomonic dynasty is founded." },
+      { year: 1896, zh: "阿杜瓦战役。", en: "The battle of Adwa." },
+      { year: 1974, zh: "海尔·塞拉西被废。", en: "Haile Selassie is deposed." },
+    ],
+  ),
+  vietnam: book(
+    "939年以后的大越与越南",
+    "Dai Viet and Vietnam after 939",
+    "升龙，后为顺化、河内",
+    "Thang Long, later Hue and Hanoi",
+    `939年吴权在白藤江打败南汉，越南北部脱离南汉。1054年李朝定国号大越，都升龙。陈朝两次挡住元朝。1427年黎利赶走明朝的驻军。1802年阮朝统一南北，国号越南，都顺化。十九世纪末法国分成交趾支那、安南和东京三部分统治。1945年宣布独立，1976年统一，定都河内。`,
+    `In 939 Ngo Quyen defeated Southern Han on the Bach Dang. In 1054 the Ly named the state Dai Viet, at Thang Long. The Tran stopped the Yuan twice. In 1427 Le Loi drove out the Ming garrisons. In 1802 the Nguyen unified north and south as Vietnam, at Hue. At the end of the nineteenth century France ruled it as Cochinchina, Annam, and Tonkin. Independence was declared in 1945 and the country was reunified in 1976 at Hanoi.`,
+    [
+      { year: 939, zh: "吴权独立。", en: "Ngo Quyen wins independence." },
+      { year: 1054, zh: "国号大越。", en: "The name becomes Dai Viet." },
+      { year: 1427, zh: "黎利赶走明军。", en: "Le Loi drives out the Ming." },
+      { year: 1802, zh: "阮朝建立，国号越南。", en: "The Nguyen dynasty names the country Vietnam." },
+      { year: 1976, zh: "越南统一。", en: "Vietnam is reunified." },
+    ],
+  ),
+  "golden horde": book(
+    "1242–1502",
+    "1242–1502",
+    "萨莱",
+    "Sarai",
+    `拔都西征之后在伏尔加河下游建萨莱，罗斯王公要到汗庭领受册封。这就是钦察汗国，也叫金帐汗国。1380年莫斯科在库利科沃打败马迈，但纳贡又继续了几十年。1480年莫斯科停止纳贡。1502年克里米亚汗攻灭大帐。喀山、阿斯特拉罕和克里米亚等汗国还各自存在。`,
+    `After the western campaign Batu built Sarai on the lower Volga. Rus princes received their patents at his court. This was the Kipchak khanate, the Golden Horde. Moscow defeated Mamai at Kulikovo in 1380, but tribute continued for decades. Moscow stopped it in 1480. In 1502 the Crimean khan destroyed the Great Horde. Kazan, Astrakhan, and Crimea continued as separate khanates.`,
+    [
+      { year: 1242, zh: "拔都在伏尔加河下游建国。", en: "Batu founds the state on the lower Volga." },
+      { year: 1480, zh: "莫斯科结束纳贡。", en: "Moscow stops the tribute." },
+      { year: 1502, zh: "大帐灭亡。", en: "The Great Horde is destroyed." },
+    ],
+  ),
+  "kievan rus": book(
+    "约882–1240",
+    "about 882–1240",
+    "基辅",
+    "Kyiv",
+    `约882年奥列格把中心迁到基辅。基辅罗斯是东斯拉夫与瓦良格商人沿第聂伯河通往拜占庭的公国联盟。988年弗拉基米尔接受基督教。1132年以后诸子分领城市，联盟松散。1240年蒙古攻破基辅。罗斯变成几个向汗国领受册封的公国，莫斯科后来从中兴起。`,
+    `Around 882 Oleg moved the center to Kyiv. Kievan Rus was a league of East Slavic and Varangian principalities on the Dnieper route to Byzantium. Vladimir accepted Christianity in 988. After 1132 sons held separate cities and the league loosened. The Mongols took Kyiv in 1240. Rus became principalities that received patents from the khan. Moscow later rose among them.`,
+    [
+      { year: 882, zh: "奥列格定都基辅。", en: "Oleg settles at Kyiv." },
+      { year: 988, zh: "接受基督教。", en: "Christianity is accepted." },
+      { year: 1240, zh: "蒙古攻破基辅。", en: "The Mongols take Kyiv." },
+    ],
+  ),
+  germany: book(
+    "1871年以后的德国",
+    "Germany after 1871",
+    "柏林",
+    "Berlin",
+    `1806年以前德意志是神圣罗马帝国里的许多邦，不是一个王国。1871年德意志帝国成立，皇帝由普鲁士国王兼任，奥地利留在外面。1918年变成共和国。1933年纳粹掌权，1945年战败后被分区占领。1949年分成联邦德国和民主德国，1990年统一。不能把1871年以前的德意志涂成一个国家。`,
+    `Before 1806 Germany was the many states of the Holy Roman Empire, not one kingdom. The German empire of 1871 made the king of Prussia its emperor and left Austria outside. It became a republic in 1918. The Nazis took power in 1933. After 1945 Germany was occupied in zones, split in 1949, and reunited in 1990. Germany before 1871 cannot be painted as one state.`,
+    [
+      { year: 1871, zh: "德意志帝国成立。", en: "The German empire is founded." },
+      { year: 1918, zh: "帝国结束。", en: "The empire ends." },
+      { year: 1949, zh: "分成东西两国。", en: "Germany splits in two." },
+      { year: 1990, zh: "两德统一。", en: "The two states unite." },
+    ],
+  ),
+  italy: book(
+    "1861年以后的意大利",
+    "Italy after 1861",
+    "都灵，后为罗马",
+    "Turin, later Rome",
+    `1861年以前意大利半岛是教宗国、两西西里、撒丁和若干外国王朝的领地。撒丁王国在加富尔和加里波第的战争里合并了大部分地区，1861年成立意大利王国，1870年进入罗马。1946年废除君主制。罗马城、中世纪城邦和1861年的王国不是同一个国家。`,
+    `Before 1861 the peninsula was the Papal States, the Two Sicilies, Sardinia, and lands of foreign dynasties. Sardinia absorbed most of it through the wars of Cavour and Garibaldi. The kingdom of Italy was founded in 1861 and entered Rome in 1870. The monarchy ended in 1946. The city of Rome, the medieval communes, and the kingdom of 1861 are not the same state.`,
+    [
+      { year: 1861, zh: "意大利王国成立。", en: "The kingdom of Italy is founded." },
+      { year: 1870, zh: "罗马并入意大利。", en: "Rome joins Italy." },
+      { year: 1946, zh: "君主制结束。", en: "The monarchy ends." },
+    ],
+  ),
+  greece: book(
+    "1830年以后的希腊王国",
+    "Greece after 1830",
+    "纳夫普利翁，后为雅典",
+    "Nafplio, later Athens",
+    `古代希腊是许多城邦。马其顿、罗马和拜占庭先后统治，1453年以后大部分属于奥斯曼。1830年列强承认一个小希腊王国，最初只有伯罗奔尼撒和大陆南部。古代城邦、拜占庭行省和1830年的王国是三件不同的事。`,
+    `Ancient Greece was many cities. Macedon, Rome, and Byzantium ruled it in turn, and after 1453 most of it belonged to the Ottomans. In 1830 the powers recognized a small Greek kingdom, at first only the Peloponnese and the southern mainland. The ancient cities, the Byzantine provinces, and the kingdom of 1830 are three different things.`,
+    [
+      { year: 1830, zh: "希腊王国得到承认。", en: "The kingdom of Greece is recognized." },
+      { year: 1944, zh: "轴心国占领结束。", en: "The Axis occupation ends." },
+    ],
+  ),
+  chola: book(
+    "约850–1279",
+    "about 850–1279",
+    "坦贾武尔",
+    "Thanjavur",
+    `注辇在九世纪复兴于泰米尔地区。罗茶罗乍一世和拉金德拉一世把水师派过孟加拉湾，1025年袭击三佛齐的港口。1279年潘地亚打败末代注辇国王。注辇是印度洋上少有的以海军伸张势力的南亚王朝。`,
+    `The Cholas revived in the Tamil country in the ninth century. Rajaraja I and Rajendra I sent a fleet across the Bay of Bengal and attacked Srivijaya's ports in 1025. In 1279 the Pandyas defeated the last Chola king. The Cholas were one of the few South Asian dynasties to project power by sea.`,
+    [
+      { year: 985, zh: "罗茶罗乍一世即位。", en: "Rajaraja I comes to the throne." },
+      { year: 1025, zh: "水师袭击三佛齐。", en: "The fleet attacks Srivijaya." },
+      { year: 1279, zh: "注辇灭亡。", en: "The Cholas fall." },
+    ],
+  ),
+  mamluk: book(
+    "1250–1517",
+    "1250–1517",
+    "开罗",
+    "Cairo",
+    `1250年埃及的马穆鲁克军人取代阿尤布王朝。1260年他们在艾因贾鲁挡住蒙古，叙利亚没有落入伊利汗国。苏丹由军人推举。1517年奥斯曼进入开罗，苏丹国结束。埃及变成奥斯曼行省，本地贝伊还延续到十九世纪。`,
+    `In 1250 Mamluk soldiers replaced the Ayyubids in Egypt. In 1260 they stopped the Mongols at Ayn Jalut, and Syria did not fall to the Ilkhanate. Sultans were chosen by the soldiers. In 1517 the Ottomans entered Cairo and the sultanate ended. Egypt became an Ottoman province. Local beys continued into the nineteenth century.`,
+    [
+      { year: 1250, zh: "马穆鲁克在开罗掌权。", en: "The Mamluks take Cairo." },
+      { year: 1260, zh: "艾因贾鲁挡住蒙古。", en: "Ayn Jalut stops the Mongols." },
+      { year: 1517, zh: "奥斯曼夺取开罗。", en: "The Ottomans take Cairo." },
+    ],
+  ),
+  ayyubid: book(
+    "1171–1250",
+    "1171–1250",
+    "开罗",
+    "Cairo",
+    `1171年萨拉丁结束法蒂玛王朝。1187年他在哈丁打败十字军并收回耶路撒冷。他死后领地分给子弟。1250年马穆鲁克军人杀掉末代苏丹，阿尤布王朝在埃及结束。`,
+    `In 1171 Saladin ended the Fatimids. In 1187 he defeated the crusaders at Hattin and recovered Jerusalem. After his death the lands were split among his kinsmen. In 1250 Mamluk soldiers killed the last sultan and the Ayyubids ended in Egypt.`,
+    [
+      { year: 1171, zh: "萨拉丁结束法蒂玛。", en: "Saladin ends the Fatimids." },
+      { year: 1187, zh: "收回耶路撒冷。", en: "Jerusalem is recovered." },
+      { year: 1250, zh: "马穆鲁克取代阿尤布。", en: "The Mamluks replace the Ayyubids." },
+    ],
+  ),
+  ilkhanate: book(
+    "1256–1335",
+    "1256–1335",
+    "大不里士",
+    "Tabriz",
+    `1256年旭烈兀在波斯建立伊利汗国，1258年攻破巴格达。合赞汗1295年改宗伊斯兰教。1335年不赛因死后没有继承人，汗国分成几个地方王朝。帖木儿后来又征服了其中大部分土地。`,
+    `In 1256 Hulegu founded the Ilkhanate in Persia and took Baghdad in 1258. Ghazan converted to Islam in 1295. After Abu Said died without an heir in 1335 the khanate split into local dynasties. Timur later conquered most of the same land.`,
+    [
+      { year: 1258, zh: "攻破巴格达。", en: "Baghdad is taken." },
+      { year: 1295, zh: "合赞汗改宗伊斯兰教。", en: "Ghazan converts to Islam." },
+      { year: 1335, zh: "汗国分裂。", en: "The khanate splits." },
+    ],
+  ),
+  "timurid empire": book(
+    "1370–1507",
+    "1370–1507",
+    "撒马尔罕，后为赫拉特",
+    "Samarkand, later Herat",
+    `1370年帖木儿在撒马尔罕称霸，军队洗劫德里、巴格达和阿勒颇，中心仍在河中。1405年他死在东征路上，帝国按子孙分裂。1507年乌兹别克攻入赫拉特。巴布尔是帖木儿后裔，他在印度建立的莫卧儿不是这个帝国的延续。`,
+    `In 1370 Timur became master at Samarkand. His armies sacked Delhi, Baghdad, and Aleppo, but the center stayed in Transoxiana. He died in 1405 on an eastern campaign and the empire split. The Uzbeks entered Herat in 1507. Babur, Timur's descendant, later founded the Mughal empire in India. That was not a continuation of Timur's state.`,
+    [
+      { year: 1370, zh: "帖木儿称霸撒马尔罕。", en: "Timur masters Samarkand." },
+      { year: 1405, zh: "帖木儿死于东征途中。", en: "Timur dies on the eastern campaign." },
+      { year: 1507, zh: "赫拉特陷落。", en: "Herat falls." },
+    ],
+  ),
+  "safavid empire": book(
+    "1501–1736",
+    "1501–1736",
+    "大不里士，后为伊斯法罕",
+    "Tabriz, later Isfahan",
+    `1501年伊斯玛仪把十二伊玛目派定为波斯国教。阿拔斯一世定都伊斯法罕，收回被奥斯曼占去的西部。1722年阿富汗人攻破伊斯法罕。1736年纳迪尔沙废掉萨法维傀儡。王朝结束，波斯还在。`,
+    `In 1501 Ismail made Twelver Shi'ism the state religion of Persia. Abbas I settled the capital at Isfahan and recovered the west from the Ottomans. Afghans took Isfahan in 1722. In 1736 Nader Shah deposed the Safavid puppet. The dynasty ended. Persia remained.`,
+    [
+      { year: 1501, zh: "伊斯玛仪称王。", en: "Ismail takes the royal title." },
+      { year: 1598, zh: "定都伊斯法罕。", en: "The capital moves to Isfahan." },
+      { year: 1736, zh: "萨法维王朝结束。", en: "The Safavid dynasty ends." },
+    ],
+  ),
+  "seljuk empire": book(
+    "1037–1194",
+    "1037–1194",
+    "尼沙布尔、伊斯法罕",
+    "Nishapur and Isfahan",
+    `塞尔柱人是乌古斯突厥的一支。1055年图格里勒进入巴格达，哈里发承认他为苏丹。1071年曼齐刻尔特以后，突厥人大量进入安纳托利亚。1092年马立克沙死后帝国分裂，安纳托利亚一支成为罗姆苏丹国。1194年花剌子模打败末代大塞尔柱苏丹。`,
+    `The Seljuks were a branch of the Oghuz. In 1055 Tughril entered Baghdad and the caliph recognized him as sultan. After Manzikert in 1071 Turks moved into Anatolia. The empire split after Malik Shah died in 1092, and the Anatolian branch became the Sultanate of Rum. Khwarazm defeated the last Great Seljuk sultan in 1194.`,
+    [
+      { year: 1055, zh: "进入巴格达。", en: "Baghdad is entered." },
+      { year: 1071, zh: "曼齐刻尔特战役。", en: "Manzikert." },
+      { year: 1194, zh: "大塞尔柱灭亡。", en: "The Great Seljuks end." },
+    ],
+  ),
+almohad: book("1121–1269", "1121–1269", "马拉喀什", "Marrakesh", `穆瓦希德由伊本·图马尔特在摩洛哥发起，1147年攻占马拉喀什，取代穆拉比特，并把统治伸到安达卢斯。1212年纳瓦斯·德托洛萨战败后，西班牙的领地迅速丢失。1269年马林王朝攻入马拉喀什，穆瓦希德结束。`, `The Almohads began with Ibn Tumart in Morocco, took Marrakesh in 1147, replaced the Almoravids, and extended into al-Andalus. After Las Navas de Tolosa in 1212 the Spanish lands fell away quickly. The Marinids entered Marrakesh in 1269 and the Almohads ended.`, [{ year: 1147, zh: "攻占马拉喀什。", en: "Marrakesh is taken." }, { year: 1212, zh: "纳瓦斯·德托洛萨战败。", en: "Las Navas de Tolosa." }, { year: 1269, zh: "王朝结束。", en: "The dynasty ends." }]),
+  almoravid: book("约1040–1147", "about 1040–1147", "马拉喀什", "Marrakesh", `穆拉比特是撒哈拉柏柏尔人建立的王朝，1062年建马拉喀什，1086年进入安达卢斯，挡住了卡斯蒂利亚的南进。1147年被穆瓦希德攻灭。`, `The Almoravids were Saharan Berbers. They founded Marrakesh in 1062 and entered al-Andalus in 1086, stopping Castile's advance. The Almohads destroyed them in 1147.`, [{ year: 1062, zh: "建立马拉喀什。", en: "Marrakesh is founded." }, { year: 1086, zh: "进入安达卢斯。", en: "They enter al-Andalus." }, { year: 1147, zh: "被穆瓦希德攻灭。", en: "The Almohads destroy them." }]),
+  austria: book("哈布斯堡与奥地利", "The Habsburgs and Austria", "维也纳", "Vienna", `哈布斯堡从十三世纪以后多次当选神圣罗马皇帝，根基是奥地利。1526年他们获得波希米亚和匈牙利。1804年另建奥地利帝国，1806年神圣罗马帝国结束。1867年与匈牙利组成二元帝国，1918年解体。今天的奥地利只是阿尔卑斯山间的共和国，不是哈布斯堡的全部领地。`, `From the thirteenth century the Habsburgs were often Holy Roman emperors. Their base was Austria. In 1526 they gained Bohemia and Hungary. An Austrian empire was created in 1804, and the Holy Roman Empire ended in 1806. The dual monarchy with Hungary lasted from 1867 to 1918. Austria today is an Alpine republic, not the whole Habsburg realm.`, [{ year: 1526, zh: "获得波希米亚和匈牙利。", en: "Bohemia and Hungary are gained." }, { year: 1806, zh: "神圣罗马帝国结束。", en: "The Holy Roman Empire ends." }, { year: 1918, zh: "奥匈帝国解体。", en: "Austria-Hungary dissolves." }]),
+  buyid: book("934–1055", "934–1055", "设拉子、巴格达", "Shiraz and Baghdad", `白益人是里海以南的戴拉姆军人。945年他们进入巴格达，哈里发还在，军政归白益埃米尔。1055年塞尔柱的图格里勒进入巴格达，白益政权结束。`, `The Buyids were Daylamite soldiers from south of the Caspian. In 945 they entered Baghdad. The caliph remained, but military government belonged to the Buyid emir. In 1055 the Seljuk Tughril entered Baghdad and Buyid rule ended.`, [{ year: 945, zh: "进入巴格达。", en: "Baghdad is entered." }, { year: 1055, zh: "塞尔柱取代白益。", en: "The Seljuks replace the Buyids." }]),
+  carthage: book("约前814–前146", "about 814–146 BCE", "迦太基", "Carthage", `迦太基由推罗人建立，靠航海控制西地中海，与罗马打了三次布匿战争。汉尼拔翻越阿尔卑斯，但没有攻下罗马。前146年罗马毁城，设阿非利加行省。迦太基作为国家结束。`, `Tyrians founded Carthage. It held the western Mediterranean by sea and fought Rome in three Punic wars. Hannibal crossed the Alps and did not take Rome. In 146 BCE Rome destroyed the city and created the province of Africa. Carthage ended as a state.`, [{ year: -218, zh: "汉尼拔进入意大利。", en: "Hannibal enters Italy." }, { year: -146, zh: "罗马毁灭迦太基。", en: "Rome destroys Carthage." }]),
+  denmark: book("丹麦", "Denmark", "哥本哈根", "Copenhagen", `1397年卡尔马联合把丹麦、挪威和瑞典放在一个君主之下。1523年瑞典退出。挪威由丹麦国王统治到1814年。丹麦此后是波罗的海入口上的小王国，1864年失去石勒苏益格和荷尔斯泰因。`, `The Kalmar Union of 1397 put Denmark, Norway, and Sweden under one monarch. Sweden left in 1523. The Danish king ruled Norway until 1814. Denmark was then a small kingdom at the entrance to the Baltic. It lost Schleswig and Holstein in 1864.`, [{ year: 1397, zh: "卡尔马联合。", en: "The Kalmar Union." }, { year: 1523, zh: "瑞典退出。", en: "Sweden leaves." }, { year: 1814, zh: "挪威转归瑞典。", en: "Norway passes to Sweden." }]),
+  "fatimid caliphate": book("909–1171", "909–1171", "马赫迪耶，后为开罗", "Mahdia, later Cairo", `法蒂玛王朝自称阿里和法蒂玛的后裔，909年在北非建国，969年建开罗。它与巴格达的阿拔斯并列，都称哈里发。1171年萨拉丁结束法蒂玛，埃及转入阿尤布王朝。`, `The Fatimids claimed descent from Ali and Fatima. They founded a state in North Africa in 909 and Cairo in 969. They and the Abbasids of Baghdad both claimed the caliphate. In 1171 Saladin ended the Fatimids and Egypt passed to the Ayyubids.`, [{ year: 969, zh: "建立开罗。", en: "Cairo is founded." }, { year: 1171, zh: "萨拉丁结束法蒂玛。", en: "Saladin ends the Fatimids." }]),
+  ghaznavid: book("977–1186", "977–1186", "加兹尼", "Ghazni", `伽色尼由萨曼王朝的突厥军人塞布克特勤建立。马哈茂德多次攻入印度北部，都城在加兹尼。十二世纪古尔人崛起，1186年攻灭伽色尼在呼罗珊以东的统治。`, `The Ghaznavids were founded by Sebuktigin, a Turkic soldier of the Samanids. Mahmud raided northern India many times. The capital was Ghazni. The Ghurids rose in the twelfth century and in 1186 ended Ghaznavid rule east of Khorasan.`, [{ year: 998, zh: "马哈茂德即位。", en: "Mahmud comes to the throne." }, { year: 1186, zh: "伽色尼灭亡。", en: "The Ghaznavids end." }]),
+  hafsid: book("1229–1574", "1229–1574", "突尼斯", "Tunis", `哈夫斯王朝是穆瓦希德在伊弗里基叶的总督自立而成，都突尼斯。它在西地中海贸易里保持独立，直到1574年奥斯曼攻占突尼斯。`, `The Hafsids began when a local Almohad governor made himself independent in Ifriqiya, at Tunis. The dynasty stayed independent in western Mediterranean trade until the Ottomans took Tunis in 1574.`, [{ year: 1229, zh: "哈夫斯王朝建立。", en: "The Hafsid dynasty is founded." }, { year: 1574, zh: "奥斯曼攻占突尼斯。", en: "The Ottomans take Tunis." }]),
+  hungary: book("1000–1918年间的匈牙利王国", "the kingdom of Hungary, 1000–1918", "布达", "Buda", `1000年伊什特万加冕。1526年摩哈奇战役后王国分裂为奥斯曼中部、哈布斯堡西部和特兰西瓦尼亚。1699年奥斯曼退出大部分土地。1867年与奥地利组成二元帝国，1918年解体。中世纪匈牙利比今天的国境大得多。`, `Stephen was crowned in 1000. After Mohacs in 1526 the kingdom split into an Ottoman center, a Habsburg west, and Transylvania. The Ottomans left most of the land in 1699. The dual monarchy with Austria lasted from 1867 to 1918. Medieval Hungary was much larger than the present state.`, [{ year: 1000, zh: "伊什特万加冕。", en: "Stephen is crowned." }, { year: 1526, zh: "摩哈奇战役。", en: "Mohacs." }, { year: 1918, zh: "二元帝国解体。", en: "The dual monarchy dissolves." }]),
+  khwarazm: book("约1077–1231", "about 1077–1231", "玉龙杰赤", "Gurganj", `花剌子模在咸海以南兴起，十二世纪末摩诃末把塞尔柱的残余和呼罗珊并入自己的苏丹国。1219年他处死蒙古商队，成吉思汗西征。1220年都城陷落，1221年以后苏丹国崩溃。`, `Khwarazm rose south of the Aral Sea. At the end of the twelfth century Muhammad annexed what remained of the Seljuks and Khorasan. In 1219 he killed a Mongol caravan and Chinggis Khan marched west. The capital fell in 1220 and the sultanate collapsed after 1221.`, [{ year: 1219, zh: "成吉思汗开始西征。", en: "Chinggis Khan marches west." }, { year: 1221, zh: "花剌子模苏丹国崩溃。", en: "The sultanate collapses." }]),
+  kush: book("约前8世纪–350", "about the 8th century BCE–350 CE", "纳帕塔，后为麦罗埃", "Napata, later Meroe", `库施在尼罗河中上游。前8世纪它的国王一度统治埃及。后来中心迁到麦罗埃，有自己的文字和炼铁。约350年阿克苏姆攻打麦罗埃，库施王国结束。`, `Kush lay on the middle Nile. In the eighth century BCE its kings briefly ruled Egypt. The center later moved to Meroe, with its own script and iron. Around 350 Aksum campaigned against Meroe and the kingdom of Kush ended.`, [{ year: -730, zh: "库施国王统治埃及。", en: "Kushite kings rule Egypt." }, { year: 350, zh: "阿克苏姆攻打麦罗埃。", en: "Aksum campaigns against Meroe." }]),
+  macedon: book("前4世纪的马其顿", "Macedon in the 4th century BCE", "佩拉", "Pella", `腓力二世在前338年喀罗尼亚打败希腊城邦。亚历山大前334年东征，前330年灭亡阿契美尼德，前323年死于巴比伦，部将分裂帝国。马其顿本土前148年成为罗马行省。亚历山大的远征不是一个长期稳定的世界帝国。`, `Philip II defeated the Greek cities at Chaeronea in 338 BCE. Alexander marched east in 334, destroyed the Achaemenids in 330, and died at Babylon in 323. His generals split the empire. Macedon itself became a Roman province in 148 BCE. Alexander's campaign was not a stable world empire.`, [{ year: -338, zh: "喀罗尼亚战役。", en: "Chaeronea." }, { year: -323, zh: "亚历山大死于巴比伦。", en: "Alexander dies at Babylon." }, { year: -148, zh: "马其顿成为罗马行省。", en: "Macedon becomes a Roman province." }]),
+  olmec: book("约前1500–前400", "about 1500–400 BCE", "圣洛伦索、拉文塔", "San Lorenzo and La Venta", `奥尔梅克是墨西哥湾沿岸的早期城市文化，以巨石头像闻名。它影响后来的玛雅，但没有留下可以读成王朝的文字史。前400年前后主要中心被放弃。不能把它画成边界清楚的帝国。`, `The Olmec were an early urban culture on the Gulf of Mexico, known for colossal heads. They influenced the later Maya but left no dynastic history that can be read as a king list. The main centers were abandoned around 400 BCE. They should not be drawn as an empire with a clear border.`, [{ year: -1200, zh: "圣洛伦索处于盛期。", en: "San Lorenzo is at its height." }, { year: -400, zh: "主要中心被放弃。", en: "The main centers are abandoned." }]),
+  poland: book("966年以后的波兰", "Poland after 966", "克拉科夫，后为华沙", "Krakow, later Warsaw", `966年梅什科一世受洗。1569年与立陶宛组成联邦，国王由贵族选举。1772年到1795年被普鲁士、奥地利和俄国三次瓜分，国家消失。1918年复国，1945年以后边界西移。波兰的历史是一再被瓜分又一再复国。`, `Mieszko I was baptized in 966. In 1569 Poland and Lithuania formed a commonwealth with an elected king. From 1772 to 1795 Prussia, Austria, and Russia partitioned it out of existence. It returned in 1918, and after 1945 the border moved west. Polish history is a state repeatedly erased and restored.`, [{ year: 966, zh: "梅什科一世受洗。", en: "Mieszko I is baptized." }, { year: 1569, zh: "与立陶宛组成联邦。", en: "The union with Lithuania." }, { year: 1795, zh: "第三次瓜分。", en: "The third partition." }, { year: 1918, zh: "波兰复国。", en: "Poland is restored." }]),
+  prussia: book("1701–1871", "1701–1871", "柏林", "Berlin", `1701年勃兰登堡选帝侯称普鲁士国王。腓特烈二世在1740年夺取西里西亚。1871年普鲁士国王成为德意志皇帝。普鲁士没有消失，但不再单独面对欧洲。1947年这个邦名被废除。`, `In 1701 the elector of Brandenburg became king in Prussia. Frederick II seized Silesia in 1740. In 1871 the king of Prussia became German emperor. Prussia did not vanish, but it no longer faced Europe alone. The name of the state was abolished in 1947.`, [{ year: 1701, zh: "普鲁士王国成立。", en: "The kingdom is founded." }, { year: 1871, zh: "普鲁士国王成为德意志皇帝。", en: "The king becomes German emperor." }, { year: 1947, zh: "普鲁士邦被废除。", en: "The state of Prussia is abolished." }]),
+  "ptolemaic kingdom": book("前305–前30", "305–30 BCE", "亚历山大", "Alexandria", `托勒密是亚历山大的部将，前305年在埃及称王。王朝用希腊语治理，同时以法老身份面对埃及神庙。前30年克娄巴特拉死后，埃及成为罗马行省。`, `Ptolemy, one of Alexander's generals, took the royal title in Egypt in 305 BCE. The dynasty governed in Greek and faced the temples as pharaohs. After Cleopatra died in 30 BCE, Egypt became a Roman province.`, [{ year: -305, zh: "托勒密称王。", en: "Ptolemy becomes king." }, { year: -30, zh: "埃及并入罗马。", en: "Egypt joins Rome." }]),
+  samanid: book("819–999", "819–999", "布哈拉", "Bukhara", `萨曼王朝在河中和呼罗珊用波斯语复兴宫廷文化，都布哈拉。999年喀喇汗王朝攻入布哈拉，萨曼王朝结束。`, `The Samanids revived a Persian court culture in Transoxiana and Khorasan, at Bukhara. In 999 the Kara-Khanids entered Bukhara and the Samanid dynasty ended.`, [{ year: 892, zh: "伊斯玛仪把都城定为布哈拉。", en: "Ismail settles the capital at Bukhara." }, { year: 999, zh: "萨曼王朝灭亡。", en: "The Samanids end." }]),
+  "seleucid kingdom": book("前312–前63", "312–63 BCE", "安条克", "Antioch", `塞琉古前312年回到巴比伦，王国一度从叙利亚伸到伊朗。巴克特里亚和帕提亚脱离以后，它缩成叙利亚。前63年庞培把它变成罗马行省。`, `Seleucus returned to Babylon in 312 BCE. The kingdom once reached from Syria to Iran. After Bactria and Parthia broke away it shrank to Syria. Pompey made it a Roman province in 63 BCE.`, [{ year: -312, zh: "塞琉古回到巴比伦。", en: "Seleucus returns to Babylon." }, { year: -63, zh: "罗马吞并叙利亚。", en: "Rome annexes Syria." }]),
+  sweden: book("瑞典", "Sweden", "斯德哥尔摩", "Stockholm", `1523年古斯塔夫·瓦萨使瑞典脱离卡尔马联合。十七世纪它是波罗的海的强国。1709年波尔塔瓦战败后霸权转到俄国。1809年失去芬兰，1814年获得挪威，1905年挪威和平脱离。瑞典的大国时期是十七世纪。`, `In 1523 Gustav Vasa took Sweden out of the Kalmar Union. In the seventeenth century it was a Baltic power. After Poltava in 1709 that hegemony passed to Russia. Sweden lost Finland in 1809, gained Norway in 1814, and Norway left peacefully in 1905. Sweden's great-power period was the seventeenth century.`, [{ year: 1523, zh: "脱离卡尔马联合。", en: "Sweden leaves the Kalmar Union." }, { year: 1709, zh: "波尔塔瓦战败。", en: "The defeat at Poltava." }, { year: 1905, zh: "挪威脱离。", en: "Norway leaves." }]),
 }

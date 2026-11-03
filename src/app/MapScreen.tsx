@@ -9,6 +9,7 @@ import { colorFor } from "../lib/color"
 import { centroidOf, contains } from "../lib/geo"
 import { eraFor, yearText } from "../lib/era"
 import { presentPolity } from "../data/reign"
+import { gazetteer } from "../data/gazetteer"
 import { chronicles } from "../data/chronicles"
 import { asset, useCopy } from "./chrome"
 
@@ -53,18 +54,21 @@ function decorate(fc: AtlasFC, lexicon: Lexicon, lang: "zh" | "en", year: number
       const view = presentPolity(source, year)
       if (view?.hide) return []
       const key = source.toLowerCase()
-      const zh = view?.zh || lexicon[key]?.zh || ""
-      const en = view?.en || lexicon[key]?.en || source
+      const named = gazetteer[key]
+      const zh = view?.zh || lexicon[key]?.zh || named?.zh || ""
+      const en = view?.en || lexicon[key]?.en || named?.en || source
       const label = lang === "zh" ? zh : en
+      const dossier = (view?.dossier || named?.dossier || key).toLowerCase()
+      const chapter = view?.chapter || named?.chapter
       return [{
         ...feature,
         properties: {
           ...feature.properties,
-          color: colorFor(view?.dossier || String(feature.properties.id)),
+          color: colorFor(view?.dossier || named?.dossier || String(feature.properties.id)),
           name_zh: zh,
           name_en: en,
-          dossier: (view?.dossier || key).toLowerCase(),
-          ...(view?.chapter ? { chapter: view.chapter } : {}),
+          dossier,
+          ...(chapter ? { chapter } : {}),
           adjusted: view && view.zh !== (lexicon[key]?.zh ?? "") ? 1 : 0,
           ...(label ? { label } : {}),
           area: Math.round(geomArea(feature.geometry)),
