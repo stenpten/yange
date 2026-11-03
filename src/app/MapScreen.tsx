@@ -7,7 +7,9 @@ import { chinaFileFor, ratioToYear, snapshotFor, yearToRatio } from "../lib/snap
 import { snapshotYears } from "../data/snapshots"
 import { colorFor } from "../lib/color"
 import { centroidOf, contains } from "../lib/geo"
-import { eraFor } from "../lib/era"
+import { eraFor, yearText } from "../lib/era"
+import { presentPolity } from "../data/reign"
+import { chronicles } from "../data/chronicles"
 import { asset, useCopy } from "./chrome"
 
 type Geom = { type: "Polygon" | "MultiPolygon"; coordinates: number[][][] | number[][][][] }
@@ -43,41 +45,31 @@ function geomArea(geometry: Geom) {
   return sum
 }
 
-function displayZh(name: string, year: number, lexicon: Lexicon) {
-  const key = name.toLowerCase()
-  if (key === "nan chao" || key === "nan-zhao") return year >= 938 ? "大理" : "南诏"
-  if (key === "song empire" && year >= 1127) return "南宋"
-  if (key === "song empire" && year >= 960) return "北宋"
-  if (key === "great khanate") return year >= 1368 ? "北元" : "元"
-  if (key === "koguryo") return "高句丽"
-  if (key === "paekche") return "百济"
-  if (key === "silla") return "新罗"
-  if (key === "parhae") return "渤海"
-  if (key === "korea" && year >= 1392) return "朝鲜"
-  if (key === "korea" && year >= 918) return "高丽"
-  if (key === "korea") return "新罗"
-  return lexicon[key]?.zh ?? ""
-}
-
 function decorate(fc: AtlasFC, lexicon: Lexicon, lang: "zh" | "en", year: number): AtlasFC {
   return {
     type: "FeatureCollection",
-    features: fc.features.map((feature) => {
+    features: fc.features.flatMap((feature) => {
       const source = String(feature.properties.name ?? "")
-      const zh = displayZh(source, year, lexicon)
-      const en = lexicon[source.toLowerCase()]?.en ?? source
+      const view = presentPolity(source, year)
+      if (view?.hide) return []
+      const key = source.toLowerCase()
+      const zh = view?.zh || lexicon[key]?.zh || ""
+      const en = view?.en || lexicon[key]?.en || source
       const label = lang === "zh" ? zh : en
-      return {
+      return [{
         ...feature,
         properties: {
           ...feature.properties,
-          color: colorFor(String(feature.properties.id)),
+          color: colorFor(view?.dossier || String(feature.properties.id)),
           name_zh: zh,
           name_en: en,
+          dossier: (view?.dossier || key).toLowerCase(),
+          ...(view?.chapter ? { chapter: view.chapter } : {}),
+          adjusted: view && view.zh !== (lexicon[key]?.zh ?? "") ? 1 : 0,
           ...(label ? { label } : {}),
           area: Math.round(geomArea(feature.geometry)),
         },
-      }
+      }]
     }),
   }
 }
@@ -88,7 +80,7 @@ export function MapScreen() {
   const [snapshots, setSnapshots] = useState<number[]>(snapshotYears)
   const [spans, setSpans] = useState<ChinaSpan[]>([])
   const [lexicon, setLexicon] = useState<Lexicon>({})
-  const [dossiers, setDossiers] = useState<Record<string, Dossier>>({})
+  const [dossiers, setDossiers] = useState<Record<string, Dossier>>(chronicles)
   const [population, setPopulation] = useState<Record<string, number[][]>>({})
   const [playing, setPlaying] = useState(false)
   const [speed, setSpeed] = useState<1 | 4 | 16>(1)
@@ -98,6 +90,7 @@ export function MapScreen() {
   const [data, setData] = useState<{ world: AtlasFC; china: AtlasFC }>({ world: empty, china: empty })
   const mapNode = useRef<HTMLDivElement>(null)
   const dataRef = useRef(data)
+  const shownRef = useRef(empty)
   const setParamsRef = useRef(setParams)
   dataRef.current = data
   setParamsRef.current = setParams
@@ -133,7 +126,7 @@ export function MapScreen() {
       setSpans(loadedSpans)
     })
     void fetch(asset("history/labels.json")).then((res) => res.json()).then((data: Lexicon) => setLexicon(data)).catch(() => setLexicon({}))
-    void fetch(asset("history/dossiers.json")).then((res) => res.json()).then((data: Record<string, Dossier>) => setDossiers(data)).catch(() => setDossiers({}))
+    void fetch(asset("history/dossiers.json")).then((res) => res.json()).then((data: Record<string, Dossier>) => setDossiers({ ...data, ...chronicles })).catch(() => setDossiers(chronicles))
     void fetch(asset("history/population.json")).then((res) => res.json()).then((data: Record<string, number[][]>) => setPopulation(data)).catch(() => setPopulation({}))
   }, [])
 
@@ -256,7 +249,7 @@ export function MapScreen() {
         return next
       }, { replace: true })
       const bounds = map.getBounds()
-      const features = [...(map.getSource("china") ? [] : []), ...dataRef.current.world.features, ...dataRef.current.china.features]
+      const features = shownRef.current.features
       const ids = new Set<string>()
       for (const feature of features) {
         const [x, y] = centroidOf(feature.geometry)
@@ -314,6 +307,7 @@ export function MapScreen() {
   }, [snap, snapshots.length, t.loading, t.failed])
 
   const shown = useMemo(() => decorate(data.world, lexicon, lang, clamped), [data.world, lexicon, lang, clamped])
+  shownRef.current = shown
 
   useEffect(() => {
     const map = mapRef.current
@@ -368,9 +362,11 @@ export function MapScreen() {
       return sameSnap || sameChina
     })
     .sort((a, b) => a.year - b.year)
-  const chapter = chapters.find((item) => item.polityId && item.polityId === polity)
-  const dossier = selected ? dossiers[String(selected.properties.name ?? "").toLowerCase()] : undefined
-  const series = (population[String(selected?.properties.name ?? "").toLowerCase()] ?? []).slice().sort((a, b) => a[0] - b[0])
+  const dossierKey = String(selected?.properties.dossier ?? selected?.properties.name ?? "").toLowerCase()
+  const chapterSlug = String(selected?.properties.chapter ?? "")
+  const chapter = chapters.find((item) => chapterSlug && item.slug === chapterSlug) ?? chapters.find((item) => item.polityId && item.polityId === polity)
+  const dossier = selected ? dossiers[dossierKey] : undefined
+  const series = (population[dossierKey] ?? population[String(selected?.properties.name ?? "").toLowerCase()] ?? []).slice().sort((a, b) => a[0] - b[0])
   const popMin = series[0]?.[0] ?? 0
   const popMax = series[series.length - 1]?.[0] ?? 1
   const popPeak = Math.max(1, ...series.map((point) => point[1]))
@@ -392,6 +388,7 @@ export function MapScreen() {
         <aside className={railOpen ? "rail open" : "rail"}>
           <button className="expand textbtn" type="button" onClick={() => setRailOpen((value) => !value)}>{railOpen ? t.close : t.thisYear}</button>
           {status ? <p>{status}</p> : null}
+          {snap !== clamped ? <p className="note">{t.corrected}</p> : null}
           {selected ? (
             <article className="polity">
               <div className="polity-rule" style={{ background: String(selected.properties.color) }} />
@@ -412,7 +409,7 @@ export function MapScreen() {
                   <ol className="beats">
                     {dossier.beats.map((beat) => (
                       <li key={beat.year}>
-                        <span className="num">{beat.year}</span>
+                        <span className="num">{yearText(beat.year, lang)}</span>
                         <span>{lang === "zh" ? beat.zh : beat.en}</span>
                       </li>
                     ))}
@@ -437,7 +434,7 @@ export function MapScreen() {
               {polityEvents.length === 0 ? <p className="muted">{t.noEvents}</p> : polityEvents.map((event) => (
                 <div className="event" key={event.id}>
                   <button className="event-hit" type="button" onClick={() => write({ year: String(event.year), lng: String(event.lng), lat: String(event.lat), z: "4", polity: event.polityId })}>
-                    <span className="num">{event.year}</span>
+                    <span className="num">{yearText(event.year, lang)}</span>
                     <span>
                       <b>{event.title[lang]}</b>
                       <span className="muted">{event.summary[lang]}</span>
@@ -456,7 +453,7 @@ export function MapScreen() {
               {shownEvents.length === 0 ? <p className="muted">{t.noEvents}</p> : shownEvents.map((event) => (
                 <div className="event" key={event.id}>
                   <button className="event-hit" type="button" onClick={() => write({ year: String(event.year), lng: String(event.lng), lat: String(event.lat), z: "4", polity: event.polityId })}>
-                    <span className="num">{event.year}</span>
+                    <span className="num">{yearText(event.year, lang)}</span>
                     <span>
                       <b>{event.title[lang]}</b>
                       <span className="muted">{event.summary[lang]}</span>
@@ -468,7 +465,7 @@ export function MapScreen() {
               {[...events].sort((a, b) => a.year - b.year).map((event) => (
                 <div className="event" key={`all-${event.id}`}>
                   <button className="event-hit" type="button" onClick={() => write({ year: String(event.year), lng: String(event.lng), lat: String(event.lat), z: "4", polity: event.polityId })}>
-                    <span className="num">{event.year}</span>
+                    <span className="num">{yearText(event.year, lang)}</span>
                     <span>
                       <b>{event.title[lang]}</b>
                       <span className="muted">{event.summary[lang]}</span>
@@ -482,7 +479,7 @@ export function MapScreen() {
       </div>
       <div className="yearbar">
         <div className="chronicle">
-          <span className="year-num">{clamped}</span>
+          <span className="year-num">{yearText(clamped, lang)}</span>
           {era ? <span>{era}</span> : null}
           {snap !== clamped ? <span className="faint">{t.source} {sourceText}</span> : null}
           <span className="faint">{t.visible} {visible}</span>

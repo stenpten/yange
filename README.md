@@ -1,8 +1,8 @@
 # 沿革 / Yange
 
-中英对照的历史地图。平面地图为主，可以切换地球。拖动年份时，疆域只在跨过历史底图快照时改变，并标明依据年份。中国在关键年份另有一层，把同时存在的政权分开。
+中英对照的历史地图。平面地图为主，可以切换地球。拖动年份时，疆域只在跨过历史底图快照时改变，并标明依据年份。底图上的国号如果已经过时，页面按所选年份改正：公元750年仍用700年的世界轮廓，但写成唐，而不是隋。已经灭亡的政权不再涂出来。中国在关键年份另有一层，把同时存在的政权分开。
 
-A bilingual historical atlas. The flat map is the default, with a globe switch. Territory changes only when the year crosses a historical snapshot, and the page names that source year. A separate China layer splits contemporary regimes at key dates.
+A bilingual historical atlas. The flat map is the default, with a globe switch. Territory changes only when the year crosses a historical snapshot, and the page names that source year. If that sheet still carries an obsolete realm name, the label is corrected to the selected year: 750 keeps the year-700 outline but reads Tang, not Sui. Realms that had already fallen are not painted. A separate China layer splits contemporary regimes at key dates.
 
 站点 / Site: https://stenpten.github.io/yange/
 
