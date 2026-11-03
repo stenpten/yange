@@ -5,7 +5,29 @@
     "capitalZh": "汴梁；1127年后为临安",
     "capitalEn": "Bianliang; Lin'an after 1127",
     "bodyZh": "宋立国于五代之后，以文官制度和岁币换来长期的内地秩序。1127年汴梁陷落，高宗在南方重建朝廷，史称南宋。\n\n1150年前后的南宋以临安为行在，与金以绍兴和议划界：淮河、大散关一线大致成为南北分界。朝廷财政依赖东南农田与海外贸易，军力则集中在江淮和四川。图上的范围是该年历史快照，不是逐年勘测的国界。",
-    "bodyEn": "The Song reunified the Chinese interior after the Five Dynasties. After 1127 the court ruled from the south. Around 1150 the Southern Song faced the Jin along the Huai River and the Dasan Pass, with its fiscal base in the southeast. The shape is the historical snapshot for this year, not a surveyed border."
+    "bodyEn": "The Song reunified the Chinese interior after the Five Dynasties. After 1127 the court ruled from the south. Around 1150 the Southern Song faced the Jin along the Huai River and the Dasan Pass, with its fiscal base in the southeast. The shape is the historical snapshot for this year, not a surveyed border.",
+    "beats": [
+      {
+        "year": 960,
+        "zh": "赵匡胤代周，宋立。",
+        "en": "Zhao Kuangyin founds the Song."
+      },
+      {
+        "year": 1127,
+        "zh": "汴梁陷落，朝廷南迁，史称南宋。",
+        "en": "Bianliang falls and the court moves south."
+      },
+      {
+        "year": 1141,
+        "zh": "绍兴和议后，宋金大致以淮河为界。",
+        "en": "After the Shaoxing peace, the Huai River is the rough frontier."
+      },
+      {
+        "year": 1279,
+        "zh": "崖山之后，宋亡。",
+        "en": "The Song ends after Yashan."
+      }
+    ]
   },
   "liao": {
     "spanZh": "907–1125",
@@ -13,7 +35,24 @@
     "capitalZh": "上京临潢",
     "capitalEn": "Shangjing",
     "bodyZh": "辽是契丹皇朝，兼有草原部落与华北燕云的农耕州县。双轨官制让游牧与农耕地区各按其法。1125年被金所灭，皇族西迁后建立西辽。\n\n若时间轴停在1150年，辽的本土已经不在。这一年若仍见到辽的色块，是底图快照尚未切到下一年，不应当成1125年以后的契丹国境。",
-    "bodyEn": "Liao was the Khitan dynasty, ruling both the steppe and the farmed prefectures of Yan and Yun. It fell to the Jin in 1125. A Liao shape still visible in 1150 comes from the previous basemap snapshot, not from a Khitan state that still held North China."
+    "bodyEn": "Liao was the Khitan dynasty, ruling both the steppe and the farmed prefectures of Yan and Yun. It fell to the Jin in 1125. A Liao shape still visible in 1150 comes from the previous basemap snapshot, not from a Khitan state that still held North China.",
+    "beats": [
+      {
+        "year": 907,
+        "zh": "耶律阿保机建契丹国。",
+        "en": "Abaoji founds the Khitan state."
+      },
+      {
+        "year": 1005,
+        "zh": "澶渊之盟后，辽宋长期并立。",
+        "en": "The Chanyuan treaty stabilizes Liao and Song."
+      },
+      {
+        "year": 1125,
+        "zh": "金灭辽，余部西迁。",
+        "en": "The Jin destroy Liao; a remnant moves west."
+      }
+    ]
   },
   "xixia": {
     "spanZh": "1038–1227",
@@ -21,7 +60,24 @@
     "capitalZh": "兴庆",
     "capitalEn": "Xingqing",
     "bodyZh": "西夏是党项拓跋氏在河西建立的皇朝，控制河套以西的绿洲通道。它同时向宋、辽、金称臣或交战，靠互市与岁赐维持。\n\n1150年西夏夹在金与南宋之间，都城兴庆仍在今天的银川一带。西夏文字和佛教寺院是其国家认同的核心。1227年亡于蒙古。",
-    "bodyEn": "Western Xia was the Tangut dynasty of the Hexi corridor, based at Xingqing. In 1150 it sat between Jin and the Southern Song, living by trade and tribute. The Mongols destroyed it in 1227."
+    "bodyEn": "Western Xia was the Tangut dynasty of the Hexi corridor, based at Xingqing. In 1150 it sat between Jin and the Southern Song, living by trade and tribute. The Mongols destroyed it in 1227.",
+    "beats": [
+      {
+        "year": 1038,
+        "zh": "元昊称帝，国号夏。",
+        "en": "Yuanhao proclaims the Xia empire."
+      },
+      {
+        "year": 1150,
+        "zh": "西夏夹在金与南宋之间，都城仍在兴庆。",
+        "en": "Xia sits between Jin and the Southern Song, still based at Xingqing."
+      },
+      {
+        "year": 1227,
+        "zh": "蒙古灭西夏。",
+        "en": "The Mongols destroy Western Xia."
+      }
+    ]
   },
   "tibet": {
     "spanZh": "吐蕃帝国约7–9世纪；此后为分裂时期",
@@ -37,7 +93,29 @@
     "capitalZh": "阳苴咩城，今大理一带",
     "capitalEn": "Yangjuemie, near modern Dali",
     "bodyZh": "南诏是八世纪在洱海兴起的王国，后与唐决裂。902年以后南诏王室覆灭。937年段氏建立大理，继续统治云南直到1253年蒙古灭国。\n\n所以1150年这一块土地的政权是大理，不是南诏。底图仍沿用旧名时，中文界面改标大理。大理奉佛教，对宋大体保持朝贡，内部由段氏与高氏共治的时期很长。",
-    "bodyEn": "Nanzhao fell in the early tenth century. By 1150 the state at Erhai was Dali, under the Duan house, until the Mongol conquest of 1253. The Chinese label uses Dali even when the source file still says Nan Chao."
+    "bodyEn": "Nanzhao fell in the early tenth century. By 1150 the state at Erhai was Dali, under the Duan house, until the Mongol conquest of 1253. The Chinese label uses Dali even when the source file still says Nan Chao.",
+    "beats": [
+      {
+        "year": 738,
+        "zh": "皮逻阁受唐册封，南诏统一洱海诸部。",
+        "en": "Piluoge unifies the Erhai region as Nanzhao."
+      },
+      {
+        "year": 902,
+        "zh": "南诏王室覆灭。",
+        "en": "The Nanzhao royal house falls."
+      },
+      {
+        "year": 937,
+        "zh": "段思平建立大理。",
+        "en": "Duan Siping founds Dali."
+      },
+      {
+        "year": 1253,
+        "zh": "蒙古灭大理。",
+        "en": "The Mongols conquer Dali."
+      }
+    ]
   },
   "jin": {
     "spanZh": "1115–1234",
@@ -45,7 +123,29 @@
     "capitalZh": "中都，今北京",
     "capitalEn": "Zhongdu, modern Beijing",
     "bodyZh": "金是女真完颜氏建立的皇朝。1127年俘虏宋徽、钦二帝，占有华北。1150年前后海陵王在位前后，金正在把政治中心从会宁南移到燕京。\n\n金与南宋以淮为界，西线则与西夏对峙。猛安谋克嵌入华北州县，是这一帝国最主要的内部张力。1234年亡于蒙古与南宋的夹击。",
-    "bodyEn": "Jin was the Jurchen dynasty that took North China in 1127. Around 1150 it was shifting its capital toward Yanjing and facing the Southern Song across the Huai. It fell in 1234."
+    "bodyEn": "Jin was the Jurchen dynasty that took North China in 1127. Around 1150 it was shifting its capital toward Yanjing and facing the Southern Song across the Huai. It fell in 1234.",
+    "beats": [
+      {
+        "year": 1115,
+        "zh": "完颜阿骨打建立金。",
+        "en": "Aguda founds the Jin."
+      },
+      {
+        "year": 1127,
+        "zh": "金军俘获宋徽、钦二帝，占有华北。",
+        "en": "Jin takes the two Song emperors and North China."
+      },
+      {
+        "year": 1153,
+        "zh": "海陵王迁都燕京。",
+        "en": "Prince Hailing moves the capital to Yanjing."
+      },
+      {
+        "year": 1234,
+        "zh": "金亡于蒙古与宋的夹击。",
+        "en": "Jin falls between the Mongols and the Song."
+      }
+    ]
   },
   "jin empire": {
     "spanZh": "1115–1234",
@@ -61,7 +161,19 @@
     "capitalZh": "吴哥",
     "capitalEn": "Angkor",
     "bodyZh": "真腊吴哥王朝以洞里萨湖的水利与庙山为国家中心。十二世纪苏利耶跋摩二世修建吴哥窟，阇耶跋摩七世则把大乘佛教与王路网推到极盛。\n\n1150年正处于吴哥窟落成后不久的时代，帝国影响伸向湄公河中游和马来半岛的一部分。后来重心逐渐南移，1431年吴哥被放弃。",
-    "bodyEn": "Angkor's hydraulic city was the Khmer capital. Around 1150, just after Angkor Wat, the empire still reached into the middle Mekong. The court later shifted south."
+    "bodyEn": "Angkor's hydraulic city was the Khmer capital. Around 1150, just after Angkor Wat, the empire still reached into the middle Mekong. The court later shifted south.",
+    "beats": [
+      {
+        "year": 802,
+        "zh": "阇耶跋摩二世在吴哥地区建立王权。",
+        "en": "Jayavarman II establishes kingship near Angkor."
+      },
+      {
+        "year": 1150,
+        "zh": "吴哥窟落成后不久，帝国仍控制洞里萨湖与湄公河中游。",
+        "en": "Soon after Angkor Wat, the empire still holds the Tonle Sap and middle Mekong."
+      }
+    ]
   },
   "karkhanids": {
     "spanZh": "约840–1212",
@@ -77,7 +189,24 @@
     "capitalZh": "长安",
     "capitalEn": "Chang'an",
     "bodyZh": "唐以长安为中心，前期通过都护府与羁縻州经营西域和北方。安史之乱以后藩镇坐大，朝廷对黄河以北的控制变得间接。\n\n图上的唐是某一快照年份的综合版图，不等于该年每一座城都由长安直接派官。",
-    "bodyEn": "The Tang centered on Chang'an. After the An Lushan rebellion its control north of the Yellow River was indirect. The shape is one snapshot, not a claim that every town was directly administered."
+    "bodyEn": "The Tang centered on Chang'an. After the An Lushan rebellion its control north of the Yellow River was indirect. The shape is one snapshot, not a claim that every town was directly administered.",
+    "beats": [
+      {
+        "year": 618,
+        "zh": "李渊建立唐朝，都长安。",
+        "en": "Li Yuan founds the Tang at Chang'an."
+      },
+      {
+        "year": 755,
+        "zh": "安史之乱后，藩镇坐大。",
+        "en": "After the An Lushan rebellion, military provinces grow autonomous."
+      },
+      {
+        "year": 907,
+        "zh": "唐亡，五代开始。",
+        "en": "The Tang ends and the Five Dynasties begin."
+      }
+    ]
   },
   "mongol empire": {
     "spanZh": "1206–1271年后分裂为汗国",
@@ -85,7 +214,24 @@
     "capitalZh": "哈拉和林",
     "capitalEn": "Karakorum",
     "bodyZh": "1206年铁木真称成吉思汗。此后蒙古军队相继灭西夏、金，并西征花剌子模。1259年以后帝国不再有一个能号令全境的大汗，形成元、察合台、伊利与钦察等汗国。",
-    "bodyEn": "After 1206 the Mongol armies destroyed Western Xia and Jin and invaded Khwarazm. After 1259 the empire divided into separate khanates."
+    "bodyEn": "After 1206 the Mongol armies destroyed Western Xia and Jin and invaded Khwarazm. After 1259 the empire divided into separate khanates.",
+    "beats": [
+      {
+        "year": 1206,
+        "zh": "铁木真称成吉思汗。",
+        "en": "Temujin is proclaimed Chinggis Khan."
+      },
+      {
+        "year": 1234,
+        "zh": "蒙古灭金。",
+        "en": "The Mongols destroy the Jin."
+      },
+      {
+        "year": 1271,
+        "zh": "忽必烈定国号为大元。",
+        "en": "Khubilai adopts the name Yuan."
+      }
+    ]
   },
   "byzantine empire": {
     "spanZh": "330–1453",

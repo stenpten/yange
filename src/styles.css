@@ -73,7 +73,7 @@ a { color: inherit; }
 .menu { display: none; }
 .stage { flex: 1; min-height: 0; display: flex; flex-direction: column; }
 .mapwrap { position: relative; flex: 1; min-height: 0; }
-.map { position: absolute; inset: 0; }
+.map { position: absolute; top: 0; left: 0; right: 384px; bottom: 0; }
 .rail {
   position: absolute;
   top: 0;
@@ -102,6 +102,12 @@ a { color: inherit; }
 .meta dt { color: #949494; }
 .meta dd { margin: 0; }
 .dossier p { line-height: 1.7; }
+.pop { margin: 4px 0 14px; }
+.pop svg { display: block; width: 100%; height: auto; }
+.pop-scale { display: flex; justify-content: space-between; }
+.beats { margin: 0 0 8px; padding: 0; list-style: none; }
+.beats li { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 8px 0; }
+.beats li + li { border-top: 1px solid #1a1a1a; }
 .polity-actions { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
 .chapter {
   display: inline-flex;
@@ -190,6 +196,8 @@ a { color: inherit; }
 .prose p { margin: 0 0 16px; }
 .status { padding: 22px; }
 @media (max-width: 800px) {
+  .map { right: 0; bottom: 112px; }
+  .mapwrap:has(.rail.open) .map { bottom: 42dvh; }
   .nav, .viewtoggle, .lang { display: none; }
   .nav.open, .topbar.menu-open .viewtoggle, .topbar.menu-open .lang { display: flex; }
   .menu { display: inline; }

@@ -28,7 +28,7 @@ function labelOf(feature: AtlasFeature, lang: "zh" | "en") {
 }
 
 type Lexicon = Record<string, { zh: string; en: string }>
-type Dossier = { spanZh: string; spanEn: string; capitalZh: string; capitalEn: string; bodyZh: string; bodyEn: string }
+type Dossier = { spanZh: string; spanEn: string; capitalZh: string; capitalEn: string; bodyZh: string; bodyEn: string; beats?: { year: number; zh: string; en: string }[] }
 
 function ringArea(ring: number[][]) {
   let area = 0
@@ -84,6 +84,7 @@ export function MapScreen() {
   const [spans, setSpans] = useState<ChinaSpan[]>([])
   const [lexicon, setLexicon] = useState<Lexicon>({})
   const [dossiers, setDossiers] = useState<Record<string, Dossier>>({})
+  const [population, setPopulation] = useState<Record<string, number[][]>>({})
   const [playing, setPlaying] = useState(false)
   const [speed, setSpeed] = useState<1 | 4 | 16>(1)
   const [status, setStatus] = useState<string>(t.loading)
@@ -128,6 +129,7 @@ export function MapScreen() {
     })
     void fetch(asset("history/labels.json")).then((res) => res.json()).then((data: Lexicon) => setLexicon(data)).catch(() => setLexicon({}))
     void fetch(asset("history/dossiers.json")).then((res) => res.json()).then((data: Record<string, Dossier>) => setDossiers(data)).catch(() => setDossiers({}))
+    void fetch(asset("history/population.json")).then((res) => res.json()).then((data: Record<string, number[][]>) => setPopulation(data)).catch(() => setPopulation({}))
   }, [])
 
   const explicitView = useRef(params.has("z")).current
@@ -220,13 +222,10 @@ export function MapScreen() {
       map.addSource("select", { type: "geojson", data: empty })
       map.addLayer({ id: "select", type: "line", source: "select", paint: { "line-color": "#c44536", "line-width": 2.5 } })
       map.resize()
-      if (!explicitView) {
-        const narrow = window.innerWidth <= 800
-        map.fitBounds([[-168, -56], [168, 74]], {
-          padding: narrow ? { top: 12, bottom: 128, left: 12, right: 12 } : { top: 18, bottom: 18, left: 18, right: 400 },
-          animate: false,
-        })
-        map.setMinZoom(map.getZoom())
+      const earth = map.cameraForBounds([[-180, -58], [180, 72]], { padding: 8 })
+      if (earth) {
+        map.setMinZoom(Math.max(0, earth.zoom - 0.05))
+        if (!explicitView || zoom < 1.5) map.jumpTo({ center: [earth.center.lng, earth.center.lat], zoom: earth.zoom })
       }
     })
     map.on("click", (event) => {
@@ -267,7 +266,7 @@ export function MapScreen() {
 
   useEffect(() => {
     const map = mapRef.current
-    if (!map || !ready.current) return
+    if (!map || !ready.current || !params.has("z") || zoom < 1.5) return
     const center = map.getCenter()
     if (Math.abs(center.lng - lng) > 0.5 || Math.abs(center.lat - lat) > 0.5 || Math.abs(map.getZoom() - zoom) > 0.25) {
       map.jumpTo({ center: [lng, lat], zoom })
@@ -366,6 +365,12 @@ export function MapScreen() {
     .sort((a, b) => a.year - b.year)
   const chapter = chapters.find((item) => item.polityId && item.polityId === polity)
   const dossier = selected ? dossiers[String(selected.properties.name ?? "").toLowerCase()] : undefined
+  const series = (population[String(selected?.properties.name ?? "").toLowerCase()] ?? []).slice().sort((a, b) => a[0] - b[0])
+  const popMin = series[0]?.[0] ?? 0
+  const popMax = series[series.length - 1]?.[0] ?? 1
+  const popPeak = Math.max(1, ...series.map((point) => point[1]))
+  const popX = (year: number) => 8 + ((year - popMin) / (popMax - popMin || 1)) * 304
+  const popY = (value: number) => 88 - (value / (popPeak * 1.15)) * 76
   const polityEvents = events.filter((event) => {
     if (!selected) return false
     const id = String(selected.properties.id)
@@ -395,6 +400,33 @@ export function MapScreen() {
                 </dl>
               ) : <p className="note">{t.scopeNote}</p>}
               {dossier ? <div className="dossier">{(lang === "zh" ? dossier.bodyZh : dossier.bodyEn).split("\n\n").map((paragraph) => <p key={paragraph.slice(0, 24)}>{paragraph}</p>)}</div> : null}
+              {dossier?.beats?.length ? (
+                <>
+                  <h3>{t.history}</h3>
+                  <ol className="beats">
+                    {dossier.beats.map((beat) => (
+                      <li key={beat.year}>
+                        <span className="num">{beat.year}</span>
+                        <span>{lang === "zh" ? beat.zh : beat.en}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </>
+              ) : null}
+              {series.length > 1 ? (
+                <>
+                  <h3>{t.population}</h3>
+                  <div className="pop">
+                    <svg viewBox="0 0 320 96" role="img" aria-label={t.population}>
+                      <path d={series.map((point, index) => `${index ? "L" : "M"}${popX(point[0]).toFixed(1)},${popY(point[1]).toFixed(1)}`).join(" ")} fill="none" stroke="#f4f1ea" strokeWidth="1.5" />
+                      {series.map((point) => <circle key={point[0]} cx={popX(point[0])} cy={popY(point[1])} r="2.5" fill="#f4f1ea" />)}
+                      {clamped >= series[0][0] && clamped <= series[series.length - 1][0] ? <line x1={popX(clamped)} x2={popX(clamped)} y1="8" y2="88" stroke="#c44536" strokeWidth="1" /> : null}
+                    </svg>
+                    <div className="pop-scale faint"><span>{series[0][0]}</span><span>{series[series.length - 1][1]} {lang === "zh" ? "百万" : "million"}</span><span>{series[series.length - 1][0]}</span></div>
+                  </div>
+                  <p className="faint">{t.estimate}</p>
+                </>
+              ) : null}
               <h3>{t.related}</h3>
               {polityEvents.length === 0 ? <p className="muted">{t.noEvents}</p> : polityEvents.map((event) => (
                 <div className="event" key={event.id}>

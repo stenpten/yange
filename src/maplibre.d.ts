@@ -14,6 +14,7 @@ export class Map {
   queryRenderedFeatures(point: unknown, options: unknown): Array<{ layer: { id: string }; properties?: Record<string, unknown> }>
   resize(): void
   fitBounds(bounds: [[number, number], [number, number]], options?: unknown): void
+  cameraForBounds(bounds: [[number, number], [number, number]], options?: unknown): { center: { lng: number; lat: number }; zoom: number } | null
   setMinZoom(zoom: number): void
   remove(): void
   isStyleLoaded(): boolean
