@@ -9,6 +9,7 @@ import { colorFor } from "../lib/color"
 import { centroidOf, contains } from "../lib/geo"
 import { eraFor, yearText } from "../lib/era"
 import { presentPolity } from "../data/reign"
+import { splitChina } from "../lib/split"
 import { gazetteer } from "../data/gazetteer"
 import { chronicles } from "../data/chronicles"
 import { asset, useCopy } from "./chrome"
@@ -50,6 +51,20 @@ function decorate(fc: AtlasFC, lexicon: Lexicon, lang: "zh" | "en", year: number
   return {
     type: "FeatureCollection",
     features: fc.features.flatMap((feature) => {
+      if (Number(feature.properties.lock) === 1) {
+        const zh = String(feature.properties.name_zh || "")
+        const en = String(feature.properties.name_en || feature.properties.name || "")
+        const label = lang === "zh" ? zh : en
+        return [{
+          ...feature,
+          properties: {
+            ...feature.properties,
+            color: colorFor(String(feature.properties.dossier || feature.properties.id)),
+            ...(label ? { label } : {}),
+            area: Math.round(geomArea(feature.geometry)),
+          },
+        }]
+      }
       const source = String(feature.properties.name ?? "")
       const view = presentPolity(source, year)
       if (view?.hide) return []
@@ -111,6 +126,14 @@ export function MapScreen() {
   const clamped = Math.min(max, Math.max(min, year))
   const snap = snapshotFor(clamped, snapshots)
   const chinaFile = chinaFileFor(clamped, spans)
+  const [yearField, setYearField] = useState(String(clamped))
+  const yearFocused = useRef(false)
+  useEffect(() => { if (!yearFocused.current) setYearField(String(clamped)) }, [clamped])
+  function commitYear(raw: string) {
+    const next = Number(raw)
+    if (!Number.isFinite(next)) { setYearField(String(clamped)); return }
+    write({ year: String(Math.min(max, Math.max(min, Math.round(next)))) })
+  }
 
   function write(next: Record<string, string | undefined>) {
     const updated = new URLSearchParams(params)
@@ -300,17 +323,22 @@ export function MapScreen() {
         const worldRes = await fetch(asset(`history/world/${snap}.geojson`))
         if (!worldRes.ok) throw new Error("world")
         const world = await worldRes.json() as AtlasFC
+        let china = empty
+        if (chinaFile) {
+          const chinaRes = await fetch(asset(`history/china/${chinaFile}.geojson`))
+          if (chinaRes.ok) china = await chinaRes.json() as AtlasFC
+        }
         if (cancel) return
-        setData({ world, china: empty })
+        setData({ world, china })
         setStatus("")
       } catch {
         if (!cancel) setStatus(t.failed)
       }
     })()
     return () => { cancel = true }
-  }, [snap, snapshots.length, t.loading, t.failed])
+  }, [snap, chinaFile, snapshots.length, t.loading, t.failed])
 
-  const shown = useMemo(() => decorate(data.world, lexicon, lang, clamped), [data.world, lexicon, lang, clamped])
+  const shown = useMemo(() => decorate(splitChina(data.world, data.china, chinaFile || "", clamped), lexicon, lang, clamped), [data.world, data.china, chinaFile, lexicon, lang, clamped])
   shownRef.current = shown
 
   useEffect(() => {
@@ -483,7 +511,7 @@ export function MapScreen() {
       </div>
       <div className="yearbar">
         <div className="chronicle">
-          <span className="year-num">{yearText(clamped, lang)}</span>
+          <input className="year-num year-input" aria-label={t.year} inputMode="numeric" value={yearField} onFocus={() => { yearFocused.current = true }} onBlur={() => { yearFocused.current = false; commitYear(yearField) }} onChange={(event) => setYearField(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") event.currentTarget.blur() }} />
           {era ? <span>{era}</span> : null}
           {snap !== clamped ? <span className="faint">{t.source} {sourceText}</span> : null}
           <span className="faint">{t.visible} {visible}</span>

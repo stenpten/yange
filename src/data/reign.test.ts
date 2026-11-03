@@ -29,11 +29,14 @@ test("Jin on the medieval snapshots is the Chinese Jin, not Jurchen Jin", () => 
 })
 
 test("polities that had already fallen are hidden at 750", () => {
-  for (const name of ["Koguryo", "Paekche", "Göktürks", "Western Gokturk Khaganate", "Sasanian Empire", "Visigothic Kingdom"]) {
+  for (const name of ["Koguryo", "Paekche", "Sasanian Empire", "Visigothic Kingdom"]) {
     assert.equal(presentPolity(name, 750)?.hide, true, name)
   }
   assert.equal(presentPolity("Koguryo", 600)?.zh, "高句丽")
   assert.equal(presentPolity("Göktürks", 620)?.zh, "突厥")
+  assert.equal(presentPolity("Göktürks", 750)?.zh, "回鹘")
+  assert.equal(presentPolity("Western Gokturk Khaganate", 750)?.zh, "突骑施")
+  assert.equal(presentPolity("Uyghurs", 750)?.zh, "回鹘")
   assert.equal(presentPolity("Umayyad Caliphate", 750)?.zh, "阿拔斯")
   assert.equal(presentPolity("Umayyad Caliphate", 750)?.dossier, "abbasid caliphate")
 })

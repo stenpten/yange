@@ -114,9 +114,11 @@ function taiwanName(year: number): ReignView {
 
 function steppeTurks(year: number): ReignView {
   if (year <= 630) return show("突厥", "Turkic Khaganate", "gokturks")
-  if (year < 682) return hide()
+  if (year < 682) return show("安北都护府", "Tang northern protectorate", "tang empire", "tang")
   if (year <= 744) return show("后突厥", "Second Turkic Khaganate", "gokturks")
-  return hide()
+  if (year <= 840) return show("回鹘", "Uyghur Khaganate", "uyghur khaganate")
+  if (year <= 924) return show("黠戛斯", "Yenisei Kyrgyz", "kyrgyz")
+  return show("契丹", "Khitan", "liao", "song-liao-xia-jin")
 }
 
 function koreaName(year: number): ReignView {
@@ -221,10 +223,17 @@ export function presentPolity(raw: string, year: number): ReignView | null {
     case "gokturks":
       return steppeTurks(year)
     case "western gokturk khaganate":
-      return year > 657 ? hide() : show("西突厥", "Western Turkic Khaganate", "western gokturk")
+      if (year <= 657) return show("西突厥", "Western Turkic Khaganate", "western gokturk")
+      if (year <= 766) return show("突骑施", "Turgesh", "turgesh")
+      if (year <= 940) return show("葛逻禄", "Karluks", "karluks")
+      return show("喀喇汗", "Kara-Khanid Khanate", "kara khanid")
     case "uyghurs":
     case "uyghur":
-      return year < 744 || year > 840 ? hide() : show("回鹘", "Uyghur Khaganate", "uyghur khaganate")
+      if (year < 744) return show("回纥", "Uyghur tribes", "uyghur khaganate")
+      if (year <= 840) return show("回鹘", "Uyghur Khaganate", "uyghur khaganate")
+      return show("回鹘诸部", "Uyghur successor states", "uyghur khaganate")
+    case "karluks":
+      return show("葛逻禄", "Karluks", "karluks")
     case "sasanian empire":
     case "sasanian dependencies":
       return year > 651 ? hide() : show(plain(raw) === "sasanian dependencies" ? "萨珊附庸" : "萨珊", plain(raw) === "sasanian dependencies" ? "Sasanian dependencies" : "Sasanian Empire", "sasanian empire")

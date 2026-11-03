@@ -135,6 +135,7 @@ a { color: inherit; }
 .yearbar { background: #0e0d0c; border-top: 1px solid #1a1a1a; padding: 10px 16px 12px; }
 .chronicle { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
 .year-num { font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.year-input { width: 5.2em; color: inherit; background: transparent; border: 0; border-bottom: 1px solid #3a3a3a; padding: 0; }
 .yearbar input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
