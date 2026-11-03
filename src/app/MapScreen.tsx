@@ -48,6 +48,11 @@ function displayZh(name: string, year: number, lexicon: Lexicon) {
   if (key === "nan chao" || key === "nan-zhao") return year >= 938 ? "大理" : "南诏"
   if (key === "song empire" && year >= 1127) return "南宋"
   if (key === "song empire" && year >= 960) return "北宋"
+  if (key === "great khanate") return year >= 1368 ? "北元" : "元"
+  if (key === "koguryo") return "高句丽"
+  if (key === "paekche") return "百济"
+  if (key === "silla") return "新罗"
+  if (key === "parhae") return "渤海"
   if (key === "korea" && year >= 1392) return "朝鲜"
   if (key === "korea" && year >= 918) return "高丽"
   if (key === "korea") return "新罗"
@@ -216,7 +221,7 @@ export function MapScreen() {
           "text-color": "#f6f3ec",
           "text-halo-color": "#14110e",
           "text-halo-width": 1.15,
-          "text-opacity": ["step", ["zoom"], ["case", [">=", ["get", "area"], 70], 1, 0], 2, ["case", [">=", ["get", "area"], 22], 1, 0], 3.4, ["case", [">=", ["get", "area"], 8], 1, 0], 4.8, 1],
+          "text-opacity": ["step", ["zoom"], ["case", [">=", ["get", "area"], 12], 1, 0], 2.2, ["case", [">=", ["get", "area"], 6], 1, 0], 3.5, 1],
         },
       })
       map.addSource("select", { type: "geojson", data: empty })
@@ -399,6 +404,7 @@ export function MapScreen() {
                   <dt>{t.capital}</dt><dd>{lang === "zh" ? dossier.capitalZh : dossier.capitalEn}</dd>
                 </dl>
               ) : <p className="note">{t.scopeNote}</p>}
+              {dossier ? <h3>{t.chronicle}</h3> : null}
               {dossier ? <div className="dossier">{(lang === "zh" ? dossier.bodyZh : dossier.bodyEn).split("\n\n").map((paragraph) => <p key={paragraph.slice(0, 24)}>{paragraph}</p>)}</div> : null}
               {dossier?.beats?.length ? (
                 <>

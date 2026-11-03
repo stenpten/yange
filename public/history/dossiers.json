@@ -328,5 +328,215 @@
     "capitalEn": "Rome; later also Constantinople",
     "bodyZh": "罗马帝国在地中海四周建立行省。三世纪危机之后，戴克里先与君士坦丁重组帝国。395年以后东西分治成为常态。图上的一整块是快照里的行省集合，行省内部的城市同盟和附属王国不会逐一画出。",
     "bodyEn": "The Roman Empire's color covers its provinces at that snapshot. Allied kingdoms inside the frontier are not drawn one by one."
+  },
+  "koguryo": {
+    "spanZh": "约前37–668",
+    "spanEn": "c. 37 BCE–668",
+    "capitalZh": "国内城，后迁平壤",
+    "capitalEn": "Gungnae, later Pyongyang",
+    "bodyZh": "高句丽兴起于西汉末年的浑江、鸭绿江一带，先都国内城，后把都城迁到平壤。鼎盛时疆域北抵辽东和松花江方向，南与百济、新罗相接，是半岛三国里领土最广的一个。\n\n它长期处在中原王朝的东北边缘。隋炀帝三征失败，唐太宗亲征也没有把它灭掉。真正的灭亡在668年：唐与新罗联军攻破平壤，高句丽王被俘，国家解体。平壤以南渐入新罗，辽东则由安东都护府管领，后来又被渤海和新罗各自消化。渤海是后来在东北兴起的另一个王国，不能看成高句丽原样复国。",
+    "bodyEn": "Goguryeo rose along the Hun and Yalu rivers, later moving its capital to Pyongyang. At its height it held Liaodong and the northern Korean peninsula. Tang and Silla together took Pyongyang in 668 and the kingdom ended. Balhae, founded afterward in Manchuria, was not the same state restored.",
+    "beats": [
+      {
+        "year": -37,
+        "zh": "传统纪年以此年为高句丽立国。",
+        "en": "Traditional accounts date the founding to 37 BCE."
+      },
+      {
+        "year": 427,
+        "zh": "长寿王迁都平壤，国势转向半岛。",
+        "en": "King Jangsu moves the capital to Pyongyang."
+      },
+      {
+        "year": 598,
+        "zh": "隋朝开始对高句丽用兵，三次大征都没有灭国。",
+        "en": "Sui campaigns begin and fail to destroy the kingdom."
+      },
+      {
+        "year": 668,
+        "zh": "唐与新罗攻破平壤，高句丽灭亡。",
+        "en": "Tang and Silla take Pyongyang. Goguryeo falls."
+      }
+    ]
+  },
+  "paekche": {
+    "spanZh": "前18–660",
+    "spanEn": "18 BCE–660",
+    "capitalZh": "慰礼，后为泗沘",
+    "capitalEn": "Wirye, later Sabi",
+    "bodyZh": "百济在半岛西南，靠汉江、锦江一带立国，海上与日本列岛、南朝来往很密。六世纪迁都泗沘以后，北面被高句丽压迫，东面又要防新罗。\n\n660年，唐与新罗先灭百济，义慈王被俘。百济遗民曾拥立王室复国，663年白江口之战失败后，复国也就结束了。",
+    "bodyEn": "Baekje held the southwestern peninsula and kept sea links with Japan and the southern Chinese courts. Tang and Silla destroyed it in 660, and the restoration failed after the battle of Baekgang in 663.",
+    "beats": [
+      {
+        "year": 538,
+        "zh": "迁都泗沘，史称泗沘时代。",
+        "en": "The capital moves to Sabi."
+      },
+      {
+        "year": 660,
+        "zh": "唐罗联军灭百济。",
+        "en": "Tang and Silla conquer Baekje."
+      },
+      {
+        "year": 663,
+        "zh": "白江口战败，百济复国失败。",
+        "en": "The restoration fails at Baekgang."
+      }
+    ]
+  },
+  "silla": {
+    "spanZh": "前57–935",
+    "spanEn": "57 BCE–935",
+    "capitalZh": "金城，今庆州",
+    "capitalEn": "Gyeongju",
+    "bodyZh": "新罗起初只是半岛东南的一国。六世纪以后它把唐的力量引进三国战争，660年灭百济，668年与唐合力灭高句丽。随后又把唐的安东都护府从平壤挤走，到八世纪大体统一了大同江以南。\n\n九世纪王室衰弱，地方豪族崛起。935年，末代国王金傅向王建的高丽投降，新罗灭亡。",
+    "bodyEn": "Silla began in the southeast, then allied with Tang to destroy Baekje and Goguryeo. It later pushed Tang off the peninsula and held the land south of the Taedong River. In 935 the last king surrendered to Goryeo.",
+    "beats": [
+      {
+        "year": 668,
+        "zh": "与唐合力灭高句丽。",
+        "en": "With Tang, Silla destroys Goguryeo."
+      },
+      {
+        "year": 676,
+        "zh": "唐军退出平壤一带，新罗成为大同江以南的主要王国。",
+        "en": "Tang leaves the Pyongyang region."
+      },
+      {
+        "year": 935,
+        "zh": "新罗降于高丽，王国结束。",
+        "en": "Silla surrenders to Goryeo."
+      }
+    ]
+  },
+  "parhae": {
+    "spanZh": "698–926",
+    "spanEn": "698–926",
+    "capitalZh": "上京龙泉府",
+    "capitalEn": "Shangjing",
+    "bodyZh": "高句丽灭亡三十年后，大祚荣在东北建立渤海，都城最后定在上京龙泉府。它兼有高句丽故地的一部分和靺鞨诸部，对唐称渤海国王，自己则用皇帝制度。\n\n926年，辽太祖耶律阿保机攻破上京，渤海灭亡。辽在其地设东丹，不久又把人民东迁。渤海不是高句丽的国号延续，但东北的政治传统确实接上了高句丽留下的空档。",
+    "bodyEn": "Dae Joyeong founded Balhae in 698 on part of former Goguryeo land and Mohe territory. In 926 Abaoji of Liao took the capital and Balhae ended.",
+    "beats": [
+      {
+        "year": 698,
+        "zh": "大祚荣建国，后称渤海。",
+        "en": "Dae Joyeong founds the state later called Balhae."
+      },
+      {
+        "year": 926,
+        "zh": "辽攻破上京，渤海灭亡。",
+        "en": "Liao takes the capital. Balhae falls."
+      }
+    ]
+  },
+  "great khanate": {
+    "spanZh": "1271–1368为元；1368年后为北元",
+    "spanEn": "Yuan 1271–1368, then Northern Yuan",
+    "capitalZh": "大都；北迁后为上都",
+    "capitalEn": "Dadu, later Shangdu",
+    "bodyZh": "图上这片土地，底图写的是大汗之国。1271年忽必烈定国号为大元，建大都，用的已经是中原王朝的国号，所以中文不译成“大汗之国”，而写作元。\n\n元朝把大都当作天下的政治中心，同时保留岭北、西域的汗国关系。1340年代以后，红巾军和各地起兵把华北、江南从元廷手里一块块切开。1368年明军进入大都，元惠宗逃往上都，中原的元朝到此结束，残留在草原的政权史称北元。北元还打了几十年，但已经不是坐镇大都的元朝。",
+    "bodyEn": "The basemap calls this the Great Khanate. In 1271 Khubilai named it Yuan and built Dadu, so the Chinese label is Yuan rather than a literal translation. In 1368 Ming troops took Dadu and the Yuan court fled to the steppe, where the remnant is called the Northern Yuan.",
+    "beats": [
+      {
+        "year": 1271,
+        "zh": "忽必烈定国号大元。",
+        "en": "Khubilai adopts the name Yuan."
+      },
+      {
+        "year": 1279,
+        "zh": "崖山之后，宋的残余也结束了。",
+        "en": "The last Song resistance ends at Yashan."
+      },
+      {
+        "year": 1368,
+        "zh": "明军入大都，元廷北迁，元朝作为中原王朝灭亡。",
+        "en": "The Ming take Dadu. Yuan rule in China proper ends."
+      }
+    ]
+  },
+  "qing empire": {
+    "spanZh": "1636–1912",
+    "spanEn": "1636–1912",
+    "capitalZh": "北京",
+    "capitalEn": "Beijing",
+    "bodyZh": "清在入关以前已建国号。1644年迁都北京，随后用了四十年才真正压平江南和三藩。台湾不是清朝之外的另一国：1683年施琅攻灭明郑，次年设台湾府，归福建省。地图上把岛屿并进清朝版图，就是按这次设府来的。\n\n清朝的结束不在海上，而在1911年的起义和1912年宣统退位。在那以前，1895年马关条约把台湾割给日本，是清朝疆域被削去的一笔，不是台湾变成了另一个历史中国之外的国家。1945年日本战败后，台湾回归中国。",
+    "bodyEn": "After the Qing defeated the Zheng regime in 1683, it created Taiwan Prefecture. The island is drawn inside the Qing. The dynasty itself ended with the abdication of 1912. The 1895 cession to Japan was a loss of territory, and Taiwan returned in 1945.",
+    "beats": [
+      {
+        "year": 1644,
+        "zh": "清军入山海关，迁都北京。",
+        "en": "Qing forces enter the Shanhai Pass and move the capital to Beijing."
+      },
+      {
+        "year": 1683,
+        "zh": "施琅平台，次年设台湾府。",
+        "en": "Shi Lang takes Taiwan. A prefecture follows."
+      },
+      {
+        "year": 1895,
+        "zh": "马关条约割让台湾。",
+        "en": "The treaty of Shimonoseki cedes Taiwan."
+      },
+      {
+        "year": 1912,
+        "zh": "宣统退位，清朝灭亡。",
+        "en": "The Xuantong emperor abdicates. The Qing ends."
+      }
+    ]
+  },
+  "manchu empire": {
+    "spanZh": "1636–1912",
+    "spanEn": "1636–1912",
+    "capitalZh": "北京",
+    "capitalEn": "Beijing",
+    "bodyZh": "清在入关以前已建国号。1644年迁都北京，随后用了四十年才真正压平江南和三藩。台湾不是清朝之外的另一国：1683年施琅攻灭明郑，次年设台湾府，归福建省。地图上把岛屿并进清朝版图，就是按这次设府来的。\n\n清朝的结束不在海上，而在1911年的起义和1912年宣统退位。在那以前，1895年马关条约把台湾割给日本，是清朝疆域被削去的一笔，不是台湾变成了另一个历史中国之外的国家。1945年日本战败后，台湾回归中国。",
+    "bodyEn": "After the Qing defeated the Zheng regime in 1683, it created Taiwan Prefecture. The island is drawn inside the Qing. The dynasty itself ended with the abdication of 1912. The 1895 cession to Japan was a loss of territory, and Taiwan returned in 1945.",
+    "beats": [
+      {
+        "year": 1644,
+        "zh": "清军入山海关，迁都北京。",
+        "en": "Qing forces enter the Shanhai Pass and move the capital to Beijing."
+      },
+      {
+        "year": 1683,
+        "zh": "施琅平台，次年设台湾府。",
+        "en": "Shi Lang takes Taiwan. A prefecture follows."
+      },
+      {
+        "year": 1895,
+        "zh": "马关条约割让台湾。",
+        "en": "The treaty of Shimonoseki cedes Taiwan."
+      },
+      {
+        "year": 1912,
+        "zh": "宣统退位，清朝灭亡。",
+        "en": "The Xuantong emperor abdicates. The Qing ends."
+      }
+    ]
+  },
+  "china": {
+    "spanZh": "现代中国",
+    "spanEn": "Modern China",
+    "capitalZh": "北京",
+    "capitalEn": "Beijing",
+    "bodyZh": "这一层里的中国包含台湾。台湾在1683年以后由清朝设府治理，1895年至1945年被日本占据，1945年回归。地图不把台湾画成中国之外的另一个国家。",
+    "bodyEn": "This China layer includes Taiwan. The Qing administered it after 1683, Japan occupied it from 1895 to 1945, and it returned in 1945. It is not drawn as a separate country.",
+    "beats": [
+      {
+        "year": 1683,
+        "zh": "清朝设治台湾。",
+        "en": "The Qing begins administering Taiwan."
+      },
+      {
+        "year": 1895,
+        "zh": "日本开始占据台湾。",
+        "en": "Japan occupies Taiwan."
+      },
+      {
+        "year": 1945,
+        "zh": "日本战败，台湾回归中国。",
+        "en": "Taiwan returns to China."
+      }
+    ]
   }
 }
