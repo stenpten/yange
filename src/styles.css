@@ -97,6 +97,11 @@ a { color: inherit; }
 .eyebrow { color: #b4b4b4; font-size: 13px; }
 .alias { color: #b4b4b4; }
 .note { max-width: 36ch; }
+.rail h3 { margin: 18px 0 8px; font-size: 13px; font-weight: 500; color: #b4b4b4; }
+.meta { display: grid; grid-template-columns: 3em 1fr; gap: 4px 12px; margin: 0 0 14px; }
+.meta dt { color: #949494; }
+.meta dd { margin: 0; }
+.dossier p { line-height: 1.7; }
 .polity-actions { display: flex; align-items: center; gap: 16px; margin-top: 8px; }
 .chapter {
   display: inline-flex;

@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Link, useSearchParams } from "react-router-dom"
 import { Map } from "maplibre-gl"
-import { chapters, events, nameDict } from "../data/content"
+import { chapters, events } from "../data/content"
 import type { ChinaSpan } from "../lib/snapshot"
 import { chinaFileFor, ratioToYear, snapshotFor, yearToRatio } from "../lib/snapshot"
+import { snapshotYears } from "../data/snapshots"
 import { colorFor } from "../lib/color"
 import { centroidOf, contains } from "../lib/geo"
 import { eraFor } from "../lib/era"
@@ -20,29 +21,58 @@ function num(value: string | null, fallback: number) {
 }
 
 function labelOf(feature: AtlasFeature, lang: "zh" | "en") {
-  if (feature.properties.name_zh) return lang === "zh" ? String(feature.properties.name_zh) : String(feature.properties.name_en)
-  const source = String(feature.properties.name ?? "")
-  const dict = nameDict[source.toLowerCase()]
-  return dict ? dict[lang] : source
+  const zh = String(feature.properties.name_zh ?? "")
+  const en = String(feature.properties.name_en || feature.properties.name || "")
+  if (lang === "zh") return zh || "未定译名"
+  return en
 }
 
-function paint(fc: AtlasFC): AtlasFC {
-  return {
-    type: "FeatureCollection",
-    features: fc.features.map((feature) => ({
-      ...feature,
-      properties: { ...feature.properties, color: colorFor(String(feature.properties.id)) },
-    })),
-  }
+type Lexicon = Record<string, { zh: string; en: string }>
+type Dossier = { spanZh: string; spanEn: string; capitalZh: string; capitalEn: string; bodyZh: string; bodyEn: string }
+
+function ringArea(ring: number[][]) {
+  let area = 0
+  for (let i = 0; i < ring.length - 1; i++) area += ring[i][0] * ring[i + 1][1] - ring[i + 1][0] * ring[i][1]
+  return Math.abs(area / 2)
 }
 
-function hideCovered(world: AtlasFC, china: AtlasFC): AtlasFC {
-  if (!china.features.length) return world
+function geomArea(geometry: Geom) {
+  const polys = geometry.type === "Polygon" ? [geometry.coordinates as number[][][]] : geometry.coordinates as number[][][][]
+  let sum = 0
+  for (const poly of polys) if (poly[0]) sum += ringArea(poly[0])
+  return sum
+}
+
+function displayZh(name: string, year: number, lexicon: Lexicon) {
+  const key = name.toLowerCase()
+  if (key === "nan chao" || key === "nan-zhao") return year >= 938 ? "大理" : "南诏"
+  if (key === "song empire" && year >= 1127) return "南宋"
+  if (key === "song empire" && year >= 960) return "北宋"
+  if (key === "korea" && year >= 1392) return "朝鲜"
+  if (key === "korea" && year >= 918) return "高丽"
+  if (key === "korea") return "新罗"
+  return lexicon[key]?.zh ?? ""
+}
+
+function decorate(fc: AtlasFC, lexicon: Lexicon, lang: "zh" | "en", year: number): AtlasFC {
   return {
     type: "FeatureCollection",
-    features: world.features.filter((feature) => {
-      const [lng, lat] = centroidOf(feature.geometry)
-      return !china.features.some((item) => contains(item.geometry, lng, lat))
+    features: fc.features.map((feature) => {
+      const source = String(feature.properties.name ?? "")
+      const zh = displayZh(source, year, lexicon)
+      const en = lexicon[source.toLowerCase()]?.en ?? source
+      const label = lang === "zh" ? zh : en
+      return {
+        ...feature,
+        properties: {
+          ...feature.properties,
+          color: colorFor(String(feature.properties.id)),
+          name_zh: zh,
+          name_en: en,
+          ...(label ? { label } : {}),
+          area: Math.round(geomArea(feature.geometry)),
+        },
+      }
     }),
   }
 }
@@ -50,8 +80,10 @@ function hideCovered(world: AtlasFC, china: AtlasFC): AtlasFC {
 export function MapScreen() {
   const { lang, t } = useCopy()
   const [params, setParams] = useSearchParams()
-  const [snapshots, setSnapshots] = useState<number[]>([])
+  const [snapshots, setSnapshots] = useState<number[]>(snapshotYears)
   const [spans, setSpans] = useState<ChinaSpan[]>([])
+  const [lexicon, setLexicon] = useState<Lexicon>({})
+  const [dossiers, setDossiers] = useState<Record<string, Dossier>>({})
   const [playing, setPlaying] = useState(false)
   const [speed, setSpeed] = useState<1 | 4 | 16>(1)
   const [status, setStatus] = useState<string>(t.loading)
@@ -94,15 +126,26 @@ export function MapScreen() {
       setSnapshots(manifest.snapshots)
       setSpans(loadedSpans)
     })
+    void fetch(asset("history/labels.json")).then((res) => res.json()).then((data: Lexicon) => setLexicon(data)).catch(() => setLexicon({}))
+    void fetch(asset("history/dossiers.json")).then((res) => res.json()).then((data: Record<string, Dossier>) => setDossiers(data)).catch(() => setDossiers({}))
   }, [])
+
+  const explicitView = useRef(params.has("z")).current
 
   useEffect(() => {
     if (!mapNode.current || mapRef.current) return
     const map = new Map({
       container: mapNode.current,
-      style: { version: 8, sources: {}, layers: [{ id: "bg", type: "background", paint: { "background-color": "#071828" } }] },
-      center: [lng, lat],
-      zoom,
+      style: {
+        version: 8,
+        glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
+        sources: {},
+        layers: [{ id: "bg", type: "background", paint: { "background-color": "#071828" } }],
+      },
+      center: explicitView ? [lng, lat] : [10, 18],
+      zoom: explicitView ? zoom : 1.4,
+      renderWorldCopies: false,
+      localIdeographFontFamily: '"Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif',
       attributionControl: false,
       fadeDuration: 0,
       dragRotate: false,
@@ -151,17 +194,44 @@ export function MapScreen() {
       })
       map.addSource("world", { type: "geojson", data: empty })
       map.addLayer({ id: "world", type: "fill", source: "world", paint: { "fill-color": ["get", "color"], "fill-opacity": ["interpolate", ["linear"], ["zoom"], 0.5, 0.64, 3, 0.5, 5, 0.46] } })
-      map.addSource("china", { type: "geojson", data: empty })
-      map.addLayer({ id: "china", type: "fill", source: "china", paint: { "fill-color": ["get", "color"], "fill-opacity": ["interpolate", ["linear"], ["zoom"], 0.5, 0.7, 3, 0.58, 5, 0.52] } })
-      map.addLayer({ id: "world-line", type: "line", source: "world", paint: { "line-color": ["get", "color"], "line-width": ["interpolate", ["linear"], ["zoom"], 0.5, 0.35, 3, 0.8, 5, 1.15], "line-opacity": 0.9 } })
-      map.addLayer({ id: "china-line", type: "line", source: "china", paint: { "line-color": ["get", "color"], "line-width": ["interpolate", ["linear"], ["zoom"], 0.5, 0.45, 3, 1, 5, 1.35], "line-opacity": 0.95 } })
+      map.addLayer({ id: "world-line", type: "line", source: "world", paint: { "line-color": "#241c16", "line-width": ["interpolate", ["linear"], ["zoom"], 0.8, 0.85, 3, 1.2, 6, 1.8], "line-opacity": 0.72 } })
+      map.addLayer({
+        id: "world-label",
+        type: "symbol",
+        source: "world",
+        filter: ["has", "label"],
+        layout: {
+          "text-field": ["get", "label"],
+          "text-font": ["Open Sans Regular"],
+          "text-size": ["interpolate", ["linear"], ["zoom"], 1, 11, 4, 14],
+          "text-max-width": 7,
+          "text-padding": 2,
+          "text-allow-overlap": false,
+          "text-optional": true,
+          "symbol-sort-key": ["*", ["get", "area"], -1],
+        },
+        paint: {
+          "text-color": "#f6f3ec",
+          "text-halo-color": "#14110e",
+          "text-halo-width": 1.15,
+          "text-opacity": ["step", ["zoom"], ["case", [">=", ["get", "area"], 70], 1, 0], 2, ["case", [">=", ["get", "area"], 22], 1, 0], 3.4, ["case", [">=", ["get", "area"], 8], 1, 0], 4.8, 1],
+        },
+      })
       map.addSource("select", { type: "geojson", data: empty })
       map.addLayer({ id: "select", type: "line", source: "select", paint: { "line-color": "#c44536", "line-width": 2.5 } })
       map.resize()
+      if (!explicitView) {
+        const narrow = window.innerWidth <= 800
+        map.fitBounds([[-168, -56], [168, 74]], {
+          padding: narrow ? { top: 12, bottom: 128, left: 12, right: 12 } : { top: 18, bottom: 18, left: 18, right: 400 },
+          animate: false,
+        })
+        map.setMinZoom(map.getZoom())
+      }
     })
     map.on("click", (event) => {
-      const hits = map.queryRenderedFeatures(event.point, { layers: ["china", "world"] })
-      const hit = hits.find((item) => item.layer.id === "china") ?? hits[0]
+      const hits = map.queryRenderedFeatures(event.point, { layers: ["world"] })
+      const hit = hits[0]
       const id = hit ? String(hit.properties?.id ?? "") : ""
       setParamsRef.current((current) => {
         const next = new URLSearchParams(current)
@@ -228,38 +298,34 @@ export function MapScreen() {
       try {
         const worldRes = await fetch(asset(`history/world/${snap}.geojson`))
         if (!worldRes.ok) throw new Error("world")
-        const world = paint(await worldRes.json() as AtlasFC)
-        let china = empty
-        if (chinaFile) {
-          const chinaRes = await fetch(asset(`history/china/${chinaFile}.geojson`))
-          if (chinaRes.ok) china = paint(await chinaRes.json() as AtlasFC)
-        }
-        const visibleWorld = hideCovered(world, china)
+        const world = await worldRes.json() as AtlasFC
         if (cancel) return
-        setData({ world: visibleWorld, china })
+        setData({ world, china: empty })
         setStatus("")
-        const map = mapRef.current
-        const put = () => {
-          ;(map?.getSource("world") as { setData(data: unknown): void } | undefined)?.setData(visibleWorld)
-          ;(map?.getSource("china") as { setData(data: unknown): void } | undefined)?.setData(china)
-        }
-        if (map?.isStyleLoaded()) put()
-        else map?.once("load", put)
       } catch {
         if (!cancel) setStatus(t.failed)
       }
     })()
     return () => { cancel = true }
-  }, [snap, chinaFile, snapshots.length, t.loading, t.failed])
+  }, [snap, snapshots.length, t.loading, t.failed])
+
+  const shown = useMemo(() => decorate(data.world, lexicon, lang, clamped), [data.world, lexicon, lang, clamped])
 
   useEffect(() => {
-    const features = [...data.china.features, ...data.world.features].filter((feature) => String(feature.properties.id) === polity)
+    const map = mapRef.current
+    const put = () => (map?.getSource("world") as { setData(data: unknown): void } | undefined)?.setData(shown)
+    if (map?.isStyleLoaded()) put()
+    else map?.once("load", put)
+  }, [shown])
+
+  useEffect(() => {
+    const features = shown.features.filter((feature) => String(feature.properties.id) === polity)
     const selected: AtlasFC = { type: "FeatureCollection", features }
     const map = mapRef.current
     const put = () => (map?.getSource("select") as { setData(data: unknown): void } | undefined)?.setData(selected)
     if (map?.isStyleLoaded()) put()
     else map?.once("load", put)
-  }, [data, polity])
+  }, [shown, polity])
 
   useEffect(() => {
     if (!playing) return
@@ -290,16 +356,22 @@ export function MapScreen() {
     return () => window.removeEventListener("keydown", onKey)
   })
 
-  const selected = useMemo(() => [...data.china.features, ...data.world.features].find((feature) => String(feature.properties.id) === polity), [data, polity])
+  const selected = useMemo(() => shown.features.find((feature) => String(feature.properties.id) === polity), [shown, polity])
   const shownEvents = events
     .filter((event) => {
       const sameSnap = snapshots.length ? snapshotFor(event.year, snapshots) === snap : false
       const sameChina = chinaFile !== null && chinaFileFor(event.year, spans) === chinaFile
       return sameSnap || sameChina
     })
-    .sort((a, b) => Math.abs(a.year - clamped) - Math.abs(b.year - clamped))
-    .slice(0, 6)
+    .sort((a, b) => a.year - b.year)
   const chapter = chapters.find((item) => item.polityId && item.polityId === polity)
+  const dossier = selected ? dossiers[String(selected.properties.name ?? "").toLowerCase()] : undefined
+  const polityEvents = events.filter((event) => {
+    if (!selected) return false
+    const id = String(selected.properties.id)
+    if (event.polityId && (event.polityId === id || id.startsWith(`${event.polityId}-`) || event.polityId.startsWith(`${id}-`))) return true
+    return contains(selected.geometry, event.lng, event.lat)
+  }).sort((a, b) => a.year - b.year)
   const era = eraFor(clamped, lang)
   const sourceText = lang === "zh" ? (snap < 0 ? `前${-snap}年` : `${snap}年`) : (snap < 0 ? `${-snap} BCE` : `${snap} CE`)
 
@@ -315,8 +387,26 @@ export function MapScreen() {
               <div className="polity-rule" style={{ background: String(selected.properties.color) }} />
               <p className="eyebrow">{era ? `${era} · ${sourceText}` : sourceText}</p>
               <h2>{labelOf(selected, lang)}</h2>
-              <p className="alias">{selected.properties.name_zh ? (lang === "zh" ? selected.properties.name_en : selected.properties.name_zh) : selected.properties.name}</p>
-              {selected.properties.note_zh ? <p className="note">{lang === "zh" ? selected.properties.note_zh : selected.properties.note_en}</p> : null}
+              {lang === "en" ? <p className="alias">{String(selected.properties.name_zh || selected.properties.name || "")}</p> : null}
+              {dossier ? (
+                <dl className="meta">
+                  <dt>{t.span}</dt><dd>{lang === "zh" ? dossier.spanZh : dossier.spanEn}</dd>
+                  <dt>{t.capital}</dt><dd>{lang === "zh" ? dossier.capitalZh : dossier.capitalEn}</dd>
+                </dl>
+              ) : <p className="note">{t.scopeNote}</p>}
+              {dossier ? <div className="dossier">{(lang === "zh" ? dossier.bodyZh : dossier.bodyEn).split("\n\n").map((paragraph) => <p key={paragraph.slice(0, 24)}>{paragraph}</p>)}</div> : null}
+              <h3>{t.related}</h3>
+              {polityEvents.length === 0 ? <p className="muted">{t.noEvents}</p> : polityEvents.map((event) => (
+                <div className="event" key={event.id}>
+                  <button className="event-hit" type="button" onClick={() => write({ year: String(event.year), lng: String(event.lng), lat: String(event.lat), z: "4", polity: event.polityId })}>
+                    <span className="num">{event.year}</span>
+                    <span>
+                      <b>{event.title[lang]}</b>
+                      <span className="muted">{event.summary[lang]}</span>
+                    </span>
+                  </button>
+                </div>
+              ))}
               <div className="polity-actions">
                 {chapter ? <Link className="chapter" to={`/${lang}/chapters/${chapter.slug}`}>{t.openChapter}</Link> : null}
                 <button className="textbtn" type="button" onClick={() => write({ polity: undefined })}>{t.close}</button>
@@ -336,7 +426,18 @@ export function MapScreen() {
                   </button>
                 </div>
               ))}
-              <p><Link to={`/${lang}/chapters?filter=events`}>{t.allEvents}</Link></p>
+              <h3>{t.allEvents}</h3>
+              {[...events].sort((a, b) => a.year - b.year).map((event) => (
+                <div className="event" key={`all-${event.id}`}>
+                  <button className="event-hit" type="button" onClick={() => write({ year: String(event.year), lng: String(event.lng), lat: String(event.lat), z: "4", polity: event.polityId })}>
+                    <span className="num">{event.year}</span>
+                    <span>
+                      <b>{event.title[lang]}</b>
+                      <span className="muted">{event.summary[lang]}</span>
+                    </span>
+                  </button>
+                </div>
+              ))}
             </>
           )}
         </aside>

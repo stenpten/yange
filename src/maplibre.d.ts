@@ -13,6 +13,8 @@ export class Map {
   dragRotate: { enable(): void; disable(): void }
   queryRenderedFeatures(point: unknown, options: unknown): Array<{ layer: { id: string }; properties?: Record<string, unknown> }>
   resize(): void
+  fitBounds(bounds: [[number, number], [number, number]], options?: unknown): void
+  setMinZoom(zoom: number): void
   remove(): void
   isStyleLoaded(): boolean
 }

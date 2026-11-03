@@ -8,11 +8,11 @@ A bilingual historical atlas. The flat map is the default, with a globe switch. 
 
 ## 数据 / Data
 
-- 世界边界来自 [aourednik/historical-basemaps](https://github.com/aourednik/historical-basemaps)，GPL-3.0。已简化，每年不超过 500KB。
+- 世界边界来自 [aourednik/historical-basemaps](https://github.com/aourednik/historical-basemaps)，GPL-3.0。岸线保留到约 0.004 度，仍是历史快照，不是实测国界。
 - 陆地底图来自 Natural Earth，公有领域。
 - 地形来自 [Mapterhorn](https://mapterhorn.com/attribution) 的 Terrarium 高程，只使用 0–3 级，放大后保持粗颗粒。
 - 中国层是本项目绘制的示意范围，不是 CHGIS，也不是实测国界。
-- World borders are simplified from historical-basemaps (GPL-3.0). Land comes from Natural Earth (public domain). Terrain is Mapterhorn Terrarium elevation, limited to zoom 0–3 so the relief stays coarse. The China layer is an original schematic drawn for this project. It is not CHGIS and not a surveyed border.
+- World borders keep the historical-basemaps coastline to about 0.004 degrees (GPL-3.0). Land comes from Natural Earth (public domain). Terrain is Mapterhorn Terrarium elevation, limited to zoom 0–3 so the relief stays coarse. The China layer is an original schematic drawn for this project. It is not CHGIS and not a surveyed border.
 
 边界有争议，只能作读图，不能当作法律或主权依据。
 

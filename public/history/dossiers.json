@@ -1,0 +1,186 @@
+{
+  "song empire": {
+    "spanZh": "960–1279",
+    "spanEn": "960–1279",
+    "capitalZh": "汴梁；1127年后为临安",
+    "capitalEn": "Bianliang; Lin'an after 1127",
+    "bodyZh": "宋立国于五代之后，以文官制度和岁币换来长期的内地秩序。1127年汴梁陷落，高宗在南方重建朝廷，史称南宋。\n\n1150年前后的南宋以临安为行在，与金以绍兴和议划界：淮河、大散关一线大致成为南北分界。朝廷财政依赖东南农田与海外贸易，军力则集中在江淮和四川。图上的范围是该年历史快照，不是逐年勘测的国界。",
+    "bodyEn": "The Song reunified the Chinese interior after the Five Dynasties. After 1127 the court ruled from the south. Around 1150 the Southern Song faced the Jin along the Huai River and the Dasan Pass, with its fiscal base in the southeast. The shape is the historical snapshot for this year, not a surveyed border."
+  },
+  "liao": {
+    "spanZh": "907–1125",
+    "spanEn": "907–1125",
+    "capitalZh": "上京临潢",
+    "capitalEn": "Shangjing",
+    "bodyZh": "辽是契丹皇朝，兼有草原部落与华北燕云的农耕州县。双轨官制让游牧与农耕地区各按其法。1125年被金所灭，皇族西迁后建立西辽。\n\n若时间轴停在1150年，辽的本土已经不在。这一年若仍见到辽的色块，是底图快照尚未切到下一年，不应当成1125年以后的契丹国境。",
+    "bodyEn": "Liao was the Khitan dynasty, ruling both the steppe and the farmed prefectures of Yan and Yun. It fell to the Jin in 1125. A Liao shape still visible in 1150 comes from the previous basemap snapshot, not from a Khitan state that still held North China."
+  },
+  "xixia": {
+    "spanZh": "1038–1227",
+    "spanEn": "1038–1227",
+    "capitalZh": "兴庆",
+    "capitalEn": "Xingqing",
+    "bodyZh": "西夏是党项拓跋氏在河西建立的皇朝，控制河套以西的绿洲通道。它同时向宋、辽、金称臣或交战，靠互市与岁赐维持。\n\n1150年西夏夹在金与南宋之间，都城兴庆仍在今天的银川一带。西夏文字和佛教寺院是其国家认同的核心。1227年亡于蒙古。",
+    "bodyEn": "Western Xia was the Tangut dynasty of the Hexi corridor, based at Xingqing. In 1150 it sat between Jin and the Southern Song, living by trade and tribute. The Mongols destroyed it in 1227."
+  },
+  "tibet": {
+    "spanZh": "吐蕃帝国约7–9世纪；此后为分裂时期",
+    "spanEn": "Imperial period, then fragmentation",
+    "capitalZh": "逻些，帝国时期",
+    "capitalEn": "Lhasa in the imperial period",
+    "bodyZh": "七至九世纪的吐蕃是统一帝国，与唐在陇右、西域反复争城。九世纪中叶帝国解体，卫藏、安多、康区不再由一个朝廷号令。\n\n1150年前后的青藏高原是寺院与地方贵族并立的分裂时期，不是松赞干布的帝国。图上大块的“吐蕃”来自历史底图的综合画法，会把并不统一的地面涂成同一色。",
+    "bodyEn": "Imperial Tibet fought the Tang across the northeast and the Tarim. After the mid-ninth century the plateau was fragmented. A single Tibet color in 1150 is the basemap's generalization, not a unified empire."
+  },
+  "nan chao": {
+    "spanZh": "南诏738–902；大理937–1253",
+    "spanEn": "Nanzhao 738–902; Dali 937–1253",
+    "capitalZh": "阳苴咩城，今大理一带",
+    "capitalEn": "Yangjuemie, near modern Dali",
+    "bodyZh": "南诏是八世纪在洱海兴起的王国，后与唐决裂。902年以后南诏王室覆灭。937年段氏建立大理，继续统治云南直到1253年蒙古灭国。\n\n所以1150年这一块土地的政权是大理，不是南诏。底图仍沿用旧名时，中文界面改标大理。大理奉佛教，对宋大体保持朝贡，内部由段氏与高氏共治的时期很长。",
+    "bodyEn": "Nanzhao fell in the early tenth century. By 1150 the state at Erhai was Dali, under the Duan house, until the Mongol conquest of 1253. The Chinese label uses Dali even when the source file still says Nan Chao."
+  },
+  "jin": {
+    "spanZh": "1115–1234",
+    "spanEn": "1115–1234",
+    "capitalZh": "中都，今北京",
+    "capitalEn": "Zhongdu, modern Beijing",
+    "bodyZh": "金是女真完颜氏建立的皇朝。1127年俘虏宋徽、钦二帝，占有华北。1150年前后海陵王在位前后，金正在把政治中心从会宁南移到燕京。\n\n金与南宋以淮为界，西线则与西夏对峙。猛安谋克嵌入华北州县，是这一帝国最主要的内部张力。1234年亡于蒙古与南宋的夹击。",
+    "bodyEn": "Jin was the Jurchen dynasty that took North China in 1127. Around 1150 it was shifting its capital toward Yanjing and facing the Southern Song across the Huai. It fell in 1234."
+  },
+  "jin empire": {
+    "spanZh": "1115–1234",
+    "spanEn": "1115–1234",
+    "capitalZh": "中都",
+    "capitalEn": "Zhongdu",
+    "bodyZh": "女真金朝占有华北，与南宋、西夏并立。1150年前后其都城正在南移。1234年灭亡。图上范围来自对应年份的历史快照。",
+    "bodyEn": "The Jurchen Jin held North China between the Southern Song and Western Xia. The map shape follows that year's historical snapshot."
+  },
+  "khmer empire": {
+    "spanZh": "约802–1431",
+    "spanEn": "c. 802–1431",
+    "capitalZh": "吴哥",
+    "capitalEn": "Angkor",
+    "bodyZh": "真腊吴哥王朝以洞里萨湖的水利与庙山为国家中心。十二世纪苏利耶跋摩二世修建吴哥窟，阇耶跋摩七世则把大乘佛教与王路网推到极盛。\n\n1150年正处于吴哥窟落成后不久的时代，帝国影响伸向湄公河中游和马来半岛的一部分。后来重心逐渐南移，1431年吴哥被放弃。",
+    "bodyEn": "Angkor's hydraulic city was the Khmer capital. Around 1150, just after Angkor Wat, the empire still reached into the middle Mekong. The court later shifted south."
+  },
+  "karkhanids": {
+    "spanZh": "约840–1212",
+    "spanEn": "c. 840–1212",
+    "capitalZh": "八剌沙衮、喀什噶尔",
+    "capitalEn": "Balasagun and Kashgar",
+    "bodyZh": "喀喇汗王朝是回鹘与葛逻禄传统上建立的突厥伊斯兰王朝，分东西两支，地跨七河与塔里木西南。它是突厥语人群大规模改宗伊斯兰教之后的重要政权。\n\n十二世纪以后西辽压服东西喀喇汗，汗位还在，但不再独立。图上的一整块往往把东西两支画在一起。",
+    "bodyEn": "The Qarakhanids were a Turkic Muslim dynasty across Semirechye and the southwest Tarim, later subordinated to Qara Khitai. The map often merges the eastern and western lines."
+  },
+  "tang empire": {
+    "spanZh": "618–907",
+    "spanEn": "618–907",
+    "capitalZh": "长安",
+    "capitalEn": "Chang'an",
+    "bodyZh": "唐以长安为中心，前期通过都护府与羁縻州经营西域和北方。安史之乱以后藩镇坐大，朝廷对黄河以北的控制变得间接。\n\n图上的唐是某一快照年份的综合版图，不等于该年每一座城都由长安直接派官。",
+    "bodyEn": "The Tang centered on Chang'an. After the An Lushan rebellion its control north of the Yellow River was indirect. The shape is one snapshot, not a claim that every town was directly administered."
+  },
+  "mongol empire": {
+    "spanZh": "1206–1271年后分裂为汗国",
+    "spanEn": "1206, later split into khanates",
+    "capitalZh": "哈拉和林",
+    "capitalEn": "Karakorum",
+    "bodyZh": "1206年铁木真称成吉思汗。此后蒙古军队相继灭西夏、金，并西征花剌子模。1259年以后帝国不再有一个能号令全境的大汗，形成元、察合台、伊利与钦察等汗国。",
+    "bodyEn": "After 1206 the Mongol armies destroyed Western Xia and Jin and invaded Khwarazm. After 1259 the empire divided into separate khanates."
+  },
+  "byzantine empire": {
+    "spanZh": "330–1453",
+    "spanEn": "330–1453",
+    "capitalZh": "君士坦丁堡",
+    "capitalEn": "Constantinople",
+    "bodyZh": "拜占庭是东罗马帝国的延续，以君士坦丁堡控制博斯普鲁斯。十二世纪科穆宁王朝一度恢复巴尔干和小亚细亚的部分疆土。1204年第四次十字军占领都城，帝国分裂，1261年才复国。",
+    "bodyEn": "Byzantium was the continuation of the Eastern Roman Empire. The Fourth Crusade took Constantinople in 1204; the court returned in 1261."
+  },
+  "abbasid caliphate": {
+    "spanZh": "750–1258",
+    "spanEn": "750–1258",
+    "capitalZh": "巴格达",
+    "capitalEn": "Baghdad",
+    "bodyZh": "阿拔斯把伊斯兰世界的中心从叙利亚移到伊拉克。兴盛时直控从北非到河中的大片土地，稍后只保留哈里发名分。读图时要分清：色块大，不等于巴格达仍在派总督。",
+    "bodyEn": "A large Abbasid color does not mean Baghdad still appointed every governor."
+  },
+  "holy roman empire": {
+    "spanZh": "962–1806",
+    "spanEn": "962–1806",
+    "capitalZh": "无固定首都",
+    "capitalEn": "No fixed capital",
+    "bodyZh": "神圣罗马帝国是中欧的选举君主国，皇帝需由诸侯承认。十二世纪霍亨施陶芬家族与教廷、北意大利城市争权。它不是一个中央集权国家，图上的整块颜色盖住了许多实际上自治的公国和城市。",
+    "bodyEn": "The Holy Roman Empire was an elective monarchy. Its color on the map covers many duchies and cities that governed themselves."
+  },
+  "seljuk empire": {
+    "spanZh": "约1037–1194",
+    "spanEn": "c. 1037–1194",
+    "capitalZh": "伊斯法罕，后期分散",
+    "capitalEn": "Isfahan, later fragmented",
+    "bodyZh": "大塞尔柱是突厥军事家族，十一世纪进入伊朗并控制阿拔斯哈里发。1071年曼齐克特之战后进入安纳托利亚。十二世纪帝国分裂为若干苏丹国，伊拉克与波斯的大塞尔柱在1150年前后已经衰落。",
+    "bodyEn": "The Great Seljuks entered Iran and Anatolia in the eleventh century. By 1150 their realm had broken into smaller sultanates."
+  },
+  "fatimid caliphate": {
+    "spanZh": "909–1171",
+    "spanEn": "909–1171",
+    "capitalZh": "开罗",
+    "capitalEn": "Cairo",
+    "bodyZh": "法蒂玛是什叶伊斯玛仪派哈里发国，从马格里布起家，969年建开罗。十二世纪中叶军权落入维齐尔之手。1169年前后萨拉丁开始掌权，1171年哈里发国终结，埃及转入阿尤布王朝。",
+    "bodyEn": "The Fatimids built Cairo in 969. By the 1160s viziers held the army, and Saladin ended the caliphate in 1171."
+  },
+  "champa": {
+    "spanZh": "约192–1832",
+    "spanEn": "c. 192–1832",
+    "capitalZh": "因陀罗补罗等，随时期迁移",
+    "capitalEn": "Indrapura and later capitals",
+    "bodyZh": "占城是今越南中南部沿海的占语诸王国，以海事和香料贸易见长，长期与北方的大越争占城以北的土地。它不是一个始终统一的帝国，更像共享文字与信仰的诸港邦。",
+    "bodyEn": "Champa was a chain of Cham-speaking polities along the central Vietnamese coast, often at war with Dai Viet over the northern edge of their coast."
+  },
+  "đại việt": {
+    "spanZh": "968年起的丁、黎、李、陈诸朝",
+    "spanEn": "Dinh, Le, Ly, and Tran from 968",
+    "capitalZh": "升龙，今河内",
+    "capitalEn": "Thang Long, modern Hanoi",
+    "bodyZh": "大越是红河三角洲的独立王朝。1150年正值李朝，朝廷在升龙，南与占城作战，北与宋保持朝贡。李朝用科举和佛教寺院稳定地方。1225年陈朝取代李朝。",
+    "bodyEn": "Dai Viet was the independent state of the Red River. In 1150 the Ly court at Thang Long fought Champa and sent tribute to the Song. The Tran replaced the Ly in 1225."
+  },
+  "korea": {
+    "spanZh": "高丽918–1392",
+    "spanEn": "Goryeo 918–1392",
+    "capitalZh": "开京",
+    "capitalEn": "Gaegyeong",
+    "bodyZh": "高丽统一后三国，都开京。它向辽、金、元先后周旋，内部由文臣与武臣交替掌权。1170年武臣政变以前，高丽仍是文治朝廷。图上的朝鲜半岛在不同世纪应分别理解为高句丽、新罗或高丽，中文名会按年份改写。",
+    "bodyEn": "Goryeo unified the later three kingdoms and ruled from Gaegyeong. Before the 1170 military coup it was still a civil court. The Chinese label changes with the century."
+  },
+  "imperial japan (fujiwara)": {
+    "spanZh": "藤原氏摄关政治，约10–11世纪最盛",
+    "spanEn": "Fujiwara regency",
+    "capitalZh": "平安京",
+    "capitalEn": "Heian-kyo",
+    "bodyZh": "这一名称指平安时代由藤原氏出任摄政、关白的日本朝廷，不是后来的天皇集权或幕府。实际土地多在庄园领主和国司手中。1150年日本已进入院政末期，源平冲突即将表面化，藤原摄关不再是唯一的权力中心。",
+    "bodyEn": "This label marks Heian Japan under Fujiwara regents, not a later shogunate. By 1150 retired emperors and the coming Genpei conflict were already displacing that monopoly."
+  },
+  "srivijaya empire": {
+    "spanZh": "约7–13世纪",
+    "spanEn": "c. 7th–13th century",
+    "capitalZh": "巨港一带",
+    "capitalEn": "Near Palembang",
+    "bodyZh": "三佛齐控制马六甲海峡两侧的港口，向过往商船抽税，并向中国朝贡。十一世纪以后注辇的远征削弱了它。十二世纪它更多是港口联盟，而不是一个边界清楚的帝国。",
+    "bodyEn": "Srivijaya taxed traffic through the Strait of Malacca. After Chola raids it was a league of ports more than a hard-edged empire."
+  },
+  "ottoman empire": {
+    "spanZh": "约1299–1922",
+    "spanEn": "c. 1299–1922",
+    "capitalZh": "布尔萨，后为君士坦丁堡",
+    "capitalEn": "Bursa, later Constantinople",
+    "bodyZh": "奥斯曼由安纳托利亚西北的突厥贝伊国扩张而成。1453年攻取君士坦丁堡，十六世纪成为地中海与红海之间的大帝国。图上不同年份的范围差得很远，不能把极盛版图看成每一年的国境。",
+    "bodyEn": "The Ottomans expanded from northwestern Anatolia, took Constantinople in 1453, and should not be read at their greatest extent in every year."
+  },
+  "roman empire": {
+    "spanZh": "前27–395年东西分治；西罗马终于476",
+    "spanEn": "27 BCE–395, west to 476",
+    "capitalZh": "罗马；后期有君士坦丁堡",
+    "capitalEn": "Rome; later also Constantinople",
+    "bodyZh": "罗马帝国在地中海四周建立行省。三世纪危机之后，戴克里先与君士坦丁重组帝国。395年以后东西分治成为常态。图上的一整块是快照里的行省集合，行省内部的城市同盟和附属王国不会逐一画出。",
+    "bodyEn": "The Roman Empire's color covers its provinces at that snapshot. Allied kingdoms inside the frontier are not drawn one by one."
+  }
+}

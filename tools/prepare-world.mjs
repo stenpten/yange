@@ -7,11 +7,10 @@ const worldDir = join(root, "public/history/world")
 mkdirSync(srcDir, { recursive: true })
 mkdirSync(worldDir, { recursive: true })
 
-const list = await fetch("https://api.github.com/repos/aourednik/historical-basemaps/contents/geojson?ref=master", {
-  headers: { "User-Agent": "yange-atlas", Accept: "application/vnd.github+json" },
-}).then((r) => r.json())
-
-const files = list.filter((item) => /^world_.*\.geojson$/.test(item.name))
+import { readdirSync } from "node:fs"
+const localWorld = readdirSync(srcDir).filter((name) => /^world_.*\.geojson$/.test(name))
+const files = localWorld.map((name) => ({ name, download_url: "" }))
+if (!files.length) throw new Error("missing data-src world geojson")
 
 async function download(url, dest) {
   if (existsSync(dest) && statSync(dest).size > 1000) return
@@ -88,7 +87,7 @@ function simplifyRing(ring, tol) {
   const simplified = simplifyOpen(open, tol)
   const rounded = []
   for (const [x, y] of simplified) {
-    const p = [Math.round(x * 100) / 100, Math.round(y * 100) / 100]
+    const p = [Math.round(x * 1000) / 1000, Math.round(y * 1000) / 1000]
     const prev = rounded[rounded.length - 1]
     if (!prev || prev[0] !== p[0] || prev[1] !== p[1]) rounded.push(p)
   }
@@ -131,14 +130,14 @@ function centroidOf(geometry) {
 function simplifyGeometry(geometry, tol) {
   if (geometry.type === "Polygon") {
     const rings = geometry.coordinates.map((ring) => simplifyRing(ring, tol)).filter(Boolean)
-    if (!rings.length || ringArea(rings[0]) < 0.04) return null
+    if (!rings.length || ringArea(rings[0]) < 0.004) return null
     return { type: "Polygon", coordinates: rings }
   }
   if (geometry.type === "MultiPolygon") {
     const polys = []
     for (const poly of geometry.coordinates) {
       const rings = poly.map((ring) => simplifyRing(ring, tol)).filter(Boolean)
-      if (rings.length && ringArea(rings[0]) >= 0.04) polys.push(rings)
+      if (rings.length && ringArea(rings[0]) >= 0.004) polys.push(rings)
     }
     if (!polys.length) return null
     return { type: "MultiPolygon", coordinates: polys }
@@ -163,21 +162,21 @@ function build(raw, tol) {
 }
 
 function fit(raw) {
-  const tolerances = [0.12, 0.2, 0.35, 0.55, 0.8, 1.2, 1.8]
+  const tolerances = [0.0035, 0.008, 0.015, 0.03]
   let best = null
   for (const tol of tolerances) {
     let fc = build(raw, tol)
     let text = JSON.stringify(fc)
-    if (text.length > 500000) {
+    if (text.length > 1800000) {
       const ranked = fc.features
         .map((feature) => ({ feature, area: feature.geometry.type === "Polygon" ? ringArea(feature.geometry.coordinates[0]) : feature.geometry.coordinates.reduce((sum, poly) => sum + ringArea(poly[0]), 0) }))
         .sort((a, b) => b.area - a.area)
-      while (ranked.length > 1 && JSON.stringify({ type: "FeatureCollection", features: ranked.map((item) => item.feature) }).length > 500000) ranked.pop()
+      while (ranked.length > 1 && JSON.stringify({ type: "FeatureCollection", features: ranked.map((item) => item.feature) }).length > 1800000) ranked.pop()
       fc = { type: "FeatureCollection", features: ranked.map((item) => item.feature) }
       text = JSON.stringify(fc)
     }
     best = { fc, text, tol }
-    if (text.length <= 500000) break
+    if (text.length <= 1800000) break
   }
   return best
 }
@@ -202,6 +201,7 @@ for (const item of files) {
 snapshots.sort((a, b) => a - b)
 for (const entry of names.values()) entry.years.sort((a, b) => a - b)
 writeFileSync(join(root, "public/history/manifest.json"), JSON.stringify({ snapshots, max: 2010 }))
+writeFileSync(join(root, "src/data/snapshots.json"), JSON.stringify(snapshots))
 writeFileSync(join(root, "public/history/names.json"), JSON.stringify([...names.values()].sort((a, b) => a.name.localeCompare(b.name))))
 
 const landRaw = JSON.parse(readFileSync(landDest, "utf8"))
