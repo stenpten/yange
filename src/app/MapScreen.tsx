@@ -73,11 +73,58 @@ function decorate(fc: AtlasFC, lexicon: Lexicon, lang: "zh" | "en", year: number
           dossier,
           ...(chapter ? { chapter } : {}),
           ...(label ? { label } : {}),
-          area: Math.round(geomArea(feature.geometry)),
+          area: Number(feature.properties.drawArea) || Math.round(geomArea(feature.geometry)),
         },
       }]
     }).sort((a, b) => Number(b.properties.area) - Number(a.properties.area)),
   }
+}
+
+
+const LABEL_BREAKS = [8, 24, 220, 500, 842, 951, 1206, 1389, 1950]
+
+function labelEpoch(year: number) {
+  let epoch = 0
+  for (const cut of LABEL_BREAKS) if (year >= cut) epoch++
+  return epoch
+}
+
+const bucketCache = new globalThis.Map<number, AtlasFC>()
+const bucketFlight = new globalThis.Map<number, Promise<AtlasFC>>()
+
+function stampArea(feature: AtlasFeature) {
+  if (Number(feature.properties.drawArea) > 0) return
+  feature.properties.drawArea = Math.round(geomArea(feature.geometry))
+}
+
+function loadBucket(id: number, url: string) {
+  const hit = bucketCache.get(id)
+  if (hit) return Promise.resolve(hit)
+  const pending = bucketFlight.get(id)
+  if (pending) return pending
+  const task = fetch(url).then(async (res) => {
+    if (!res.ok) throw new Error("polities")
+    const data = await res.json() as AtlasFC
+    for (const feature of data.features) stampArea(feature)
+    bucketCache.set(id, data)
+    bucketFlight.delete(id)
+    return data
+  }).catch((error: unknown) => {
+    bucketFlight.delete(id)
+    throw error
+  })
+  bucketFlight.set(id, task)
+  return task
+}
+
+function activeSignature(features: AtlasFeature[], year: number, lang: string, names: number) {
+  let sig = labelEpoch(year) + ":" + lang + ":" + names
+  for (const feature of features) {
+    const from = Number(feature.properties.from)
+    const to = Number(feature.properties.to)
+    if (from <= year && year <= to) sig += "|" + feature.properties.id + "@" + from + "-" + to
+  }
+  return sig
 }
 
 export function MapScreen() {
@@ -108,14 +155,58 @@ export function MapScreen() {
   const min = span.min
   const max = span.max
   const clamped = Math.min(max, Math.max(min, year))
-  const bucketId = bucketFor(clamped)
-  const [yearField, setYearField] = useState(String(clamped))
+  const [liveYear, setLiveYear] = useState(clamped)
+  const liveRef = useRef(clamped)
+  const dragging = useRef(false)
+  const playingRef = useRef(false)
+  const paintSig = useRef("")
+  const labelTimer = useRef(0)
+  playingRef.current = playing
+  const viewYear = Math.min(max, Math.max(min, liveYear))
+  const bucketId = bucketFor(viewYear)
+  const [yearField, setYearField] = useState(String(viewYear))
   const yearFocused = useRef(false)
-  useEffect(() => { if (!yearFocused.current) setYearField(String(clamped)) }, [clamped])
+  useEffect(() => { if (!yearFocused.current) setYearField(String(viewYear)) }, [viewYear])
+  useEffect(() => {
+    if (dragging.current || playingRef.current) return
+    if (liveRef.current === clamped) return
+    liveRef.current = clamped
+    setLiveYear(clamped)
+  }, [clamped])
+  function publishYear(nextYear: number) {
+    const next = Math.min(max, Math.max(min, Math.round(nextYear)))
+    liveRef.current = next
+    setLiveYear(next)
+    setParams((current) => {
+      if (current.get("year") === String(next)) return current
+      const updated = new URLSearchParams(current)
+      updated.set("year", String(next))
+      return updated
+    }, { replace: true })
+  }
+  function revealLabelsSoon() {
+    window.clearTimeout(labelTimer.current)
+    labelTimer.current = window.setTimeout(() => {
+      if (dragging.current || playingRef.current) return
+      const map = mapRef.current
+      if (map?.getLayer("world-label")) map.setLayoutProperty("world-label", "visibility", "visible")
+    }, 160)
+  }
+  function quietLabels() {
+    const map = mapRef.current
+    if (map?.getLayer("world-label")) map.setLayoutProperty("world-label", "visibility", "none")
+    revealLabelsSoon()
+  }
+  function endDrag() {
+    if (!dragging.current) return
+    dragging.current = false
+    publishYear(liveRef.current)
+    revealLabelsSoon()
+  }
   function commitYear(raw: string) {
     const next = Number(raw)
-    if (!Number.isFinite(next)) { setYearField(String(clamped)); return }
-    write({ year: String(Math.min(max, Math.max(min, Math.round(next)))) })
+    if (!Number.isFinite(next)) { setYearField(String(viewYear)); return }
+    publishYear(next)
   }
 
   function write(next: Record<string, string | undefined>) {
@@ -150,6 +241,7 @@ export function MapScreen() {
       },
       center: explicitView ? [lng, lat] : [10, 18],
       zoom: explicitView ? zoom : 1.4,
+      pixelRatio: Math.min(window.devicePixelRatio || 1, 1.5),
       renderWorldCopies: false,
       localIdeographFontFamily: '"Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif',
       attributionControl: false,
@@ -295,23 +387,29 @@ export function MapScreen() {
 
   useEffect(() => {
     let cancel = false
-    setStatus(t.loading)
-    void (async () => {
-      try {
-        const res = await fetch(asset(`history/polities/${bucketId}.geojson`))
-        if (!res.ok) throw new Error("polities")
-        const loaded = await res.json() as AtlasFC
-        if (cancel) return
-        setBucket(loaded)
-        setStatus("")
-      } catch {
-        if (!cancel) setStatus(t.failed)
-      }
-    })()
-    return () => { cancel = true }
+    const known = bucketCache.get(bucketId)
+    if (known) setBucket(known)
+    const slow = window.setTimeout(() => {
+      if (!cancel && !bucketCache.get(bucketId)) setStatus(t.loading)
+    }, 240)
+    void loadBucket(bucketId, asset(`history/polities/${bucketId}.geojson`)).then((loaded) => {
+      if (cancel) return
+      setBucket(loaded)
+      setStatus("")
+      window.setTimeout(() => {
+        for (const id of [bucketId - 1, bucketId + 1]) void loadBucket(id, asset(`history/polities/${id}.geojson`)).catch(() => undefined)
+      }, 40)
+    }).catch(() => { if (!cancel) setStatus(t.failed) })
+    return () => { cancel = true; window.clearTimeout(slow) }
   }, [bucketId, t.loading, t.failed])
 
-  const shown = useMemo(() => decorate({ type: "FeatureCollection", features: activeFeatures(bucket.features, clamped) }, lexicon, lang, clamped), [bucket, clamped, lexicon, lang])
+  const shown = useMemo(() => {
+    const sig = activeSignature(bucket.features, viewYear, lang, Object.keys(lexicon).length)
+    if (sig === paintSig.current && shownRef.current.features.length) return shownRef.current
+    const next = decorate({ type: "FeatureCollection", features: activeFeatures(bucket.features, viewYear) }, lexicon, lang, viewYear)
+    paintSig.current = sig
+    return next
+  }, [bucket, viewYear, lexicon, lang])
   shownRef.current = shown
 
   useEffect(() => {
@@ -332,17 +430,27 @@ export function MapScreen() {
 
   useEffect(() => {
     if (!playing) return
+    quietLabels()
     const timer = window.setInterval(() => {
-      setParams((current) => {
-        const now = num(current.get("year"), 750)
-        const next = new URLSearchParams(current)
-        if (now >= max) { setPlaying(false); next.set("year", String(max)); return next }
-        next.set("year", String(now + 1))
-        return next
-      }, { replace: true })
-    }, 280 / speed)
+      const next = Math.min(max, liveRef.current + 1)
+      liveRef.current = next
+      setLiveYear(next)
+      if (next >= max) setPlaying(false)
+    }, Math.max(16, 280 / speed))
     return () => window.clearInterval(timer)
-  }, [playing, speed, setParams, max])
+  }, [playing, speed, max])
+
+  useEffect(() => {
+    if (playing) return
+    const next = String(liveRef.current)
+    setParams((current) => {
+      if (current.get("year") === next) return current
+      const updated = new URLSearchParams(current)
+      updated.set("year", next)
+      return updated
+    }, { replace: true })
+    revealLabelsSoon()
+  }, [playing, setParams])
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -352,7 +460,7 @@ export function MapScreen() {
       if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
         event.preventDefault()
         const step = (event.shiftKey ? 10 : 1) * (event.key === "ArrowLeft" ? -1 : 1)
-        write({ year: String(Math.min(max, Math.max(min, clamped + step))) })
+        publishYear(viewYear + step)
       }
     }
     window.addEventListener("keydown", onKey)
@@ -361,7 +469,7 @@ export function MapScreen() {
 
   const selected = useMemo(() => shown.features.find((feature) => String(feature.properties.id) === polity), [shown, polity])
   const shownEvents = events
-    .filter((event) => Math.abs(event.year - clamped) <= 35)
+    .filter((event) => Math.abs(event.year - viewYear) <= 35)
     .sort((a, b) => a.year - b.year)
   const dossierKey = String(selected?.properties.dossier ?? selected?.properties.name ?? "").toLowerCase()
   const chapterSlug = String(selected?.properties.chapter ?? "")
@@ -379,7 +487,7 @@ export function MapScreen() {
     if (event.polityId && (event.polityId === id || id.startsWith(`${event.polityId}-`) || event.polityId.startsWith(`${id}-`))) return true
     return contains(selected.geometry, event.lng, event.lat)
   }).sort((a, b) => a.year - b.year)
-  const era = eraFor(clamped, lang)
+  const era = eraFor(viewYear, lang)
   const borderFrom = Number(selected?.properties.from)
   const borderTo = Number(selected?.properties.to)
   const borderText = Number.isFinite(borderFrom) && Number.isFinite(borderTo) ? `${yearText(borderFrom, lang)}–${yearText(borderTo, lang)}` : ""
@@ -424,7 +532,7 @@ export function MapScreen() {
                     <svg viewBox="0 0 320 96" role="img" aria-label={t.population}>
                       <path d={series.map((point, index) => `${index ? "L" : "M"}${popX(point[0]).toFixed(1)},${popY(point[1]).toFixed(1)}`).join(" ")} fill="none" stroke="#f4f1ea" strokeWidth="1.5" />
                       {series.map((point) => <circle key={point[0]} cx={popX(point[0])} cy={popY(point[1])} r="2.5" fill="#f4f1ea" />)}
-                      {clamped >= series[0][0] && clamped <= series[series.length - 1][0] ? <line x1={popX(clamped)} x2={popX(clamped)} y1="8" y2="88" stroke="#c44536" strokeWidth="1" /> : null}
+                      {viewYear >= series[0][0] && viewYear <= series[series.length - 1][0] ? <line x1={popX(viewYear)} x2={popX(viewYear)} y1="8" y2="88" stroke="#c44536" strokeWidth="1" /> : null}
                     </svg>
                     <div className="pop-scale faint"><span>{series[0][0]}</span><span>{series[series.length - 1][1]} {lang === "zh" ? "百万" : "million"}</span><span>{series[series.length - 1][0]}</span></div>
                   </div>
@@ -485,7 +593,7 @@ export function MapScreen() {
           {borderText ? <span className="faint">{t.border} {borderText}</span> : null}
           <span className="faint">{t.visible} {visible}</span>
         </div>
-        <input aria-label={t.source} type="range" min={0} max={1000} value={Math.round(yearToRatio(clamped, min, max) * 1000)} onChange={(event) => write({ year: String(ratioToYear(Number(event.target.value) / 1000, min, max)) })} />
+        <input aria-label={t.source} type="range" min={0} max={1000} value={Math.round(yearToRatio(viewYear, min, max) * 1000)} onPointerDown={() => { dragging.current = true; quietLabels() }} onPointerUp={() => endDrag()} onPointerCancel={() => endDrag()} onBlur={() => endDrag()} onChange={(event) => { const next = Math.min(max, Math.max(min, ratioToYear(Number(event.target.value) / 1000, min, max))); liveRef.current = next; setLiveYear(next); if (dragging.current) quietLabels(); else publishYear(next) }} />
         <div className="year-controls">
           <button className="play" type="button" onClick={() => setPlaying((value) => !value)}>{playing ? t.pause : t.play}</button>
           <div className="speeds" aria-label={t.speeds}>

@@ -18,6 +18,8 @@ export class Map {
   setMinZoom(zoom: number): void
   remove(): void
   isStyleLoaded(): boolean
+  getLayer(id: string): unknown
+  setLayoutProperty(layer: string, name: string, value: unknown): void
 }
 declare const maplibregl: { Map: typeof Map }
 export default maplibregl
