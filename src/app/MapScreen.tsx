@@ -216,12 +216,24 @@ export function MapScreen() {
       return updated
     }, { replace: true })
   }
+  const worldLabelOpacity = ["step", ["zoom"], ["case", [">=", ["get", "area"], 12], 1, 0], 2.2, ["case", [">=", ["get", "area"], 6], 1, 0], 3.5, 1]
+  const peopleLabelOpacity = ["step", ["zoom"], ["case", [">=", ["get", "area"], 20], 1, 0], 2.4, ["case", [">=", ["get", "area"], 8], 1, 0], 3.8, 1]
+  const playLabelOpacity = ["step", ["zoom"], ["case", [">=", ["get", "area"], 2], 1, 0], 2.4, 1]
+  function showLabels(duringPlay = false) {
+    const map = mapRef.current
+    if (!map) return
+    for (const id of ["world-label", "peoples-label"]) {
+      if (!map.getLayer(id)) continue
+      map.setLayoutProperty(id, "visibility", "visible")
+      map.setLayoutProperty(id, "text-padding", duringPlay ? 6 : 2)
+      map.setPaintProperty(id, "text-opacity", duringPlay ? playLabelOpacity : (id === "world-label" ? worldLabelOpacity : peopleLabelOpacity))
+    }
+  }
   function revealLabelsSoon() {
     window.clearTimeout(labelTimer.current)
     labelTimer.current = window.setTimeout(() => {
       if (dragging.current || playingRef.current) return
-      const map = mapRef.current
-      for (const id of ["world-label", "peoples-label"]) if (map?.getLayer(id)) map.setLayoutProperty(id, "visibility", "visible")
+      showLabels(false)
     }, 160)
   }
   function quietLabels() {
@@ -524,14 +536,17 @@ export function MapScreen() {
 
   useEffect(() => {
     if (!playing) return
-    quietLabels()
+    showLabels(true)
     const timer = window.setInterval(() => {
       const next = Math.min(max, liveRef.current + 1)
       liveRef.current = next
       setLiveYear(next)
       if (next >= max) setPlaying(false)
     }, Math.max(16, 280 / speed))
-    return () => window.clearInterval(timer)
+    return () => {
+      window.clearInterval(timer)
+      if (!playingRef.current) showLabels(false)
+    }
   }, [playing, speed, max])
 
   useEffect(() => {

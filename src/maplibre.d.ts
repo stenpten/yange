@@ -20,6 +20,7 @@ export class Map {
   isStyleLoaded(): boolean
   getLayer(id: string): unknown
   setLayoutProperty(layer: string, name: string, value: unknown): void
+  setPaintProperty(layer: string, name: string, value: unknown): void
 }
 declare const maplibregl: { Map: typeof Map }
 export default maplibregl
