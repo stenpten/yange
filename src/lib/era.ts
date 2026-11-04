@@ -17,7 +17,7 @@ const eras: Array<[number, number, string, string]> = [
   [1368, 1644, "明", "Ming"],
   [1644, 1911, "清", "Qing"],
   [1912, 1949, "中华民国", "Republican China"],
-  [1949, 2010, "中华人民共和国", "People's Republic of China"],
+  [1949, 2024, "中华人民共和国", "People's Republic of China"],
 ]
 
 export function eraFor(year: number, lang: "zh" | "en"): string | null {

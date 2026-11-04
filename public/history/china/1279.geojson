@@ -1,1 +1,0 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"id":"yuan","name_zh":"元","name_en":"Yuan","note_zh":"示意范围，不是实测国界。","note_en":"Schematic extent, not a surveyed border.","lng":103.45,"lat":35.45},"geometry":{"type":"Polygon","coordinates":[[[78,34],[90,32],[100,28],[108,22],[116,22],[122,28],[126,40],[122,48],[104,50],[90,46],[82,40],[78,34]]]}}]}

@@ -1,5 +1,0 @@
-{"type":"FeatureCollection","features":[
-  {"type":"Feature","properties":{"id":"shu","name":"Shu Han"},"geometry":{"type":"Polygon","coordinates":[[[96,34],[110.5,33.4],[110.5,26],[101,23.5],[94,29],[96,34]]]}},
-  {"type":"Feature","properties":{"id":"wei","name":"Cao Wei"},"geometry":{"type":"Polygon","coordinates":[[[94,32.6],[126.5,32.6],[126.5,43.2],[94,43.2],[94,32.6]]]}},
-  {"type":"Feature","properties":{"id":"wu","name":"Eastern Wu"},"geometry":{"type":"Polygon","coordinates":[[[94,33],[126.5,33],[126.5,17],[94,17],[94,33]]]}}
-]}
