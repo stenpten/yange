@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import { Link, useSearchParams } from "react-router-dom"
 import { Map } from "maplibre-gl"
 import { chapters, events } from "../data/content"
-import { ratioToYear, yearToRatio } from "../lib/snapshot"
+import { ratioToYear, snapshotFor, yearToRatio } from "../lib/snapshot"
 import { activeFeatures, bucketFor } from "../lib/polities"
 import { colorFor } from "../lib/color"
 import { centroidOf, contains } from "../lib/geo"
@@ -10,6 +10,7 @@ import { eraFor, yearText } from "../lib/era"
 import { presentPolity } from "../data/reign"
 import { gazetteer } from "../data/gazetteer"
 import { aliasFor } from "../data/polity-alias"
+import { peopleOverview } from "../data/people-briefs"
 import { chronicles } from "../data/chronicles"
 import { asset, useCopy } from "./chrome"
 
@@ -91,10 +92,26 @@ function labelEpoch(year: number) {
 
 const bucketCache = new globalThis.Map<number, AtlasFC>()
 const bucketFlight = new globalThis.Map<number, Promise<AtlasFC>>()
+const peopleCache = new globalThis.Map<number, AtlasFC>()
 
 function stampArea(feature: AtlasFeature) {
-  if (Number(feature.properties.drawArea) > 0) return
+  if (Number(feature.properties.drawArea) > 0 && Number.isFinite(Number(feature.properties.minX))) return
   feature.properties.drawArea = Math.round(geomArea(feature.geometry))
+  let minX = Infinity
+  let minY = Infinity
+  let maxX = -Infinity
+  let maxY = -Infinity
+  const polys = feature.geometry.type === "Polygon" ? [feature.geometry.coordinates as number[][][]] : feature.geometry.coordinates as number[][][][]
+  for (const poly of polys) for (const point of poly[0] || []) {
+    if (point[0] < minX) minX = point[0]
+    if (point[1] < minY) minY = point[1]
+    if (point[0] > maxX) maxX = point[0]
+    if (point[1] > maxY) maxY = point[1]
+  }
+  feature.properties.minX = minX
+  feature.properties.minY = minY
+  feature.properties.maxX = maxX
+  feature.properties.maxY = maxY
 }
 
 function loadBucket(id: number, url: string) {
@@ -102,16 +119,27 @@ function loadBucket(id: number, url: string) {
   if (hit) return Promise.resolve(hit)
   const pending = bucketFlight.get(id)
   if (pending) return pending
-  const task = fetch(url).then(async (res) => {
-    if (!res.ok) throw new Error("polities")
-    const data = await res.json() as AtlasFC
-    for (const feature of data.features) stampArea(feature)
-    bucketCache.set(id, data)
-    bucketFlight.delete(id)
-    return data
-  }).catch((error: unknown) => {
-    bucketFlight.delete(id)
-    throw error
+  const task = new Promise<AtlasFC>((resolve, reject) => {
+    const worker = new Worker(new URL("../lib/parse-worker.ts", import.meta.url), { type: "module" })
+    worker.onmessage = (event: MessageEvent<{ ok: boolean; empty?: boolean; data?: AtlasFC }>) => {
+      worker.terminate()
+      if (!event.data.ok) {
+        bucketFlight.delete(id)
+        reject(new Error("polities"))
+        return
+      }
+      const data = event.data.empty || !event.data.data ? { type: "FeatureCollection" as const, features: [] } : event.data.data
+      for (const feature of data.features) stampArea(feature)
+      bucketCache.set(id, data)
+      bucketFlight.delete(id)
+      resolve(data)
+    }
+    worker.onerror = () => {
+      worker.terminate()
+      bucketFlight.delete(id)
+      reject(new Error("polities"))
+    }
+    worker.postMessage({ id, bucket: id, url })
   })
   bucketFlight.set(id, task)
   return task
@@ -130,7 +158,7 @@ function activeSignature(features: AtlasFeature[], year: number, lang: string, n
 export function MapScreen() {
   const { lang, t } = useCopy()
   const [params, setParams] = useSearchParams()
-  const [span, setSpan] = useState<{ min: number; max: number }>({ min: -3400, max: 2024 })
+  const [span, setSpan] = useState<{ min: number; max: number }>({ min: -123000, max: 2024 })
   const [lexicon, setLexicon] = useState<Lexicon>({})
   const [dossiers, setDossiers] = useState<Record<string, Dossier>>(chronicles)
   const [population, setPopulation] = useState<Record<string, number[][]>>({})
@@ -140,6 +168,9 @@ export function MapScreen() {
   const [visible, setVisible] = useState(0)
   const [railOpen, setRailOpen] = useState(false)
   const [bucket, setBucket] = useState<AtlasFC>(empty)
+  const [peopleYears, setPeopleYears] = useState<number[]>([])
+  const [peoples, setPeoples] = useState<AtlasFC>(empty)
+  const [briefs, setBriefs] = useState<Record<string, { zh: string; en: string }>>({})
   const mapNode = useRef<HTMLDivElement>(null)
   const shownRef = useRef(empty)
   const setParamsRef = useRef(setParams)
@@ -164,6 +195,7 @@ export function MapScreen() {
   playingRef.current = playing
   const viewYear = Math.min(max, Math.max(min, liveYear))
   const bucketId = bucketFor(viewYear)
+  const peopleSnap = peopleYears.length ? snapshotFor(viewYear, peopleYears) : null
   const [yearField, setYearField] = useState(String(viewYear))
   const yearFocused = useRef(false)
   useEffect(() => { if (!yearFocused.current) setYearField(String(viewYear)) }, [viewYear])
@@ -189,12 +221,12 @@ export function MapScreen() {
     labelTimer.current = window.setTimeout(() => {
       if (dragging.current || playingRef.current) return
       const map = mapRef.current
-      if (map?.getLayer("world-label")) map.setLayoutProperty("world-label", "visibility", "visible")
+      for (const id of ["world-label", "peoples-label"]) if (map?.getLayer(id)) map.setLayoutProperty(id, "visibility", "visible")
     }, 160)
   }
   function quietLabels() {
     const map = mapRef.current
-    if (map?.getLayer("world-label")) map.setLayoutProperty("world-label", "visibility", "none")
+    for (const id of ["world-label", "peoples-label"]) if (map?.getLayer(id)) map.setLayoutProperty(id, "visibility", "none")
     revealLabelsSoon()
   }
   function endDrag() {
@@ -220,11 +252,13 @@ export function MapScreen() {
 
   useEffect(() => {
     void fetch(asset("history/polities/index.json")).then((res) => res.json()).then((data: { min: number; max: number }) => {
-      if (Number.isFinite(data.min) && Number.isFinite(data.max)) setSpan({ min: data.min, max: data.max })
+      if (Number.isFinite(data.min) && Number.isFinite(data.max)) setSpan((current) => ({ min: current.min, max: data.max }))
     }).catch(() => setSpan({ min: -3400, max: 2024 }))
     void fetch(asset("history/labels.json")).then((res) => res.json()).then((data: Lexicon) => setLexicon(data)).catch(() => setLexicon({}))
     void fetch(asset("history/dossiers.json")).then((res) => res.json()).then((data: Record<string, Dossier>) => setDossiers({ ...data, ...chronicles })).catch(() => setDossiers(chronicles))
     void fetch(asset("history/population.json")).then((res) => res.json()).then((data: Record<string, number[][]>) => setPopulation(data)).catch(() => setPopulation({}))
+    void fetch(asset("history/peoples/index.json")).then((res) => res.json()).then((data: { snapshots: number[] }) => { setPeopleYears(data.snapshots || []); if (data.snapshots?.[0] !== undefined) setSpan((current) => ({ ...current, min: data.snapshots[0] })) }).catch(() => undefined)
+    void fetch(asset("history/briefs.json")).then((res) => res.ok ? res.json() : {}).then((data: Record<string, { zh: string; en: string }>) => setBriefs(data || {})).catch(() => undefined)
   }, [])
 
   const explicitView = useRef(params.has("z")).current
@@ -290,6 +324,32 @@ export function MapScreen() {
           "hillshade-accent-color": "#5c4a38",
         },
       })
+
+      map.addSource("peoples", { type: "geojson", data: empty })
+      map.addLayer({ id: "peoples", type: "fill", source: "peoples", paint: { "fill-color": ["get", "color"], "fill-opacity": 0.4 } })
+      map.addLayer({ id: "peoples-line", type: "line", source: "peoples", paint: { "line-color": "#1c1612", "line-width": 0.8, "line-opacity": 0.6 } })
+      map.addLayer({
+        id: "peoples-label",
+        type: "symbol",
+        source: "peoples",
+        filter: ["has", "label"],
+        layout: {
+          "text-field": ["get", "label"],
+          "text-font": ["Open Sans Regular"],
+          "text-size": ["interpolate", ["linear"], ["zoom"], 1, 11, 4, 13],
+          "text-max-width": 8,
+          "text-padding": 2,
+          "text-allow-overlap": false,
+          "text-optional": true,
+          "symbol-sort-key": ["*", ["get", "area"], -1],
+        },
+        paint: {
+          "text-color": "#f6f3ec",
+          "text-halo-color": "#14110e",
+          "text-halo-width": 1.15,
+          "text-opacity": ["step", ["zoom"], ["case", [">=", ["get", "area"], 20], 1, 0], 2.4, ["case", [">=", ["get", "area"], 8], 1, 0], 3.8, 1],
+        },
+      })
       map.addSource("world", { type: "geojson", data: empty })
       map.addLayer({ id: "world", type: "fill", source: "world", paint: { "fill-color": ["get", "color"], "fill-opacity": ["interpolate", ["linear"], ["zoom"], 0.5, 0.64, 3, 0.5, 5, 0.46] } })
       map.addLayer({ id: "world-line", type: "line", source: "world", paint: { "line-color": "#241c16", "line-width": ["interpolate", ["linear"], ["zoom"], 0.8, 0.85, 3, 1.2, 6, 1.8], "line-opacity": 0.72 } })
@@ -325,7 +385,7 @@ export function MapScreen() {
       }
     })
     map.on("click", (event) => {
-      const hits = map.queryRenderedFeatures(event.point, { layers: ["world"] })
+      const hits = map.queryRenderedFeatures(event.point, { layers: ["world", "peoples"] })
       const hit = hits[0]
       const id = hit ? String(hit.properties?.id ?? "") : ""
       setParamsRef.current((current) => {
@@ -403,6 +463,21 @@ export function MapScreen() {
     return () => { cancel = true; window.clearTimeout(slow) }
   }, [bucketId, t.loading, t.failed])
 
+
+  useEffect(() => {
+    if (peopleSnap === null) return
+    const cached = peopleCache.get(peopleSnap)
+    if (cached) setPeoples(cached)
+    let cancel = false
+    void fetch(asset(`history/peoples/${peopleSnap}.geojson`)).then((res) => res.ok ? res.json() : empty).then((data: AtlasFC) => {
+      if (cancel) return
+      for (const feature of data.features || []) stampArea(feature)
+      peopleCache.set(peopleSnap, data)
+      setPeoples(data)
+    }).catch(() => { if (!cancel) setPeoples(empty) })
+    return () => { cancel = true }
+  }, [peopleSnap])
+
   const shown = useMemo(() => {
     const sig = activeSignature(bucket.features, viewYear, lang, Object.keys(lexicon).length)
     if (sig === paintSig.current && shownRef.current.features.length) return shownRef.current
@@ -412,6 +487,18 @@ export function MapScreen() {
   }, [bucket, viewYear, lexicon, lang])
   shownRef.current = shown
 
+  const peoplesShown = useMemo(() => {
+    const open = peoples.features.filter((feature) => {
+      const [x, y] = centroidOf(feature.geometry)
+      return !shown.features.some((other) => {
+        const west = Number(other.properties.minX)
+        if (Number.isFinite(west) && (x < west || x > Number(other.properties.maxX) || y < Number(other.properties.minY) || y > Number(other.properties.maxY))) return false
+        return contains(other.geometry, x, y)
+      })
+    })
+    return decorate({ type: "FeatureCollection", features: open }, lexicon, lang, viewYear)
+  }, [peoples, shown, lexicon, lang, viewYear])
+
   useEffect(() => {
     const map = mapRef.current
     const put = () => (map?.getSource("world") as { setData(data: unknown): void } | undefined)?.setData(shown)
@@ -420,13 +507,20 @@ export function MapScreen() {
   }, [shown])
 
   useEffect(() => {
-    const features = shown.features.filter((feature) => String(feature.properties.id) === polity)
+    const map = mapRef.current
+    const put = () => (map?.getSource("peoples") as { setData(data: unknown): void } | undefined)?.setData(peoplesShown)
+    if (map?.isStyleLoaded()) put()
+    else map?.once("load", put)
+  }, [peoplesShown])
+
+  useEffect(() => {
+    const features = [...shown.features, ...peoplesShown.features].filter((feature) => String(feature.properties.id) === polity)
     const selected: AtlasFC = { type: "FeatureCollection", features }
     const map = mapRef.current
     const put = () => (map?.getSource("select") as { setData(data: unknown): void } | undefined)?.setData(selected)
     if (map?.isStyleLoaded()) put()
     else map?.once("load", put)
-  }, [shown, polity])
+  }, [shown, peoplesShown, polity])
 
   useEffect(() => {
     if (!playing) return
@@ -467,7 +561,7 @@ export function MapScreen() {
     return () => window.removeEventListener("keydown", onKey)
   })
 
-  const selected = useMemo(() => shown.features.find((feature) => String(feature.properties.id) === polity), [shown, polity])
+  const selected = useMemo(() => shown.features.find((feature) => String(feature.properties.id) === polity) ?? peoplesShown.features.find((feature) => String(feature.properties.id) === polity), [shown, peoplesShown, polity])
   const shownEvents = events
     .filter((event) => Math.abs(event.year - viewYear) <= 35)
     .sort((a, b) => a.year - b.year)
@@ -490,6 +584,15 @@ export function MapScreen() {
   const era = eraFor(viewYear, lang)
   const borderFrom = Number(selected?.properties.from)
   const borderTo = Number(selected?.properties.to)
+
+  const plainName = String(selected?.properties.name || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+  const wiki = briefs[plainName]
+  const wikiText = lang === "zh" ? (wiki?.zh || "") : (wiki?.en || wiki?.zh || "")
+  const overview = !selected || dossier ? "" : (
+    selected.properties.kind === "people" || !wikiText
+      ? peopleOverview(String(selected.properties.name || ""), borderFrom, borderTo, lang, labelOf(selected, lang))
+      : wikiText
+  )
   const borderText = Number.isFinite(borderFrom) && Number.isFinite(borderTo) ? `${yearText(borderFrom, lang)}–${yearText(borderTo, lang)}` : ""
 
   return (
@@ -509,7 +612,8 @@ export function MapScreen() {
                 {borderText ? <><dt>{t.border}</dt><dd>{borderText}</dd></> : null}
                 {dossier ? <><dt>{t.span}</dt><dd>{lang === "zh" ? dossier.spanZh : dossier.spanEn}</dd><dt>{t.capital}</dt><dd>{lang === "zh" ? dossier.capitalZh : dossier.capitalEn}</dd></> : null}
               </dl>
-              {dossier ? null : <p className="note">{t.scopeNote}</p>}
+              {overview ? <><h3>{t.brief}</h3><p>{overview}</p></> : null}
+              {dossier || overview ? null : <p className="note">{t.scopeNote}</p>}
               {dossier ? <h3>{t.chronicle}</h3> : null}
               {dossier ? <div className="dossier">{(lang === "zh" ? dossier.bodyZh : dossier.bodyEn).split("\n\n").map((paragraph) => <p key={paragraph.slice(0, 24)}>{paragraph}</p>)}</div> : null}
               {dossier?.beats?.length ? (

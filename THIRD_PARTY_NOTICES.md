@@ -16,6 +16,12 @@ Earlier editions of this map used simplified historical-basemaps by Andre Ouredn
 
 https://github.com/aourednik/historical-basemaps
 
+## historical-basemaps peoples
+
+`public/history/peoples` keeps the Americas, Africa, and Oceania coverage from historical-basemaps where Cliopatria has no kingdom. Those files remain GPL-3.0.
+
+https://github.com/aourednik/historical-basemaps
+
 ## Natural Earth
 
 `public/history/land.geojson` is simplified from Natural Earth 1:110m land.
