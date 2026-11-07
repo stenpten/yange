@@ -48,39 +48,98 @@ function geomArea(geometry: Geom) {
 }
 
 function decorate(fc: AtlasFC, lexicon: Lexicon, lang: "zh" | "en", year: number): AtlasFC {
-  return {
-    type: "FeatureCollection",
-    features: fc.features.flatMap((feature) => {
-      const source = String(feature.properties.name ?? "")
-      const precise = Number(feature.properties.precise) === 1
-      const view = precise ? null : presentPolity(source, year)
-      if (view?.hide) return []
-      const alias = precise ? aliasFor(source, year) : null
-      if (precise && (source === "Great Yuan" || source === "Yuan Dynasty") && (year < 1206 || year > 1388)) return []
-      const key = source.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-      const named = gazetteer[key]
-      const zh = alias?.zh || view?.zh || lexicon[key]?.zh || named?.zh || ""
-      const en = alias?.en || view?.en || lexicon[key]?.en || named?.en || source
-      const label = lang === "zh" ? (zh || en) : en
-      const dossier = (alias?.dossier || view?.dossier || named?.dossier || key).toLowerCase()
-      const chapter = alias?.chapter || view?.chapter || named?.chapter
-      return [{
-        ...feature,
-        properties: {
-          ...feature.properties,
-          color: colorFor(dossier),
-          name_zh: zh,
-          name_en: en,
-          dossier,
-          ...(chapter ? { chapter } : {}),
-          ...(label ? { label } : {}),
-          area: Number(feature.properties.drawArea) || Math.round(geomArea(feature.geometry)),
-        },
-      }]
-    }).sort((a, b) => Number(b.properties.area) - Number(a.properties.area)),
-  }
+  const decorated = fc.features.flatMap((feature) => {
+    const source = String(feature.properties.name ?? "")
+    const precise = Number(feature.properties.precise) === 1
+    const view = precise ? null : presentPolity(source, year)
+    if (view?.hide) return []
+    const alias = precise ? aliasFor(source, year) : null
+    if (precise && (source === "Great Yuan" || source === "Yuan Dynasty") && (year < 1206 || year > 1388)) return []
+    const key = source.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    const named = gazetteer[key]
+    const zh = alias?.zh || view?.zh || lexicon[key]?.zh || named?.zh || ""
+    const en = alias?.en || view?.en || lexicon[key]?.en || named?.en || source
+    const label = lang === "zh" ? (zh || en) : en
+    const dossier = (alias?.dossier || view?.dossier || named?.dossier || key).toLowerCase()
+    const chapter = alias?.chapter || view?.chapter || named?.chapter
+    return [{
+      ...feature,
+      properties: {
+        ...feature.properties,
+        color: colorFor(dossier),
+        name_zh: zh,
+        name_en: en,
+        dossier,
+        ...(chapter ? { chapter } : {}),
+        ...(label ? { label } : {}),
+        area: Number(feature.properties.drawArea) || Number(feature.properties.area) || Math.round(geomArea(feature.geometry)),
+      },
+    }]
+  })
+  const seenLabels = new Set<string>()
+  const minArea = 0.02
+  const features = decorated
+    .sort((a, b) => Number(b.properties.area) - Number(a.properties.area))
+    .filter((feature) => {
+      const label = String(feature.properties.label || "")
+      if (!label || Number(feature.properties.area) < minArea) return true
+      if (seenLabels.has(label)) {
+        feature.properties.label = ""
+        return true
+      }
+      seenLabels.add(label)
+      return true
+    })
+  return { type: "FeatureCollection", features }
 }
 
+
+
+type LabelFC = { type: "FeatureCollection"; features: Array<{ type: "Feature"; properties: Record<string, string | number>; geometry: { type: "Point"; coordinates: [number, number] } }> }
+
+function largestCentroid(geometry: Geom): [number, number] {
+  const polys = geometry.type === "Polygon" ? [geometry.coordinates as number[][][]] : geometry.coordinates as number[][][][]
+  let best: number[][] | null = null
+  let bestArea = -1
+  for (const poly of polys) {
+    const ring = poly?.[0]
+    if (!ring || ring.length < 3) continue
+    const area = ringArea(ring)
+    if (area > bestArea) {
+      bestArea = area
+      best = ring
+    }
+  }
+  if (!best) return centroidOf(geometry)
+  const closed = best[0][0] === best[best.length - 1][0] && best[0][1] === best[best.length - 1][1]
+  const count = closed ? best.length - 1 : best.length
+  let x = 0
+  let y = 0
+  for (let i = 0; i < count; i++) {
+    x += best[i][0]
+    y += best[i][1]
+  }
+  return count ? [x / count, y / count] : centroidOf(geometry)
+}
+
+function labelPoints(fc: AtlasFC, used?: Set<string>): LabelFC {
+  const best = new globalThis.Map<string, AtlasFeature>()
+  for (const feature of fc.features) {
+    const label = String(feature.properties.label || "")
+    if (!label || used?.has(label)) continue
+    const area = Number(feature.properties.area) || 0
+    const prev = best.get(label)
+    if (!prev || area > Number(prev.properties.area)) best.set(label, feature)
+  }
+  return {
+    type: "FeatureCollection",
+    features: [...best.values()].map((feature) => ({
+      type: "Feature" as const,
+      properties: feature.properties,
+      geometry: { type: "Point" as const, coordinates: largestCentroid(feature.geometry) },
+    })),
+  }
+}
 
 const LABEL_BREAKS = [8, 24, 220, 500, 842, 951, 1206, 1389, 1950]
 
@@ -338,12 +397,13 @@ export function MapScreen() {
       })
 
       map.addSource("peoples", { type: "geojson", data: empty })
+      map.addSource("peoples-labels", { type: "geojson", data: empty })
       map.addLayer({ id: "peoples", type: "fill", source: "peoples", paint: { "fill-color": ["get", "color"], "fill-opacity": 0.4 } })
       map.addLayer({ id: "peoples-line", type: "line", source: "peoples", paint: { "line-color": "#1c1612", "line-width": 0.8, "line-opacity": 0.6 } })
       map.addLayer({
         id: "peoples-label",
         type: "symbol",
-        source: "peoples",
+        source: "peoples-labels",
         filter: ["has", "label"],
         layout: {
           "text-field": ["get", "label"],
@@ -363,12 +423,13 @@ export function MapScreen() {
         },
       })
       map.addSource("world", { type: "geojson", data: empty })
+      map.addSource("world-labels", { type: "geojson", data: empty })
       map.addLayer({ id: "world", type: "fill", source: "world", paint: { "fill-color": ["get", "color"], "fill-opacity": ["interpolate", ["linear"], ["zoom"], 0.5, 0.64, 3, 0.5, 5, 0.46] } })
       map.addLayer({ id: "world-line", type: "line", source: "world", paint: { "line-color": "#241c16", "line-width": ["interpolate", ["linear"], ["zoom"], 0.8, 0.85, 3, 1.2, 6, 1.8], "line-opacity": 0.72 } })
       map.addLayer({
         id: "world-label",
         type: "symbol",
-        source: "world",
+        source: "world-labels",
         filter: ["has", "label"],
         layout: {
           "text-field": ["get", "label"],
@@ -511,6 +572,9 @@ export function MapScreen() {
     return decorate({ type: "FeatureCollection", features: open }, lexicon, lang, viewYear)
   }, [peoples, shown, lexicon, lang, viewYear])
 
+
+  const worldLabels = useMemo(() => labelPoints(shown), [shown])
+  const peopleLabels = useMemo(() => labelPoints(peoplesShown, new Set(worldLabels.features.map((feature) => String(feature.properties.label || "")))), [peoplesShown, worldLabels])
   useEffect(() => {
     const map = mapRef.current
     const put = () => (map?.getSource("world") as { setData(data: unknown): void } | undefined)?.setData(shown)
@@ -520,10 +584,24 @@ export function MapScreen() {
 
   useEffect(() => {
     const map = mapRef.current
+    const put = () => (map?.getSource("world-labels") as { setData(data: unknown): void } | undefined)?.setData(worldLabels)
+    if (map?.isStyleLoaded()) put()
+    else map?.once("load", put)
+  }, [worldLabels])
+
+  useEffect(() => {
+    const map = mapRef.current
     const put = () => (map?.getSource("peoples") as { setData(data: unknown): void } | undefined)?.setData(peoplesShown)
     if (map?.isStyleLoaded()) put()
     else map?.once("load", put)
   }, [peoplesShown])
+
+  useEffect(() => {
+    const map = mapRef.current
+    const put = () => (map?.getSource("peoples-labels") as { setData(data: unknown): void } | undefined)?.setData(peopleLabels)
+    if (map?.isStyleLoaded()) put()
+    else map?.once("load", put)
+  }, [peopleLabels])
 
   useEffect(() => {
     const features = [...shown.features, ...peoplesShown.features].filter((feature) => String(feature.properties.id) === polity)
