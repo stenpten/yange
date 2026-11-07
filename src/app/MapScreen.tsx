@@ -95,34 +95,7 @@ function decorate(fc: AtlasFC, lexicon: Lexicon, lang: "zh" | "en", year: number
 
 
 
-type LabelFC = { type: "FeatureCollection"; features: Array<{ type: "Feature"; properties: Record<string, string | number>; geometry: { type: "Point"; coordinates: [number, number] } }> }
-
-function largestCentroid(geometry: Geom): [number, number] {
-  const polys = geometry.type === "Polygon" ? [geometry.coordinates as number[][][]] : geometry.coordinates as number[][][][]
-  let best: number[][] | null = null
-  let bestArea = -1
-  for (const poly of polys) {
-    const ring = poly?.[0]
-    if (!ring || ring.length < 3) continue
-    const area = ringArea(ring)
-    if (area > bestArea) {
-      bestArea = area
-      best = ring
-    }
-  }
-  if (!best) return centroidOf(geometry)
-  const closed = best[0][0] === best[best.length - 1][0] && best[0][1] === best[best.length - 1][1]
-  const count = closed ? best.length - 1 : best.length
-  let x = 0
-  let y = 0
-  for (let i = 0; i < count; i++) {
-    x += best[i][0]
-    y += best[i][1]
-  }
-  return count ? [x / count, y / count] : centroidOf(geometry)
-}
-
-function labelPoints(fc: AtlasFC, used?: Set<string>): LabelFC {
+function labelPolygons(fc: AtlasFC, used?: Set<string>): AtlasFC {
   const best = new globalThis.Map<string, AtlasFeature>()
   for (const feature of fc.features) {
     const label = String(feature.properties.label || "")
@@ -131,14 +104,31 @@ function labelPoints(fc: AtlasFC, used?: Set<string>): LabelFC {
     const prev = best.get(label)
     if (!prev || area > Number(prev.properties.area)) best.set(label, feature)
   }
-  return {
-    type: "FeatureCollection",
-    features: [...best.values()].map((feature) => ({
-      type: "Feature" as const,
-      properties: feature.properties,
-      geometry: { type: "Point" as const, coordinates: largestCentroid(feature.geometry) },
-    })),
+  const features: AtlasFeature[] = []
+  for (const feature of best.values()) {
+    const polys = feature.geometry.type === "Polygon" ? [feature.geometry.coordinates as number[][][]] : feature.geometry.coordinates as number[][][][]
+    let ring: number[][] | null = null
+    let bestArea = -1
+    for (const poly of polys) {
+      const outer = poly?.[0]
+      if (!outer || outer.length < 4) continue
+      const area = ringArea(outer)
+      if (area > bestArea) {
+        bestArea = area
+        ring = outer
+      }
+    }
+    if (!ring) continue
+    features.push({
+      type: "Feature",
+      properties: {
+        label: String(feature.properties.label),
+        area: Number(feature.properties.area) || bestArea,
+      },
+      geometry: { type: "Polygon", coordinates: [ring] },
+    })
   }
+  return { type: "FeatureCollection", features }
 }
 
 const LABEL_BREAKS = [8, 24, 220, 500, 842, 951, 1206, 1389, 1950]
@@ -275,9 +265,9 @@ export function MapScreen() {
       return updated
     }, { replace: true })
   }
-  const worldLabelOpacity = ["step", ["zoom"], ["case", [">=", ["get", "area"], 12], 1, 0], 2.2, ["case", [">=", ["get", "area"], 6], 1, 0], 3.5, 1]
-  const peopleLabelOpacity = ["step", ["zoom"], ["case", [">=", ["get", "area"], 20], 1, 0], 2.4, ["case", [">=", ["get", "area"], 8], 1, 0], 3.8, 1]
-  const playLabelOpacity = ["step", ["zoom"], ["case", [">=", ["get", "area"], 2], 1, 0], 2.4, 1]
+  const worldLabelOpacity = ["step", ["zoom"], ["case", [">=", ["get", "area"], 1], 1, 0], 2.2, 1]
+  const peopleLabelOpacity = ["step", ["zoom"], ["case", [">=", ["get", "area"], 1], 1, 0], 2.2, 1]
+  const playLabelOpacity = ["step", ["zoom"], 1, 2.2, 1]
   function showLabels(duringPlay = false) {
     const map = mapRef.current
     if (!map) return
@@ -419,7 +409,7 @@ export function MapScreen() {
           "text-color": "#f6f3ec",
           "text-halo-color": "#14110e",
           "text-halo-width": 1.15,
-          "text-opacity": ["step", ["zoom"], ["case", [">=", ["get", "area"], 20], 1, 0], 2.4, ["case", [">=", ["get", "area"], 8], 1, 0], 3.8, 1],
+          "text-opacity": ["step", ["zoom"], ["case", [">=", ["get", "area"], 1], 1, 0], 2.2, 1],
         },
       })
       map.addSource("world", { type: "geojson", data: empty })
@@ -445,7 +435,7 @@ export function MapScreen() {
           "text-color": "#f6f3ec",
           "text-halo-color": "#14110e",
           "text-halo-width": 1.15,
-          "text-opacity": ["step", ["zoom"], ["case", [">=", ["get", "area"], 12], 1, 0], 2.2, ["case", [">=", ["get", "area"], 6], 1, 0], 3.5, 1],
+          "text-opacity": ["step", ["zoom"], ["case", [">=", ["get", "area"], 1], 1, 0], 2.2, 1],
         },
       })
       map.addSource("select", { type: "geojson", data: empty })
@@ -573,8 +563,8 @@ export function MapScreen() {
   }, [peoples, shown, lexicon, lang, viewYear])
 
 
-  const worldLabels = useMemo(() => labelPoints(shown), [shown])
-  const peopleLabels = useMemo(() => labelPoints(peoplesShown, new Set(worldLabels.features.map((feature) => String(feature.properties.label || "")))), [peoplesShown, worldLabels])
+  const worldLabels = useMemo(() => labelPolygons(shown), [shown])
+  const peopleLabels = useMemo(() => labelPolygons(peoplesShown, new Set(worldLabels.features.map((feature) => String(feature.properties.label || "")))), [peoplesShown, worldLabels])
   useEffect(() => {
     const map = mapRef.current
     const put = () => (map?.getSource("world") as { setData(data: unknown): void } | undefined)?.setData(shown)
